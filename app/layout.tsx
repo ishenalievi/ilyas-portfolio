@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bowlby_One, DM_Serif_Display, Instrument_Sans, Space_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { site } from "@/content/site";
 import { Nav } from "@/components/Nav";
@@ -26,10 +27,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${display.variable} ${serif.variable} ${body.variable} ${mono.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: paletteScript }} />
-      </head>
       <body>
+        <Script id="palette" strategy="beforeInteractive">
+          {paletteScript}
+        </Script>
         <TransitionProvider>
           <a href="#main" className="skip">
             Skip to content

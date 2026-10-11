@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { experience, loves, type Love } from "@/content/about";
+import { experience, loves, type Love, type Role } from "@/content/about";
 import type { Project } from "@/content/projects";
 import { site } from "@/content/site";
 import { Lift, Tape, Torn, TornSheet } from "./collage";
@@ -110,24 +110,43 @@ export function Loves({ limit }: { limit?: number }) {
   );
 }
 
-export function Ledger() {
+export function Ledger({ rows = experience, detailed = false, linkedin = true }: { rows?: Role[]; detailed?: boolean; linkedin?: boolean }) {
   return (
     <div className="ledger">
       <div className="crest" aria-hidden="true">
         II
       </div>
-      <ol className="ledger-rows">
-        {experience.map((e) => (
-          <li key={e.org}>
-            <span className="yr">{e.year}</span>
-            <span className="org">{e.org}</span>
+      <ol className={`ledger-rows ${detailed ? "detailed" : ""}`}>
+        {rows.map((e) => (
+          <li key={e.org + e.role}>
+            <span className="yr">{e.dates}</span>
+            <span className="org">
+              {e.org}
+              <small>{e.place}</small>
+            </span>
             <span className="role">{e.role}</span>
+            {detailed && (
+              <div className="pts">
+                <ul>
+                  {e.points.map((pt) => (
+                    <li key={pt}>{pt}</li>
+                  ))}
+                </ul>
+                {e.link && (
+                  <TLink href={e.link.href} className="pts-link">
+                    {e.link.label} →
+                  </TLink>
+                )}
+              </div>
+            )}
           </li>
         ))}
       </ol>
-      <TLink href={site.linkedin.url} className="btn">
-        Full record on LinkedIn ↗
-      </TLink>
+      {linkedin && (
+        <TLink href={site.linkedin.url} className="btn">
+          Full record on LinkedIn ↗
+        </TLink>
+      )}
     </div>
   );
 }

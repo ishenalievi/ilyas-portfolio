@@ -43,11 +43,11 @@ export const projects: Project[] = [
     subtitle: "for UBC IMPRINT",
     short: "IMPRINT",
     year: "2026",
-    role: "Film + edit",
+    role: "VP Content Marketing",
     platform: "Instagram",
     facts: ["Instagram reel", "@ubcimprint", "Oct 2026", "Film + edit"],
     summary:
-      "A run of reels for UBC IMPRINT. The first one teases After Hours on 20 October 2026. More land over the next few weeks.",
+      "A run of reels for UBC Imprint Conference & Competition, where I'm VP Content Marketing. The first one teases After Hours on 20 October 2026. More land over the next few weeks.",
     body: [
       {
         heading: "The brief",

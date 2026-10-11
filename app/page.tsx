@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { experience } from "@/content/about";
 import { posts } from "@/content/posts";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
@@ -117,8 +118,15 @@ export default function Home() {
 
       {/* Frame 6 · Experience */}
       <Sheet seed="home-ledger">
-        <SectionHead eyebrow="The record" title="Where I've been" />
-        <Ledger />
+        <SectionHead eyebrow="The record" title="Where I've been">
+          Marketing at UBC Sauder, plus whatever clubs and startups let me near their content.
+        </SectionHead>
+        <Ledger rows={experience.slice(0, 4)} />
+        <p className="more">
+          <TLink href="/about" className="btn btn-ghost">
+            The full record →
+          </TLink>
+        </p>
       </Sheet>
     </>
   );

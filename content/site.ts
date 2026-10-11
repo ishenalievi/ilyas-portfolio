@@ -5,9 +5,9 @@ export const site = {
   firstName: "Ilyas",
   lastName: "Ishenaliev",
   year: "2026",
-  tagline: "Editor · Designer-ish · Professionally falls off walls",
+  tagline: "Editor · Marketer · Professionally falls off walls",
   description:
-    "Ilyas Ishenaliev: video editor and designer. IMPRINT Reels, BTV edits, posters and whatever hobby is current.",
+    "Ilyas Ishenaliev: video editor and marketer at UBC Sauder. IMPRINT Reels, BTV edits, posters and whatever hobby is current.",
   instagram: { handle: "@ishen_designs", url: "https://www.instagram.com/ishen_designs" },
   linkedin: { label: "LinkedIn", url: "https://www.linkedin.com/in/ishenalievi" },
 };
