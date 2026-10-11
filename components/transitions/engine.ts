@@ -4,7 +4,7 @@
 
 import { rng, tornClip } from "@/lib/torn";
 
-export type Kind = "strips" | "zipper" | "book" | "timestop" | "menace" | "tbc" | "fade";
+export type Kind = "strips" | "zipper" | "book" | "timestop" | "ger" | "menace" | "tbc" | "fade";
 
 export type Run = {
   cover: () => Promise<void>;
@@ -216,6 +216,66 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
         await fin(minute.animate([{ transform: "rotate(54deg)" }, { transform: "rotate(1134deg)" }], { duration: 600, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" }));
         await fin(wall.animate([{ clipPath: C(150) }, { clipPath: C(0) }], { duration: 560, easing: "cubic-bezier(.6,0,.4,1)", fill: "forwards" }));
         await fin(gray.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: "ease-out", fill: "forwards" }));
+      },
+    };
+  }
+
+  if (kind === "ger") {
+    // Gold Experience Requiem: golden rays, the Arrow, scattering ladybugs and a
+    // counter that returns to zero. The reveal plays everything backwards.
+    const bg = el("ger-bg");
+    bg.style.clipPath = "circle(0% at 50% 50%)";
+    const rays = el("ger-rays", bg);
+    const arrow = el("ger-arrow", bg);
+    arrow.innerHTML =
+      '<svg viewBox="0 0 220 44" aria-hidden="true">' +
+      '<path d="M8 6 L40 22 L8 38 L22 22 Z M24 6 L56 22 L24 38 L38 22 Z" fill="#8a5a12" stroke="#14213d" stroke-width="2.5"/>' +
+      '<rect x="40" y="18.5" width="128" height="7" rx="3" fill="#7a4e0e" stroke="#14213d" stroke-width="2.5"/>' +
+      '<line x1="44" y1="20.5" x2="164" y2="20.5" stroke="#f2c94c" stroke-width="1.6"/>' +
+      '<path d="M166 4 L214 22 L166 40 L176 22 Z" fill="#9a6a14" stroke="#14213d" stroke-width="2.5"/>' +
+      '<path d="M170 9 L205 22 L178 22 Z" fill="#ffe68a"/>' +
+      '<ellipse cx="150" cy="22" rx="11" ry="8" fill="#2f6b3a" stroke="#14213d" stroke-width="2.5"/></svg>';
+    const r = rng(1999);
+    const bugs = Array.from({ length: 7 }, (_, i) => {
+      const b = el("ger-bug", bg);
+      const ang = (i / 7) * Math.PI * 2 + r() * 0.6;
+      const dist = 26 + r() * 16;
+      return { b, x: Math.cos(ang) * dist * 1.4, y: Math.sin(ang) * dist, rot: Math.round(ang * 57.3 + 90) };
+    });
+    const center = el("ger-center", bg);
+    const lab = el("ger-label", center, text);
+    lab.style.clipPath = tornClip("trbl", 6, 88);
+    const count = el("ger-count", center, "Actions: 3");
+    const sfx = el("ger-sfx", ov, "無駄無駄無駄!");
+    const spin = (from: number, to: number, ms: number) =>
+      rays.animate([{ transform: `translate(-50%,-50%) rotate(${from}deg)` }, { transform: `translate(-50%,-50%) rotate(${to}deg)` }], { duration: ms, easing: "cubic-bezier(.3,0,.3,1)", fill: "forwards" });
+    // the Arrow dives in from the top-left and stabs into the label
+    const ARROW_IN = "translate(-50%,-50%) translate(-9vw,-17vh) rotate(26deg)";
+    const ARROW_OUT = "translate(-50%,-50%) translate(-85vw,-75vh) rotate(26deg)";
+
+    return {
+      cover: async () => {
+        spin(0, 50, 2200);
+        await fin(bg.animate([{ clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(150% at 50% 50%)" }], { duration: 520, easing: "cubic-bezier(.2,.8,.3,1)", fill: "forwards" }));
+        arrow.animate([{ transform: ARROW_OUT }, { transform: ARROW_IN }], { duration: 420, easing: "cubic-bezier(.2,1.3,.4,1)", fill: "forwards" });
+        await all(bugs.map(({ b, x, y, rot }, i) => b.animate([{ transform: "translate(-50%,-50%) scale(.2) rotate(0deg)", opacity: 0 }, { transform: `translate(-50%,-50%) translate(${x}vw, ${y}vh) scale(1) rotate(${rot}deg)`, opacity: 1 }], { duration: 620, delay: 120 + i * 40, easing: "cubic-bezier(.2,.8,.3,1)", fill: "forwards" })));
+        sfx.animate([{ opacity: 0, transform: "scale(1.6)" }, { opacity: 1, transform: "scale(1)" }], { duration: 300, easing: "ease-out", fill: "forwards" });
+        await fin(lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-3deg)" }], { duration: 300, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "forwards" }));
+        for (const n of ["Actions: 2", "Actions: 1", "Return to zero"]) {
+          await wait(200);
+          count.textContent = n;
+        }
+        await wait(350);
+      },
+      reveal: async () => {
+        // everything rewinds back to zero
+        lab.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" });
+        count.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" });
+        sfx.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" });
+        spin(50, -20, 1100);
+        arrow.animate([{ transform: ARROW_IN }, { transform: ARROW_OUT }], { duration: 480, easing: "cubic-bezier(.6,0,.8,.4)", fill: "forwards" });
+        await all(bugs.map(({ b, x, y, rot }, i) => b.animate([{ transform: `translate(-50%,-50%) translate(${x}vw, ${y}vh) scale(1) rotate(${rot}deg)`, opacity: 1 }, { transform: "translate(-50%,-50%) scale(.2) rotate(0deg)", opacity: 0 }], { duration: 480, delay: i * 30, easing: "cubic-bezier(.6,0,.8,.4)", fill: "forwards" })));
+        await fin(bg.animate([{ clipPath: "circle(150% at 50% 50%)" }, { clipPath: "circle(0% at 50% 50%)" }], { duration: 520, easing: "cubic-bezier(.6,0,.4,1)", fill: "forwards" }));
       },
     };
   }
