@@ -2,12 +2,12 @@
 // Experience comes from your resume (Oct 2026). The love captions are
 // placeholder copy written in your tone: rewrite them in your own words.
 
-export type Love = { fig: string; title: string; line: string; tag: string; color: string };
+export type Love = { fig: string; title: string; line: string; tag: string; color: string; link?: { label: string; href: string } };
 
 export const loves: Love[] = [
   { fig: "Manga, 1987–", title: "JoJo's Bizarre Adventure", line: "The reason I can no longer stand normally in photos.", tag: "ゴゴゴ", color: "var(--a4)" },
   { fig: "Football", title: "Manchester City", line: "Yes, I liked them before the trophies. No, I will not be providing evidence.", tag: "MCFC", color: "var(--city)" },
-  { fig: "V4–6 · Scarpa Instinct VSR LV", title: "Bouldering", line: "I pay money to fall off walls in shoes a size too small.", tag: "V4–6", color: "var(--a2)" },
+  { fig: "V4–6 · Scarpa Instinct VSR LV", title: "Bouldering", line: "I pay money to fall off walls in shoes a size too small.", tag: "V4–6", color: "var(--a2)", link: { label: "Proof: @ishenslabs", href: "https://www.instagram.com/ishenslabs" } },
   { fig: "Now reading", title: "Books", line: "Currently on The Place of the Skull by Chingiz Aitmatov. Exactly as cheerful as it sounds.", tag: "p. 1 of many", color: "var(--a3)" },
   { fig: "Premiere Pro, After Effects", title: "Video editing", line: "Four hours on a fifteen-second clip that people will watch once, at 2× speed.", tag: "00:00:15", color: "var(--a1)" },
   { fig: "Since summer 2026", title: "Guitar", line: "I know four chords. My neighbours know them too.", tag: "G · C · D", color: "var(--navy-fixed)" },

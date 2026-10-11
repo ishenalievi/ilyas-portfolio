@@ -93,6 +93,11 @@ export function LoveCard({ l, i }: { l: Love; i: number }) {
           </span>
           <h3>{l.title}</h3>
           <p>{l.line}</p>
+          {l.link && (
+            <TLink href={l.link.href} className="pts-link">
+              {l.link.label} ↗
+            </TLink>
+          )}
         </div>
       </Torn>
     </Lift>

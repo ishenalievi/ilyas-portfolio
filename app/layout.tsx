@@ -5,6 +5,7 @@ import "./globals.css";
 import { site } from "@/content/site";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { Stickers } from "@/components/Stickers";
 import { paletteScript } from "@/components/PaletteSwap";
 import { TransitionProvider } from "@/components/transitions/TransitionProvider";
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Script id="palette" strategy="beforeInteractive">
           {paletteScript}
         </Script>
+        <Stickers />
         <TransitionProvider>
           <a href="#main" className="skip">
             Skip to content

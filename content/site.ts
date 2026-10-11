@@ -9,6 +9,7 @@ export const site = {
   description:
     "Ilyas Ishenaliev: video editor and marketer at UBC Sauder. IMPRINT Reels, BTV edits, posters and whatever hobby is current.",
   instagram: { handle: "@ishen_designs", url: "https://www.instagram.com/ishen_designs" },
+  climbing: { handle: "@ishenslabs", url: "https://www.instagram.com/ishenslabs" },
   linkedin: { label: "LinkedIn", url: "https://www.linkedin.com/in/ishenalievi" },
 };
 

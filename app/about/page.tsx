@@ -33,6 +33,9 @@ export default function AboutPage() {
                 <TLink href={site.instagram.url} className="btn">
                   {site.instagram.handle} ↗
                 </TLink>
+                <TLink href={site.climbing.url} className="btn btn-ghost">
+                  Climbing {site.climbing.handle} ↗
+                </TLink>
                 <TLink href={site.linkedin.url} className="btn btn-ghost">
                   LinkedIn ↗
                 </TLink>

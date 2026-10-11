@@ -14,6 +14,9 @@ export function Footer() {
           <Torn as={TLink} href={site.instagram.url} seed="foot-ig" amp={3} className="foot-link">
             Instagram {site.instagram.handle}
           </Torn>
+          <Torn as={TLink} href={site.climbing.url} seed="foot-cl" amp={3} className="foot-link">
+            Climbing {site.climbing.handle}
+          </Torn>
           <Torn as={TLink} href={site.linkedin.url} seed="foot-li" amp={3} className="foot-link">
             LinkedIn
           </Torn>

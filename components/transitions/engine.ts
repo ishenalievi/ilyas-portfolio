@@ -4,7 +4,7 @@
 
 import { rng, tornClip } from "@/lib/torn";
 
-export type Kind = "strips" | "rip" | "menace" | "tbc" | "fade";
+export type Kind = "strips" | "zipper" | "book" | "menace" | "tbc" | "fade";
 
 export type Run = {
   cover: () => Promise<void>;
@@ -57,72 +57,100 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     };
   }
 
-  if (kind === "rip") {
-    const r = rng(42);
-    const seam: [number, number][] = [];
-    for (let y = 0; y < 100; y += 1.5 + r() * 2.5) seam.push([50 + (r() - 0.5) * 6 + (y - 50) * 0.06, y]);
-    seam.push([53, 100]);
-    const poly = (side: "L" | "R", off: number, jit: number, rr: () => number) => {
-      const pts = seam.map(([x, y]) => `${(x + off + (rr() - 0.5) * jit).toFixed(2)}% ${y.toFixed(2)}%`).join(",");
-      return side === "L" ? `polygon(0 0,${pts},0 100%)` : `polygon(100% 0,${pts},100% 100%)`;
+  if (kind === "zipper") {
+    // Sticky Fingers: two panels zip shut down the middle, then unzip to reveal the page.
+    const steps = [0, 0.25, 0.5, 0.75, 1];
+    const shape = (side: "L" | "R", t: number) => {
+      // t = how far the zip has closed (0 open V, 1 fully shut)
+      const y = (t * 100).toFixed(1);
+      const w = (50 * (1 - t)).toFixed(1);
+      return side === "L"
+        ? `polygon(0% 0%, 50% 0%, 50% ${y}%, ${(50 - +w).toFixed(1)}% 100%, 0% 100%)`
+        : `polygon(100% 0%, 50% 0%, 50% ${y}%, ${(50 + +w).toFixed(1)}% 100%, 100% 100%)`;
     };
-    const faceRng = rng(7);
-    const half = (side: "L" | "R") => {
-      const h = el("ov-half");
-      const fib = el("fib", h);
-      const face = el("face", h);
-      el("big", face, text);
-      el("small", face, "tear here");
-      fib.style.clipPath = poly(side, side === "L" ? 0.8 : -0.8, 1.2, rng(side === "L" ? 5 : 9));
-      fib.style.opacity = "0";
-      face.style.clipPath = poly(side, 0, 0, faceRng);
-      h.style.transform = "translateY(-105%)";
-      return { h, fib };
-    };
-    const L = half("L");
-    const R = half("R");
-    const NS = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(NS, "svg");
-    svg.setAttribute("class", "ov-seam");
-    svg.setAttribute("viewBox", "0 0 100 100");
-    svg.setAttribute("preserveAspectRatio", "none");
-    const d = seam.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(2)} ${y.toFixed(2)}`).join(" ");
-    const line = (color: string, w: number) => {
-      const p = document.createElementNS(NS, "path");
-      p.setAttribute("d", d);
-      p.setAttribute("fill", "none");
-      p.setAttribute("vector-effect", "non-scaling-stroke");
-      p.setAttribute("pathLength", "1");
-      p.setAttribute("stroke-dasharray", "1");
-      p.setAttribute("stroke-dashoffset", "1");
-      p.style.stroke = color;
-      p.style.strokeWidth = String(w);
-      svg.appendChild(p);
+    const panel = (side: "L" | "R") => {
+      const p = el(`zp-panel zp-${side}`);
+      p.style.clipPath = shape(side, 0);
+      p.style.transform = `translateX(${side === "L" ? -105 : 105}%)`;
       return p;
     };
-    const l1 = line("var(--fiber)", 9);
-    const l2 = line("var(--navy-fixed)", 2.5);
-    svg.style.opacity = "0";
-    ov.appendChild(svg);
-    const sfx = el("ov-sfx", ov, "ビリッ!");
+    const L = panel("L");
+    const R = panel("R");
+    const teeth = el("zp-teeth");
+    teeth.style.height = "0%";
+    const pull = el("zp-pull");
+    pull.style.top = "0%";
+    pull.style.opacity = "0";
+    const sfx = el("zp-sfx", ov, "ジィーッ!");
+    const lab = el("zp-label", ov, text);
+    lab.style.clipPath = tornClip("trbl", 6, 51);
+    const zip = (from: number, to: number, ms: number) => {
+      const ts = steps.map((s) => from + (to - from) * s);
+      const opts: KeyframeAnimationOptions = { duration: ms, easing: "cubic-bezier(.45,0,.55,1)", fill: "forwards" };
+      return [
+        L.animate(ts.map((t) => ({ clipPath: shape("L", t) })), opts),
+        R.animate(ts.map((t) => ({ clipPath: shape("R", t) })), opts),
+        teeth.animate([{ height: `${from * 100}%` }, { height: `${to * 100}%` }], opts),
+        pull.animate([{ top: `${from * 100}%` }, { top: `${to * 100}%` }], opts),
+      ];
+    };
     return {
       cover: async () => {
-        await all([L.h, R.h].map((h) => h.animate([{ transform: "translateY(-105%)" }, { transform: "translateY(0)" }], { duration: 750, easing: EASE, fill: "forwards" })));
-        await wait(250);
+        await all([L, R].map((p, i) => p.animate([{ transform: `translateX(${i ? 105 : -105}%)` }, { transform: "translateX(0)" }], { duration: 500, easing: EASE, fill: "forwards" })));
+        pull.style.opacity = "1";
+        sfx.animate([{ opacity: 0, transform: "scale(.4) rotate(-15deg)" }, { opacity: 1, transform: "scale(1.15) rotate(-6deg)", offset: 0.3 }, { opacity: 1, transform: "scale(1) rotate(-8deg)", offset: 0.8 }, { opacity: 0, transform: "scale(1) rotate(-8deg)" }], { duration: 900, fill: "forwards" });
+        await all(zip(0, 1, 850));
+        await fin(lab.animate([{ opacity: 0, transform: "translate(-50%,-50%) scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "translate(-50%,-50%) scale(1) rotate(-4deg)" }], { duration: 320, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "forwards" }));
+        await wait(350);
       },
       reveal: async () => {
-        svg.style.opacity = "1";
-        await all([l1, l2].map((p) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 550, easing: "cubic-bezier(.5,0,.8,.6)", fill: "forwards" })));
-        svg.style.opacity = "0";
-        L.fib.style.opacity = "1";
-        R.fib.style.opacity = "1";
-        // stage 1: the left side is ripped away
-        L.h.style.transformOrigin = "0% 0%";
-        sfx.animate([{ opacity: 0, transform: "scale(.3) rotate(-20deg)" }, { opacity: 1, transform: "scale(1.2) rotate(-8deg)", offset: 0.35 }, { opacity: 1, transform: "scale(1) rotate(-10deg)", offset: 0.7 }, { opacity: 0, transform: "scale(1) rotate(-10deg)" }], { duration: 900, easing: "ease-out", fill: "forwards" });
-        await fin(L.h.animate([{ transform: "none" }, { transform: "translate(-1.5%, .5%) rotate(-3deg)", offset: 0.22 }, { transform: "translate(-25vw, 115vh) rotate(-32deg)" }], { duration: 900, easing: "cubic-bezier(.5,0,.65,1)", fill: "forwards" }));
-        await wait(200);
-        // stage 2: the other side is dragged off-screen
-        await fin(R.h.animate([{ transform: "none" }, { transform: "translateX(-2%) rotate(-.6deg)", offset: 0.2 }, { transform: "translateX(112vw) rotate(7deg)" }], { duration: 750, easing: "cubic-bezier(.6,0,.3,1)", fill: "forwards" }));
+        lab.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" });
+        await wait(120);
+        await all(zip(1, 0, 800));
+        pull.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, fill: "forwards" });
+        await all([L, R].map((p, i) => p.animate([{ transform: "translateX(0)" }, { transform: `translateX(${i ? 105 : -105}%)` }], { duration: 480, easing: EASE, fill: "forwards" })));
+      },
+    };
+  }
+
+  if (kind === "book") {
+    // Heaven's Door: the screen turns into a book. Pages swing in, then flip away one by one.
+    const wrap = el("bk-wrap");
+    const pages = [0, 1, 2].map((i) => {
+      const pg = el("bk-page", wrap);
+      const r = rng(300 + i);
+      const lines = el("bk-lines", pg);
+      for (let n = 0; n < 16; n++) {
+        const ln = document.createElement("i");
+        ln.style.width = `${45 + r() * 50}%`;
+        ln.style.transform = `rotate(${(r() - 0.5) * 1.2}deg)`;
+        lines.appendChild(ln);
+      }
+      el("bk-num", pg, String(100 + i * 2 + Math.floor(r() * 40)));
+      if (i === 2) {
+        el("bk-title", pg, text);
+        el("bk-note", pg, "← it's all written down");
+      }
+      el("bk-shade", pg);
+      pg.style.transform = "rotateY(100deg)";
+      return pg;
+    });
+    const sfx = el("bk-sfx", ov, "ペラッ");
+    return {
+      cover: async () => {
+        await all(pages.map((pg, i) => pg.animate([{ transform: "rotateY(100deg)" }, { transform: "rotateY(0deg)" }], { duration: 650, delay: i * 130, easing: "cubic-bezier(.2,.7,.3,1)", fill: "forwards" })));
+        await wait(450);
+      },
+      reveal: async () => {
+        sfx.animate([{ opacity: 0, transform: "scale(.5) rotate(10deg)" }, { opacity: 1, transform: "scale(1.1) rotate(4deg)", offset: 0.3 }, { opacity: 0, transform: "scale(1) rotate(6deg)" }], { duration: 1000, fill: "forwards" });
+        const order = [...pages].reverse();
+        await all(
+          order.flatMap((pg, i) => {
+            const shade = pg.querySelector(".bk-shade") as HTMLElement;
+            const o: KeyframeAnimationOptions = { duration: 750, delay: i * 200, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" };
+            return [pg.animate([{ transform: "rotateY(0deg)" }, { transform: "rotateY(-180deg)" }], o), shade.animate([{ opacity: 0 }, { opacity: 0.55, offset: 0.5 }, { opacity: 0 }], o)];
+          }),
+        );
       },
     };
   }

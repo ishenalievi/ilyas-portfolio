@@ -1,7 +1,8 @@
 "use client";
 
 // Use this instead of <a> or <Link> everywhere. It picks the right transition:
-// the rip for project pages, To Be Continued for other websites,
+// Heaven's Door for project pages, Sticky Fingers for Work,
+// To Be Continued for other websites,
 // and the paper stack for everything else.
 
 import Link from "next/link";
@@ -20,7 +21,8 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
 
 function autoKind(href: string): Kind {
   if (isExternal(href)) return "tbc";
-  if (/^\/work\/[^/]+/.test(href)) return "rip";
+  if (/^\/work\/[^/]+/.test(href)) return "book"; // Heaven's Door for projects
+  if (/^\/work\/?(?:[?#]|$)/.test(href)) return "zipper"; // Sticky Fingers for Work
   return "strips";
 }
 
