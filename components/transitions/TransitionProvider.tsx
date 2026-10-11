@@ -93,14 +93,10 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
     [play, router],
   );
 
-  // First visit of the session: the menacing intro.
+  // Every full page load (first visit or reload): the menacing intro.
+  // Moving between pages inside the site keeps this provider mounted, so it doesn't replay.
   useEffect(() => {
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem("intro-seen") === "1";
-      sessionStorage.setItem("intro-seen", "1");
-    } catch {}
-    if (!seen) play("menace", "Ilyas is approaching");
+    play("menace", "Ilyas is approaching");
   }, [play]);
 
   // Coming back with the browser's back button after leaving: clear the overlay.

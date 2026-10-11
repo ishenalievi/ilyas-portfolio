@@ -22,7 +22,7 @@ export default function AboutPage() {
             <Torn className="about-card paper" seed="about-card" amp={6}>
               {/* Placeholder bio: rewrite in your own words. */}
               <p>
-                19, creative, having fun, which is what my Instagram bio says and it&apos;s still accurate. I study marketing at UBC Sauder and
+                20, creative, having fun. My Instagram bio still says 19; it&apos;s catching up. I study marketing at UBC Sauder and
                 spend the rest of my time editing videos, designing things and picking up hobbies at an alarming rate.
               </p>
               <p>

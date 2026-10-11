@@ -54,6 +54,18 @@ export default function Home() {
                 <Image src="/images/btv/cocrM2CmRTM.jpg" alt="ISM Baseball Sendoff thumbnail" width={1280} height={720} sizes="(max-width: 800px) 50vw, 26vw" />
               </Torn>
             </Lift>
+            {/* the headshot, cut out like a sticker, in front of the clippings */}
+            <div className="hb-portrait">
+              <Image
+                src="/images/ilyas-headshot.png"
+                alt="Ilyas Ishenaliev"
+                width={930}
+                height={929}
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 800px) 70vw, 36vw"
+              />
+            </div>
             <Tape className="hb-tape1" />
             <Tape className="hb-tape2" />
             <div className="hb-stamp">

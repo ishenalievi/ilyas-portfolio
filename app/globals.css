@@ -29,6 +29,7 @@
   --sf-blue: #2f5fd0;
   --sf-gold: #d4ae3a;
   --tw-gold: #e3c23c;
+  --tk-gold: #e8c766;
   --tbc-bg: #d4ae3a;
   --tbc-fg: #2a2414;
   --sepia: rgba(112, 66, 20, 0.22);
@@ -208,12 +209,19 @@ img { max-width: 100%; height: auto; display: block; }
 @media (max-width: 800px) { .hero-board { width: min(100%, 34rem); margin-inline: auto; } }
 .hb { position: absolute; }
 .hb-img img { width: 100%; }
-.hb-1 { left: 2%; top: 6%; width: 38%; transform: rotate(-5deg); z-index: 1; }
-.hb-2 { right: 3%; top: 0; width: 42%; transform: rotate(5deg); z-index: 1; }
-.hb-3 { left: 20%; bottom: 4%; width: 64%; transform: rotate(-2deg); z-index: 2; }
-.hb-tape1 { left: 12%; top: 3%; transform: rotate(-30deg); }
-.hb-tape2 { right: 14%; top: -2%; transform: rotate(14deg); }
-.gogo { position: absolute; right: -1%; top: 44%; z-index: 3; font-size: 11cqw; pointer-events: none; }
+.hb-1 { left: 0; top: 4%; width: 31%; transform: rotate(-6deg); z-index: 1; }
+.hb-2 { right: 0; top: 0; width: 33%; transform: rotate(6deg); z-index: 1; }
+.hb-3 { left: 2%; bottom: 10%; width: 46%; transform: rotate(-4deg); z-index: 2; }
+.hb-tape1 { left: 8%; top: 1%; transform: rotate(-30deg); }
+.hb-tape2 { right: 10%; top: -2%; transform: rotate(14deg); }
+.hb-portrait {
+  position: absolute; right: -6%; bottom: -2%; width: 86%; z-index: 3;
+  /* white die-cut edge that follows the cut-out, then a hard shadow */
+  filter: drop-shadow(0.45cqw 0 0 #fff) drop-shadow(-0.45cqw 0 0 #fff) drop-shadow(0 0.45cqw 0 #fff) drop-shadow(0 -0.45cqw 0 #fff)
+          drop-shadow(0.9cqw 1.1cqw 0 var(--shade));
+}
+.hb-portrait img { width: 100%; height: auto; display: block; }
+.gogo { position: absolute; left: 24%; top: 4%; z-index: 4; font-size: 8.5cqw; pointer-events: none; }
 .hb-stamp { position: absolute; left: 0; bottom: 0; z-index: 4; }
 .stamp-btn {
   width: clamp(5rem, 16cqw, 8rem); aspect-ratio: 1; border-radius: 50%; border: 0.25rem solid var(--a2);
@@ -483,6 +491,28 @@ a.clip:hover { transform: rotate(0) translateY(-6px); }
   background-color: var(--paper); background-image: var(--noise); color: var(--ink);
   font: 400 clamp(2.4rem, 11vw, 9rem)/1 var(--f-display); padding: 0.25em 0.5em 0.18em;
 }
+
+/* Tusk ACT 4 */
+.tk-bg { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(circle at 72% 74%, #2a1d44 0, #140f22 55%, #09060f 100%); }
+.tk-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tk-rect { fill: none; stroke: color-mix(in srgb, var(--tk-gold) 45%, transparent); stroke-width: 2; vector-effect: non-scaling-stroke; opacity: 0; }
+.tk-spiral { fill: none; stroke: var(--tk-gold); stroke-width: 5; stroke-linecap: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--tk-gold) 70%, transparent)); }
+.tk-star {
+  position: absolute; width: clamp(1.4rem, 2.6vw, 2.4rem); aspect-ratio: 1; opacity: 0; background: var(--tk-gold);
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.tk-nail {
+  position: absolute; left: 50%; top: 50%; width: clamp(1.6rem, 3vw, 2.8rem); aspect-ratio: 1; opacity: 0;
+  border-radius: 50% 50% 50% 0; transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 35%, #ffe3ff 0 12%, #d779e0 30%, #8b2fa0 70%, #4a1158 100%);
+  box-shadow: 0 0 0 2px #2a0d33, 0 0 0.8rem rgba(215, 121, 224, 0.6);
+}
+.tk-center { position: absolute; inset: 0; display: grid; place-items: center; }
+.tk-label {
+  opacity: 0; white-space: nowrap; background-color: var(--paper); background-image: var(--noise); color: var(--ink);
+  font: 400 clamp(2.4rem, 11vw, 9rem)/1 var(--f-display); padding: 0.25em 0.5em 0.18em;
+}
+.tk-sfx { position: absolute; left: 8vw; top: 9vh; opacity: 0; z-index: 2; white-space: nowrap; font: 400 clamp(2.4rem, 8vw, 6.5rem)/1 var(--f-display); color: var(--tk-gold); -webkit-text-stroke: 3px #140f22; text-shadow: 0.25rem 0.25rem 0 #140f22; }
 
 /* The World time stop */
 .tw-inv { position: absolute; inset: 0; -webkit-backdrop-filter: invert(1) saturate(1.3); backdrop-filter: invert(1) saturate(1.3); clip-path: circle(0% at 50% 50%); z-index: 2; }

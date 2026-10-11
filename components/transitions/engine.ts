@@ -4,7 +4,7 @@
 
 import { rng, tornClip } from "@/lib/torn";
 
-export type Kind = "strips" | "zipper" | "book" | "timestop" | "menace" | "tbc" | "fade";
+export type Kind = "strips" | "zipper" | "book" | "timestop" | "tusk" | "menace" | "tbc" | "fade";
 
 export type Run = {
   cover: () => Promise<void>;
@@ -200,25 +200,112 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     return {
       cover: async () => {
         // 1. the inverted sphere bursts out from the middle of the page
-        await fin(inv.animate([{ clipPath: C(0) }, { clipPath: C(78) }], { duration: 560, easing: "cubic-bezier(.2,.8,.3,1)", fill: "forwards" }));
+        await fin(inv.animate([{ clipPath: C(0) }, { clipPath: C(78) }], { duration: 450, easing: "cubic-bezier(.2,.8,.3,1)", fill: "forwards" }));
         // 2. it collapses, leaving the world frozen and grey
-        gray.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, fill: "forwards" });
-        sfx.animate([{ opacity: 0, transform: "translateX(-50%) scale(1.8) rotate(-6deg)" }, { opacity: 1, transform: "translateX(-50%) scale(1) rotate(-4deg)", offset: 0.4 }, { opacity: 1, transform: "translateX(-50%) scale(1.04) rotate(-4deg)" }], { duration: 700, easing: "ease-out", fill: "forwards" });
-        await fin(inv.animate([{ clipPath: C(78) }, { clipPath: C(0) }], { duration: 480, easing: "cubic-bezier(.6,0,.8,.4)", fill: "forwards" }));
+        gray.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, fill: "forwards" });
+        sfx.animate([{ opacity: 0, transform: "translateX(-50%) scale(1.8) rotate(-6deg)" }, { opacity: 1, transform: "translateX(-50%) scale(1) rotate(-4deg)", offset: 0.4 }, { opacity: 1, transform: "translateX(-50%) scale(1.04) rotate(-4deg)" }], { duration: 560, easing: "ease-out", fill: "forwards" });
+        await fin(inv.animate([{ clipPath: C(78) }, { clipPath: C(0) }], { duration: 360, easing: "cubic-bezier(.6,0,.8,.4)", fill: "forwards" }));
+        await wait(80);
+        // 3. a quick gold sphere with the stopped clock: one tick, and the label lands with it
+        second.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(6deg)" }], { duration: 300, easing: "steps(1, start)", fill: "forwards" });
+        lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-4deg)" }], { duration: 300, delay: 120, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "forwards" });
+        await fin(wall.animate([{ clipPath: C(0) }, { clipPath: C(150) }], { duration: 400, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" }));
         await wait(220);
-        // 3. the gold sphere covers everything; the clock ticks, then stops
-        second.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(18deg)" }], { duration: 1500, easing: "steps(3, start)", fill: "forwards" });
-        await fin(wall.animate([{ clipPath: C(0) }, { clipPath: C(150) }], { duration: 560, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" }));
-        await fin(lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-4deg)" }], { duration: 300, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "forwards" }));
-        await wait(450);
       },
       reveal: async () => {
-        // time resumes: the hands spin, the sphere shrinks away, colour comes back
-        sfx.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" });
-        hour.animate([{ transform: "rotate(300deg)" }, { transform: "rotate(660deg)" }], { duration: 600, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" });
-        await fin(minute.animate([{ transform: "rotate(54deg)" }, { transform: "rotate(1134deg)" }], { duration: 600, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" }));
-        await fin(wall.animate([{ clipPath: C(150) }, { clipPath: C(0) }], { duration: 560, easing: "cubic-bezier(.6,0,.4,1)", fill: "forwards" }));
-        await fin(gray.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: "ease-out", fill: "forwards" }));
+        // time resumes: the hands spin while the sphere shrinks away and colour comes back
+        const o: KeyframeAnimationOptions = { duration: 420, easing: "cubic-bezier(.6,0,.4,1)", fill: "forwards" };
+        sfx.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" });
+        hour.animate([{ transform: "rotate(300deg)" }, { transform: "rotate(480deg)" }], o);
+        minute.animate([{ transform: "rotate(54deg)" }, { transform: "rotate(774deg)" }], o);
+        gray.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 220, easing: "ease-out", fill: "forwards" });
+        await fin(wall.animate([{ clipPath: C(150) }, { clipPath: C(0) }], o));
+        await wait(220);
+      },
+    };
+  }
+
+  if (kind === "tusk") {
+    // Tusk ACT 4: a golden spiral draws itself through its golden rectangles,
+    // spinning nails fly in, then everything spins down into the spiral's eye.
+    const bg = el("tk-bg");
+    bg.style.clipPath = "circle(0% at 50% 50%)";
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 1618 1000");
+    svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+    svg.setAttribute("class", "tk-svg");
+    const g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "tk-g");
+    svg.appendChild(g);
+    const add = (tag: string, attrs: Record<string, string | number>) => {
+      const n = document.createElementNS(NS, tag);
+      for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, String(v));
+      g.appendChild(n);
+      return n as SVGElement;
+    };
+    // the golden rectangles (each square is the next Fibonacci step)
+    const squares = [
+      [0, 0, 1000], [1000, 0, 618], [1236, 618, 382], [1000, 764, 236],
+      [1000, 618, 146], [1146, 618, 90], [1180, 708, 56], [1146, 730, 34],
+    ];
+    const rects = squares.map(([x, y, w]) => add("rect", { x, y, width: w, height: w, class: "tk-rect" }));
+    const spiral = add("path", {
+      d: "M0 1000 A1000 1000 0 0 1 1000 0 A618 618 0 0 1 1618 618 A382 382 0 0 1 1236 1000 A236 236 0 0 1 1000 764 A146 146 0 0 1 1146 618 A90 90 0 0 1 1236 708 A56 56 0 0 1 1180 764 A34 34 0 0 1 1146 730",
+      class: "tk-spiral",
+      pathLength: 1,
+      "stroke-dasharray": 1,
+      "stroke-dashoffset": 1,
+    });
+    const EYE = [1168, 744];
+    bg.appendChild(svg);
+
+    const stars = [[14, 18], [82, 70], [70, 14]].map(([x, y]) => {
+      const st = el("tk-star", bg);
+      st.style.left = `${x}%`;
+      st.style.top = `${y}%`;
+      return st;
+    });
+    const r = rng(1890);
+    const nails = Array.from({ length: 5 }, (_, i) => {
+      const n = el("tk-nail", bg);
+      const ang = (i / 5) * Math.PI * 2 + r();
+      return { n, fx: Math.cos(ang) * 70, fy: Math.sin(ang) * 60, tx: Math.cos(ang) * (16 + r() * 14), ty: Math.sin(ang) * (14 + r() * 12), rot: Math.round((ang * 180) / Math.PI) };
+    });
+    const center = el("tk-center", bg);
+    const lab = el("tk-label", center, text);
+    lab.style.clipPath = tornClip("trbl", 6, 61);
+    const sfx = el("tk-sfx", ov, "ACT 4!");
+
+    return {
+      cover: async () => {
+        await fin(bg.animate([{ clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(150% at 50% 50%)" }], { duration: 450, easing: "cubic-bezier(.2,.8,.3,1)", fill: "forwards" }));
+        rects.forEach((rc, i) => rc.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: i * 70, fill: "both" }));
+        stars.forEach((st, i) => st.animate([{ opacity: 0, transform: "scale(0) rotate(-90deg)" }, { opacity: 1, transform: "scale(1) rotate(0deg)" }], { duration: 380, delay: 200 + i * 120, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "both" }));
+        nails.forEach(({ n, fx, fy, tx, ty, rot }, i) =>
+          n.animate([{ opacity: 0, transform: `translate(-50%,-50%) translate(${fx}vw, ${fy}vh) rotate(${rot}deg)` }, { opacity: 1, transform: `translate(-50%,-50%) translate(${tx}vw, ${ty}vh) rotate(${rot + 1080}deg)` }], { duration: 650, delay: 150 + i * 70, easing: "cubic-bezier(.2,.8,.3,1)", fill: "both" }),
+        );
+        await fin(spiral.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 750, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" }));
+        sfx.animate([{ opacity: 0, transform: "scale(1.7) rotate(-8deg)" }, { opacity: 1, transform: "scale(1) rotate(-6deg)" }], { duration: 280, easing: "ease-out", fill: "forwards" });
+        await fin(lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-3deg)" }], { duration: 300, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "forwards" }));
+        await wait(260);
+      },
+      reveal: async () => {
+        // find where the spiral's eye actually sits on screen, and spin everything into it
+        let eye = "50% 50%";
+        const ctm = (svg as SVGSVGElement).getScreenCTM();
+        if (ctm) {
+          const pt = new DOMPoint(EYE[0], EYE[1]).matrixTransform(ctm);
+          eye = `${Math.round(pt.x)}px ${Math.round(pt.y)}px`;
+        }
+        // the drawing fills the screen, so its on-screen eye is also its spin point
+        svg.style.transformOrigin = eye;
+        const o: KeyframeAnimationOptions = { duration: 650, easing: "cubic-bezier(.6,0,.3,1)", fill: "forwards" };
+        lab.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140, fill: "forwards" });
+        sfx.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" });
+        [...nails.map((x) => x.n), ...stars].forEach((d) => d.animate([{ opacity: 1 }, { opacity: 0, scale: "0.2" }], { duration: 300, fill: "forwards" }));
+        svg.animate([{ transform: "rotate(0deg) scale(1)" }, { transform: "rotate(540deg) scale(0.02)" }], o);
+        await fin(bg.animate([{ clipPath: `circle(150% at ${eye})` }, { clipPath: `circle(0% at ${eye})` }], o));
       },
     };
   }
