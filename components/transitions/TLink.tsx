@@ -2,7 +2,6 @@
 
 // Use this instead of <a> or <Link> everywhere. It picks the right transition:
 // Heaven's Door for project pages, Sticky Fingers for Work, The World for About,
-// Gold Experience Requiem for Content,
 // To Be Continued for other websites,
 // and the paper stack for everything else.
 
@@ -25,7 +24,6 @@ function autoKind(href: string): Kind {
   if (/^\/work\/[^/]+/.test(href)) return "book"; // Heaven's Door for projects
   if (/^\/work\/?(?:[?#]|$)/.test(href)) return "zipper"; // Sticky Fingers for Work
   if (/^\/about\/?(?:[?#]|$)/.test(href)) return "timestop"; // The World for About
-  if (/^\/content\/?(?:[?#]|$)/.test(href)) return "ger"; // Gold Experience Requiem for Content
   return "strips";
 }
 
