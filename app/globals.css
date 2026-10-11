@@ -162,9 +162,9 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--navy-fixed); color: #f3ead7; padding: 0.85rem 1.1rem;
   box-shadow: 0.25rem 0.25rem 0 var(--a1); transition: transform 0.15s, box-shadow 0.15s;
 }
-.btn:hover { transform: translate(-2px, -2px); box-shadow: 0.35rem 0.35rem 0 var(--a1); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { transform: translate(-2px, -2px); box-shadow: 0.35rem 0.35rem 0 var(--a1); } }
 .btn-ghost { background: var(--paper); color: var(--ink); box-shadow: 0.25rem 0.25rem 0 var(--a1); }
-.btn-ghost:hover { box-shadow: 0.35rem 0.35rem 0 var(--a1); }
+@media (hover: hover) and (pointer: fine) { .btn-ghost:hover { box-shadow: 0.35rem 0.35rem 0 var(--a1); } }
 .btn-big { font-size: 1rem; padding: 1.1rem 1.4rem; }
 .more { margin-top: 2.5rem; }
 
@@ -229,7 +229,7 @@ img { max-width: 100%; height: auto; display: block; }
   display: grid; place-content: center; font: 700 0.72rem/1.2 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase;
 }
 .stamp-btn small { font-size: 0.65rem; color: var(--ink-soft); }
-.stamp-btn:hover { transform: rotate(-4deg) scale(1.05); }
+@media (hover: hover) and (pointer: fine) { .stamp-btn:hover { transform: rotate(-4deg) scale(1.05); } }
 @media (prefers-reduced-motion: no-preference) {
   .gogo { animation: wob 3.2s ease-in-out infinite; }
   @keyframes wob { 50% { translate: 0 -6px; } }
@@ -260,7 +260,7 @@ img { max-width: 100%; height: auto; display: block; }
 .clip-1 { transform: rotate(1.8deg); margin-top: 1.5rem; }
 .clip-2 { transform: rotate(-1deg); }
 .clip-soon { transform: rotate(2deg); margin-top: 2rem; }
-a.clip:hover { transform: rotate(0) translateY(-6px); }
+@media (hover: hover) and (pointer: fine) { a.clip:hover { transform: rotate(0) translateY(-6px); } }
 .clip-tape { left: 50%; top: -0.7rem; transform: translateX(-50%) rotate(-4deg); }
 .clip-paper { padding: 0.9rem 0.9rem 1.3rem; display: grid; gap: 0.3rem; }
 .clip-img { aspect-ratio: 4 / 5; overflow: hidden; margin-bottom: 0.6rem; position: relative; }
@@ -290,7 +290,7 @@ a.clip:hover { transform: rotate(0) translateY(-6px); }
 .post:nth-child(3n + 1) { transform: rotate(-1.5deg); }
 .post:nth-child(3n + 2) { transform: rotate(1.2deg); }
 .post:nth-child(3n) { transform: rotate(-0.5deg); }
-.post:hover { transform: rotate(0) translateY(-4px); }
+@media (hover: hover) and (pointer: fine) { .post:hover { transform: rotate(0) translateY(-4px); } }
 .pic { aspect-ratio: 4 / 5; overflow: hidden; background: var(--line); }
 .pic img { width: 100%; height: 100%; object-fit: cover; }
 .post-stamp { position: absolute; top: 0.6rem; right: 0.4rem; font: 700 0.62rem/1 var(--f-mono); letter-spacing: 0.05em; text-transform: uppercase; background: var(--paper); color: var(--ink); padding: 0.3rem 0.45rem; transform: rotate(4deg); }
@@ -475,12 +475,13 @@ a.clip:hover { transform: rotate(0) translateY(-6px); }
   background-image: var(--noise), repeating-linear-gradient(135deg, transparent 0 2.2rem, color-mix(in srgb, #ffffff 14%, transparent) 2.2rem 2.6rem);
 }
 .zp-teeth {
-  position: absolute; left: 50%; top: 0; width: 1.6rem; transform: translateX(-50%);
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 1.6rem; transform: translateX(-50%);
+  clip-path: inset(0 0 100% 0); /* revealed from the top as the zip closes */
   background: repeating-linear-gradient(180deg, var(--sf-gold) 0 0.45rem, transparent 0.45rem 0.9rem) left / 50% 100% no-repeat,
               repeating-linear-gradient(180deg, transparent 0 0.45rem, var(--sf-gold) 0.45rem 0.9rem) right / 50% 100% no-repeat;
 }
 .zp-pull {
-  position: absolute; left: 50%; width: 2.6rem; height: 4.2rem; transform: translate(-50%, -30%);
+  position: absolute; left: 50%; top: 0; width: 2.6rem; height: 4.2rem; transform: translate(-50%, -30%);
   background: linear-gradient(90deg, #b8912c, var(--sf-gold) 45%, #fff3c4 55%, var(--sf-gold));
   border: 3px solid var(--navy-fixed); border-radius: 0.5rem 0.5rem 1.3rem 1.3rem; z-index: 2;
 }

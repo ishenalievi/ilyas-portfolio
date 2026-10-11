@@ -3,7 +3,13 @@
 // Plays a full-screen transition around every page change:
 // cover the screen, switch the page underneath, then reveal it.
 
-import { createContext, useCallback, useContext, useEffect, useRef } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createRun, type Kind } from "./engine";
 
@@ -12,7 +18,11 @@ type Go = (href: string, opts: { kind: Kind; label: string }) => void;
 const Ctx = createContext<Go>(() => {});
 export const useGo = () => useContext(Ctx);
 
-export function TransitionProvider({ children }: { children: React.ReactNode }) {
+export function TransitionProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const ovRef = useRef<HTMLDivElement>(null);
@@ -25,8 +35,12 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
     const onDown = (e: PointerEvent) => {
       lastPress.current = { x: e.clientX, y: e.clientY, t: performance.now() };
     };
-    window.addEventListener("pointerdown", onDown, { capture: true, passive: true });
-    return () => window.removeEventListener("pointerdown", onDown, { capture: true });
+    window.addEventListener("pointerdown", onDown, {
+      capture: true,
+      passive: true,
+    });
+    return () =>
+      window.removeEventListener("pointerdown", onDown, { capture: true });
   }, []);
   const pressOrigin = () => {
     const p = lastPress.current;
@@ -38,39 +52,56 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
     if (pending.current && pending.current.path === pathname) {
       const p = pending.current;
       pending.current = null;
-      setTimeout(p.resolve, 60);
+      setTimeout(p.resolve, 30);
     }
   }, [pathname]);
 
-  const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduced = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const play = useCallback(async (kind: Kind, label: string, between?: () => Promise<void>) => {
-    const ov = ovRef.current;
-    if (!ov || busy.current) return;
-    busy.current = true;
-    skip.current = false;
-    ov.replaceChildren();
-    ov.hidden = false;
-    try {
-      const run = createRun(ov, reduced() ? "fade" : kind, label, () => skip.current, pressOrigin());
-      await run.cover();
-      if (between) await between();
+  const play = useCallback(
+    async (
+      kind: Kind,
+      label: string,
+      between?: () => Promise<void>,
+      keyboard = false,
+    ) => {
+      const ov = ovRef.current;
+      if (!ov || busy.current) return;
+      busy.current = true;
       skip.current = false;
-      await run.reveal();
-    } catch {
-      // never leave the overlay stuck on screen
-    } finally {
-      ov.hidden = true;
       ov.replaceChildren();
-      busy.current = false;
-    }
-  }, []);
+      ov.hidden = false;
+      try {
+        // reduced motion, or a link opened from the keyboard: a quick fade instead
+        const run = createRun(
+          ov,
+          reduced() || keyboard ? "fade" : kind,
+          label,
+          () => skip.current,
+          pressOrigin(),
+        );
+        await run.cover();
+        if (between) await between();
+        skip.current = false;
+        await run.reveal();
+      } catch {
+        // never leave the overlay stuck on screen
+      } finally {
+        ov.hidden = true;
+        ov.replaceChildren();
+        busy.current = false;
+      }
+    },
+    [],
+  );
 
   const go = useCallback<Go>(
     (href, { kind, label }) => {
       if (busy.current) return;
       const url = new URL(href, window.location.href);
       const external = url.origin !== window.location.origin;
+      const keyboard = !pressOrigin();
       if (external) {
         // To Be Continued, then leave. The overlay stays up while the new site loads.
         const ov = ovRef.current;
@@ -79,7 +110,12 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
         skip.current = false;
         ov.replaceChildren();
         ov.hidden = false;
-        const run = createRun(ov, reduced() ? "fade" : kind, label, () => skip.current);
+        const run = createRun(
+          ov,
+          reduced() || keyboard ? "fade" : kind,
+          label,
+          () => skip.current,
+        );
         run.cover().finally(() => {
           window.location.href = href;
         });
@@ -89,18 +125,24 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
         router.push(url.pathname + url.search + url.hash);
         return;
       }
-      play(kind, label, () =>
-        new Promise<void>((resolve) => {
-          pending.current = { path: url.pathname, resolve };
-          router.push(url.pathname + url.search + url.hash);
-          // fallback in case the page takes unusually long
-          setTimeout(() => {
-            if (pending.current?.resolve === resolve) {
-              pending.current = null;
-              resolve();
-            }
-          }, 6000);
-        }),
+      // start fetching the new page now, while the cover plays, so the swap is instant
+      router.prefetch(url.pathname);
+      play(
+        kind,
+        label,
+        () =>
+          new Promise<void>((resolve) => {
+            pending.current = { path: url.pathname, resolve };
+            router.push(url.pathname + url.search + url.hash);
+            // fallback in case the page takes unusually long
+            setTimeout(() => {
+              if (pending.current?.resolve === resolve) {
+                pending.current = null;
+                resolve();
+              }
+            }, 6000);
+          }),
+        keyboard,
       );
     },
     [play, router],
@@ -148,7 +190,13 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
   return (
     <Ctx.Provider value={go}>
       {children}
-      <div ref={ovRef} className="ov" hidden aria-hidden="true" onClick={doSkip} />
+      <div
+        ref={ovRef}
+        className="ov"
+        hidden
+        aria-hidden="true"
+        onClick={doSkip}
+      />
     </Ctx.Provider>
   );
 }
