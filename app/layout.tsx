@@ -40,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Nav />
           <main id="main">{children}</main>
           <Footer />
+          <div className="floor" aria-hidden="true" />
         </TransitionProvider>
       </body>
     </html>

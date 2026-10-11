@@ -30,6 +30,12 @@
   --tbc-bg: #d4ae3a;
   --tbc-fg: #2a2414;
   --sepia: rgba(112, 66, 20, 0.22);
+  /* floorboards: fixed colours, the same in light and dark */
+  --wood: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='56' viewBox='0 0 420 56'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.28' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.08 0 0 0 0 0.03 0 0 0 0.9 -0.3'/%3E%3C/filter%3E%3Crect width='180' height='28' fill='%238b5a2f'/%3E%3Crect x='180' width='240' height='28' fill='%239c6a3a'/%3E%3Crect y='28' width='90' height='28' fill='%2374471f'/%3E%3Crect x='90' y='28' width='220' height='28' fill='%238b5a2f'/%3E%3Crect x='310' y='28' width='110' height='28' fill='%2374471f'/%3E%3Crect width='420' height='56' filter='url(%23g)'/%3E%3Cg fill='%233b2414'%3E%3Crect y='27' width='420' height='2'/%3E%3Crect y='54.5' width='420' height='1.5'/%3E%3Crect width='2' height='28'/%3E%3Crect x='178' width='2' height='28'/%3E%3Crect x='88' y='28' width='2' height='28'/%3E%3Crect x='308' y='28' width='2' height='28'/%3E%3Ccircle cx='8' cy='14' r='1.6'/%3E%3Ccircle cx='172' cy='14' r='1.6'/%3E%3Ccircle cx='186' cy='14' r='1.6'/%3E%3Ccircle cx='96' cy='42' r='1.6'/%3E%3Ccircle cx='302' cy='42' r='1.6'/%3E%3Ccircle cx='316' cy='42' r='1.6'/%3E%3C/g%3E%3Crect width='420' height='1' fill='%23fff' fill-opacity='.12'/%3E%3Crect y='29' width='420' height='1' fill='%23fff' fill-opacity='.12'/%3E%3C/svg%3E");
+  --wood-size: 27rem 3.6rem;
+  --wood-base: #74471f;
+  --wood-seam: #3b2414;
+  --wood-text: #fbf3e0;
   --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .2 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
   --f-display: var(--font-display), "Arial Black", Impact, sans-serif;
@@ -63,10 +69,16 @@
 :root.pal-4 { --a1: #00c2a8; --a2: #ff3d7f; --a3: #ffd23f; --a4: #2b59c3; }
 
 /* root size grows with the window: ~15px on phones, ~18px laptops, ~23px on big monitors */
-html { font-size: clamp(15px, 0.45vw + 11.5px, 24px); scroll-behavior: smooth; }
+html {
+  font-size: clamp(15px, 0.45vw + 11.5px, 24px); scroll-behavior: smooth;
+  /* what shows when the page bounces past its top or bottom edge */
+  background: var(--wood-base) var(--wood) 0 0 / var(--wood-size) repeat;
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
+  position: relative;
+  z-index: 0; /* own stacking layer, so the moving stripes sit above the page colour */
   background: var(--ground);
   color: var(--ink);
   font: 400 1rem/1.6 var(--f-body);
@@ -112,7 +124,7 @@ img { max-width: 100%; height: auto; display: block; }
   filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
           drop-shadow(1.5px 1.5px 0 #fff) drop-shadow(-1.5px -1.5px 0 #fff) drop-shadow(0.2rem 0.3rem 0 color-mix(in srgb, var(--shade) 35%, transparent));
 }
-.sticker svg { display: block; width: 100%; height: auto; }
+.sticker svg, .sticker img { display: block; width: 100%; height: auto; }
 .st-1 { left: -0.4%; top: 16%; transform: rotate(-12deg); width: clamp(3.6rem, 5vw, 7.5rem); }
 .st-2 { right: -0.6%; top: 24%; transform: rotate(9deg); }
 .st-3 { left: 0.2%; top: 56%; transform: rotate(14deg); width: clamp(2.6rem, 3.4vw, 5rem); }
@@ -165,18 +177,24 @@ img { max-width: 100%; height: auto; display: block; }
 .nav {
   position: sticky; top: 0; z-index: 50;
   padding-top: env(safe-area-inset-top, 0px);
-  background: color-mix(in srgb, var(--paper) 92%, transparent);
-  backdrop-filter: blur(8px);
-  border-bottom: 2px solid var(--ink);
+  background: var(--wood-base) var(--wood) 0 100% / var(--wood-size) repeat-x;
+  color: var(--wood-text);
+  border-bottom: 3px solid var(--wood-seam);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--wood-seam) 35%, transparent), inset 0 -2px 0 rgba(255, 255, 255, 0.08);
+}
+/* more floorboards above the bar, so a bounce at the top never shows a gap */
+.nav::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 100vh;
+  background: var(--wood-base) var(--wood) 0 100% / var(--wood-size) repeat;
 }
 .nav-row { display: flex; align-items: center; gap: clamp(0.8rem, 3vw, 2.5rem); min-height: 3.6rem; }
-.logo { font: italic 400 1.7rem/1 var(--f-serif); text-decoration: none; margin-right: auto; }
+.logo { font: italic 400 1.7rem/1 var(--f-serif); text-decoration: none; margin-right: auto; color: var(--wood-text); text-shadow: 0 2px 0 var(--wood-seam); }
 .nav nav { display: flex; gap: clamp(0.8rem, 2.5vw, 2.2rem); }
-.nav nav a { font: 700 0.78rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding-block: 0.4rem; border-bottom: 2px solid transparent; }
-.nav nav a:hover { border-color: var(--a1); }
-.swap-chip { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--ink); color: var(--ground); border: 0; padding: 0.5rem 0.7rem; cursor: pointer; font: 700 0.7rem/1 var(--f-mono); }
+.nav nav a { font: 700 0.78rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding-block: 0.4rem; border-bottom: 2px solid transparent; color: var(--wood-text); text-shadow: 0 1px 0 var(--wood-seam); }
+.nav nav a:hover { border-color: var(--a3); }
+.swap-chip { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--navy-fixed); color: #fbf3e0; border: 2px solid var(--wood-seam); box-shadow: 0 2px 0 var(--wood-seam); padding: 0.5rem 0.7rem; cursor: pointer; font: 700 0.7rem/1 var(--f-mono); }
 .swap-chip .dots { display: inline-flex; }
-.swap-chip .dots i { width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 1.5px solid var(--ground); margin-left: -0.25rem; }
+.swap-chip .dots i { width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 1.5px solid #fbf3e0; margin-left: -0.25rem; }
 @media (max-width: 480px) { .swap-txt { display: none; } }
 
 /* ---------- hero (frame 1) ---------- */
@@ -317,7 +335,14 @@ a.clip:hover { transform: rotate(0) translateY(-6px); }
 .sub-head { font: 400 clamp(1.5rem, 2.6vw, 2.4rem)/1.1 var(--f-serif); margin: 3.5rem 0 1.2rem; }
 
 /* ---------- footer (frame 7) ---------- */
-.foot { background: var(--navy-fixed); color: #fbfaf6; margin-top: var(--space); padding-block: var(--space) calc(2rem + env(safe-area-inset-bottom, 0px)); position: relative; overflow: hidden; }
+.foot { background: var(--navy-fixed); color: #fbfaf6; margin-top: var(--space); padding-block: var(--space) 2.5rem; position: relative; overflow: hidden; }
+/* the floor the footer stands on: a skirting board, then planks to the bottom edge */
+.floor {
+  height: calc(clamp(3.6rem, 6vw, 5.4rem) + env(safe-area-inset-bottom, 0px));
+  background: var(--wood-base) var(--wood) 0 0 / var(--wood-size) repeat;
+  border-top: 0.65rem solid #4a2c15;
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.12), inset 0 0.65rem 0.9rem rgba(0, 0, 0, 0.35);
+}
 .foot-grid { display: grid; gap: 2rem; }
 .tbc-arrow {
   justify-self: start; background: var(--tbc-bg); color: var(--tbc-fg);

@@ -1,7 +1,15 @@
 // Die-cut stickers stuck on the background, behind the paper.
-// All original drawings: nods to Ralph Lauren and Wallace & Gromit,
+// The drawn ones are originals: nods to Ralph Lauren and Wallace & Gromit,
 // not their actual characters or logos.
+//
+// TO USE YOUR OWN PNG: put it in /public/stickers/ named after the sticker
+// it replaces, e.g. public/stickers/bear.png. Names you can use:
+//   bear, cheese, rocket, crest, tea, sheep, patch, toast
+// A transparent background looks best: the white die-cut edge follows its shape.
 
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 const INK = "#14213d";
@@ -137,25 +145,41 @@ function Toast() {
   );
 }
 
-const STICKERS: { node: ReactNode; cls: string }[] = [
-  { node: <Bear />, cls: "st-1" },
-  { node: <Cheese />, cls: "st-2" },
-  { node: <Rocket />, cls: "st-3" },
-  { node: <Crest />, cls: "st-4" },
-  { node: <Tea />, cls: "st-5" },
-  { node: <Sheep />, cls: "st-6" },
-  { node: <Patch />, cls: "st-7" },
-  { node: <Toast />, cls: "st-8" },
+const STICKERS: { id: string; node: ReactNode; cls: string }[] = [
+  { id: "bear", node: <Bear />, cls: "st-1" },
+  { id: "cheese", node: <Cheese />, cls: "st-2" },
+  { id: "rocket", node: <Rocket />, cls: "st-3" },
+  { id: "crest", node: <Crest />, cls: "st-4" },
+  { id: "tea", node: <Tea />, cls: "st-5" },
+  { id: "sheep", node: <Sheep />, cls: "st-6" },
+  { id: "patch", node: <Patch />, cls: "st-7" },
+  { id: "toast", node: <Toast />, cls: "st-8" },
 ];
 
-export function Stickers() {
+/** If public/stickers/<id>.png exists, return its path and pixel size. */
+function customSticker(id: string) {
+  const file = path.join(process.cwd(), "public", "stickers", `${id}.png`);
+  try {
+    const head = fs.readFileSync(file).subarray(0, 24);
+    // PNG files store width and height at bytes 16-23
+    return { src: `/stickers/${id}.png`, w: head.readUInt32BE(16), h: head.readUInt32BE(20) };
+  } catch {
+    return null;
+  }
+}
+
+export async function Stickers() {
+  "use cache"; // the folder is checked once per build, not on every visit
   return (
     <div className="stickers" aria-hidden="true">
-      {STICKERS.map((s) => (
-        <div key={s.cls} className={`sticker ${s.cls}`}>
-          {s.node}
-        </div>
-      ))}
+      {STICKERS.map((s) => {
+        const own = customSticker(s.id);
+        return (
+          <div key={s.id} className={`sticker ${s.cls}`}>
+            {own ? <Image src={own.src} alt="" width={own.w} height={own.h} sizes="10rem" /> : s.node}
+          </div>
+        );
+      })}
     </div>
   );
 }
