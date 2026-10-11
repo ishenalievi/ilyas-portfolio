@@ -1,69 +1,125 @@
 import Image from "next/image";
+import { posts } from "@/content/posts";
+import { projects } from "@/content/projects";
+import { site } from "@/content/site";
+import { Lift, Tape, Torn } from "@/components/collage";
+import { Clipping, HazardSlot, Ledger, Loves, SectionHead, Sheet } from "@/components/blocks";
+import { ContentWall } from "@/components/ContentWall";
+import { PaletteSwap } from "@/components/PaletteSwap";
+import { TLink } from "@/components/transitions/TLink";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* Frame 1 · Hero */}
+      <section className="hero">
+        <div className="wrap hero-grid">
+          <div className="hero-copy">
+            <p className="eyebrow">Portfolio · Vol. 1 · 2026</p>
+            <h1 className="ransom" aria-label={site.name}>
+              <Torn as="span" className="r1" seed="r1" amp={6}>
+                {site.firstName.toUpperCase()}
+              </Torn>
+              <Torn as="span" className="r2 paper-2" seed="r2" amp={5}>
+                {site.lastName}
+              </Torn>
+            </h1>
+            <p className="hero-tag">{site.tagline}</p>
+            <div className="hero-actions">
+              <TLink href="/work" className="btn">
+                See the work
+              </TLink>
+              <TLink href={site.instagram.url} className="btn btn-ghost">
+                {site.instagram.handle}
+              </TLink>
+            </div>
+          </div>
+
+          <div className="hero-board">
+            <span className="gogo" aria-hidden="true">
+              ゴゴゴ
+            </span>
+            <Lift className="hb hb-1">
+              <Torn className="hb-img" seed="hb-1" amp={7}>
+                <Image src="/images/posts/imprint.jpg" alt="After Hours reel cover" width={562} height={1000} loading="eager" fetchPriority="high" sizes="(max-width: 800px) 40vw, 22vw" />
+              </Torn>
+            </Lift>
+            <Lift className="hb hb-2">
+              <Torn className="hb-img" seed="hb-2" amp={7}>
+                <Image src="/images/posts/kali.jpg" alt="Red Moon in Venus poster" width={801} height={1000} loading="eager" fetchPriority="high" sizes="(max-width: 800px) 36vw, 20vw" />
+              </Torn>
+            </Lift>
+            <Lift className="hb hb-3">
+              <Torn className="hb-img" seed="hb-3" amp={6}>
+                <Image src="/images/btv/cocrM2CmRTM.jpg" alt="ISM Baseball Sendoff thumbnail" width={1280} height={720} sizes="(max-width: 800px) 50vw, 26vw" />
+              </Torn>
+            </Lift>
+            <Tape className="hb-tape1" />
+            <Tape className="hb-tape2" />
+            <div className="hb-stamp">
+              <PaletteSwap variant="stamp" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Frame 2 · Intro */}
+      <section className="intro">
+        <div className="wrap intro-grid">
+          <p className="intro-line">
+            I edit videos, design posters, and <mark className="hl">start hobbies faster than I finish them</mark>. This site is{" "}
+            <span className="circ">mostly</span> proof I finished one.
+          </p>
+          <span className="margin-note">← accurate, sadly</span>
+        </div>
+      </section>
+
+      {/* Frame 3 · Work */}
+      <section className="block">
+        <div className="wrap">
+          <SectionHead eyebrow="Selected work" title="Three clippings, one taped shut" />
+          <div className="clips">
+            {projects.map((p, i) => (
+              <Clipping key={p.slug} p={p} i={i} />
+            ))}
+            <HazardSlot text="04 · Under construction" note="The next IMPRINT reel goes here. Allegedly soon." />
+          </div>
+        </div>
+      </section>
+
+      {/* Frame 4 · Content */}
+      <Sheet seed="home-wall">
+        <SectionHead eyebrow="Content wall" title="Reels, posters, edits">
+          A selection from Instagram and YouTube. The full wall has filters.
+        </SectionHead>
+        <ContentWall posts={posts.slice(0, 8)} filters={false} />
+        <p className="more">
+          <TLink href="/content" className="btn">
+            See everything →
+          </TLink>
+        </p>
+      </Sheet>
+
+      {/* Frame 5 · Loves */}
+      <section className="block">
+        <div className="wrap">
+          <SectionHead eyebrow="Things I love" title="The taste wall">
+            Shows, sports, books and hobbies, labelled like a museum would if it had less dignity.
+          </SectionHead>
+          <Loves limit={5} />
+          <p className="more">
+            <TLink href="/about" className="btn">
+              All nine →
+            </TLink>
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Frame 6 · Experience */}
+      <Sheet seed="home-ledger">
+        <SectionHead eyebrow="The record" title="Where I've been" />
+        <Ledger />
+      </Sheet>
+    </>
   );
 }
