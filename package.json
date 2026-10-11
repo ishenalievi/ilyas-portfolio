@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "dev:github": "NEXT_PUBLIC_KEYSTATIC_STORAGE=github next dev"
   },
   "dependencies": {
     "@keystatic/core": "^0.6.9",
