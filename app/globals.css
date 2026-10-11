@@ -30,12 +30,15 @@
   --tbc-bg: #d4ae3a;
   --tbc-fg: #2a2414;
   --sepia: rgba(112, 66, 20, 0.22);
-  /* floorboards: fixed colours, the same in light and dark */
-  --wood: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='56' viewBox='0 0 420 56'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.28' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.08 0 0 0 0 0.03 0 0 0 0.9 -0.3'/%3E%3C/filter%3E%3Crect width='180' height='28' fill='%238b5a2f'/%3E%3Crect x='180' width='240' height='28' fill='%239c6a3a'/%3E%3Crect y='28' width='90' height='28' fill='%2374471f'/%3E%3Crect x='90' y='28' width='220' height='28' fill='%238b5a2f'/%3E%3Crect x='310' y='28' width='110' height='28' fill='%2374471f'/%3E%3Crect width='420' height='56' filter='url(%23g)'/%3E%3Cg fill='%233b2414'%3E%3Crect y='27' width='420' height='2'/%3E%3Crect y='54.5' width='420' height='1.5'/%3E%3Crect width='2' height='28'/%3E%3Crect x='178' width='2' height='28'/%3E%3Crect x='88' y='28' width='2' height='28'/%3E%3Crect x='308' y='28' width='2' height='28'/%3E%3Ccircle cx='8' cy='14' r='1.6'/%3E%3Ccircle cx='172' cy='14' r='1.6'/%3E%3Ccircle cx='186' cy='14' r='1.6'/%3E%3Ccircle cx='96' cy='42' r='1.6'/%3E%3Ccircle cx='302' cy='42' r='1.6'/%3E%3Ccircle cx='316' cy='42' r='1.6'/%3E%3C/g%3E%3Crect width='420' height='1' fill='%23fff' fill-opacity='.12'/%3E%3Crect y='29' width='420' height='1' fill='%23fff' fill-opacity='.12'/%3E%3C/svg%3E");
-  --wood-size: 27rem 3.6rem;
-  --wood-base: #74471f;
-  --wood-seam: #3b2414;
-  --wood-text: #fbf3e0;
+  /* dark walnut panelling with brass trim: fixed colours, the same in light and dark */
+  --wood: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='840' height='56' viewBox='0 0 840 56'%3E%3Cdefs%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0018 0.16' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.045 0 0 0 0 0.02 0 0 0 0.75 -0.28'/%3E%3C/filter%3E%3ClinearGradient id='s' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.08'/%3E%3Cstop offset='.4' stop-color='%23fff' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='.24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='380' height='28' fill='%233e2517'/%3E%3Crect x='380' width='460' height='28' fill='%2346291a'/%3E%3Crect y='28' width='180' height='28' fill='%2339210f'/%3E%3Crect x='180' y='28' width='420' height='28' fill='%2341271a'/%3E%3Crect x='600' y='28' width='240' height='28' fill='%2339210f'/%3E%3Crect width='840' height='56' filter='url(%23g)'/%3E%3Crect width='840' height='28' fill='url(%23s)'/%3E%3Crect y='28' width='840' height='28' fill='url(%23s)'/%3E%3Cg fill='%231a0e07'%3E%3Crect y='27.4' width='840' height='1.2'/%3E%3Crect y='55' width='840' height='1'/%3E%3Crect width='1' height='28'/%3E%3Crect x='379.5' width='1' height='28'/%3E%3Crect x='179.5' y='28' width='1' height='28'/%3E%3Crect x='599.5' y='28' width='1' height='28'/%3E%3C/g%3E%3Crect y='28.6' width='840' height='0.8' fill='%23fff' fill-opacity='.05'/%3E%3Crect width='840' height='0.8' fill='%23fff' fill-opacity='.05'/%3E%3C/svg%3E");
+  --wood-size: 54rem 3.6rem;          /* two rows of long boards per nav height */
+  --wood-floor-size: 80rem 5.34rem;    /* the floor uses bigger boards */
+  --wood-base: #2f1b10;
+  --wood-seam: #1a0e07;
+  --wood-text: #f3ead7;
+  --brass: #b08d57;
+  --brass-light: #d9bd85;
   --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .2 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
   --f-display: var(--font-display), "Arial Black", Impact, sans-serif;
@@ -72,7 +75,7 @@
 html {
   font-size: clamp(15px, 0.45vw + 11.5px, 24px); scroll-behavior: smooth;
   /* what shows when the page bounces past its top or bottom edge */
-  background: var(--wood-base) var(--wood) 0 0 / var(--wood-size) repeat;
+  background: var(--wood-base) var(--wood) 0 0 / var(--wood-floor-size) repeat;
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -179,8 +182,8 @@ img { max-width: 100%; height: auto; display: block; }
   padding-top: env(safe-area-inset-top, 0px);
   background: var(--wood-base) var(--wood) 0 100% / var(--wood-size) repeat-x;
   color: var(--wood-text);
-  border-bottom: 3px solid var(--wood-seam);
-  box-shadow: 0 3px 0 color-mix(in srgb, var(--wood-seam) 35%, transparent), inset 0 -2px 0 rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--wood-seam);
+  box-shadow: 0 2px 0 var(--brass), 0 3px 0 var(--wood-seam), 0 0.6rem 1.2rem rgba(10, 5, 2, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 /* more floorboards above the bar, so a bounce at the top never shows a gap */
 .nav::before {
@@ -188,13 +191,14 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--wood-base) var(--wood) 0 100% / var(--wood-size) repeat;
 }
 .nav-row { display: flex; align-items: center; gap: clamp(0.8rem, 3vw, 2.5rem); min-height: 3.6rem; }
-.logo { font: italic 400 1.7rem/1 var(--f-serif); text-decoration: none; margin-right: auto; color: var(--wood-text); text-shadow: 0 2px 0 var(--wood-seam); }
+.logo { font: italic 400 1.7rem/1 var(--f-serif); text-decoration: none; margin-right: auto; color: var(--wood-text); }
+.logo:hover { color: var(--brass-light); }
 .nav nav { display: flex; gap: clamp(0.8rem, 2.5vw, 2.2rem); }
-.nav nav a { font: 700 0.78rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding-block: 0.4rem; border-bottom: 2px solid transparent; color: var(--wood-text); text-shadow: 0 1px 0 var(--wood-seam); }
-.nav nav a:hover { border-color: var(--a3); }
-.swap-chip { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--navy-fixed); color: #fbf3e0; border: 2px solid var(--wood-seam); box-shadow: 0 2px 0 var(--wood-seam); padding: 0.5rem 0.7rem; cursor: pointer; font: 700 0.7rem/1 var(--f-mono); }
+.nav nav a { font: 700 0.78rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding-block: 0.4rem; border-bottom: 2px solid transparent; color: var(--wood-text); letter-spacing: 0.12em; }
+.nav nav a:hover { color: var(--brass-light); border-color: var(--brass); }
+.swap-chip { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--navy-fixed); color: var(--wood-text); border: 1px solid var(--brass); box-shadow: none; padding: 0.5rem 0.7rem; cursor: pointer; font: 700 0.7rem/1 var(--f-mono); }
 .swap-chip .dots { display: inline-flex; }
-.swap-chip .dots i { width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 1.5px solid #fbf3e0; margin-left: -0.25rem; }
+.swap-chip .dots i { width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 1.5px solid var(--wood-text); margin-left: -0.25rem; }
 @media (max-width: 480px) { .swap-txt { display: none; } }
 
 /* ---------- hero (frame 1) ---------- */
@@ -338,10 +342,11 @@ a.clip:hover { transform: rotate(0) translateY(-6px); }
 .foot { background: var(--navy-fixed); color: #fbfaf6; margin-top: var(--space); padding-block: var(--space) 2.5rem; position: relative; overflow: hidden; }
 /* the floor the footer stands on: a skirting board, then planks to the bottom edge */
 .floor {
-  height: calc(clamp(3.6rem, 6vw, 5.4rem) + env(safe-area-inset-bottom, 0px));
-  background: var(--wood-base) var(--wood) 0 0 / var(--wood-size) repeat;
-  border-top: 0.65rem solid #4a2c15;
-  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.12), inset 0 0.65rem 0.9rem rgba(0, 0, 0, 0.35);
+  position: relative;
+  height: calc(clamp(4rem, 6.5vw, 6rem) + env(safe-area-inset-bottom, 0px));
+  background: var(--wood-base) var(--wood) 0 0 / var(--wood-floor-size) repeat;
+  border-top: 0.75rem solid #1f120a;
+  box-shadow: 0 -2px 0 var(--brass), inset 0 1px 0 rgba(255, 255, 255, 0.07), inset 0 0.75rem 1.2rem rgba(0, 0, 0, 0.45);
 }
 .foot-grid { display: grid; gap: 2rem; }
 .tbc-arrow {
