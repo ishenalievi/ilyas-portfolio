@@ -255,14 +255,15 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     const spiral = add("path", {
       d: "M0 1000 A1000 1000 0 0 1 1000 0 A618 618 0 0 1 1618 618 A382 382 0 0 1 1236 1000 A236 236 0 0 1 1000 764 A146 146 0 0 1 1146 618 A90 90 0 0 1 1236 708 A56 56 0 0 1 1180 764 A34 34 0 0 1 1146 730",
       class: "tk-spiral",
-      // one dash as long as the spiral, then a long gap, so nothing peeks out at the
-      // end of the line before the drawing reaches it
-      pathLength: 1,
-      "stroke-dasharray": "1 3",
-      "stroke-dashoffset": 1.05,
     });
     const EYE = [1168, 744];
     bg.appendChild(svg);
+    // Draw the spiral with its real measured length (not a normalised one), so every
+    // browser shows exactly one dash the length of the spiral followed by a long gap.
+    const len = (spiral as SVGPathElement).getTotalLength?.() || 4025;
+    const hidden = `${(len * 1.03).toFixed(1)}px`;
+    spiral.style.strokeDasharray = `${len.toFixed(1)}px ${(len * 3).toFixed(1)}px`;
+    spiral.style.strokeDashoffset = hidden;
 
     const stars = [[14, 18], [82, 70], [70, 14]].map(([x, y]) => {
       const st = el("tk-star", bg);
@@ -290,7 +291,7 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
         nails.forEach(({ n, fx, fy, tx, ty, rot }, i) =>
           n.animate([{ opacity: 0, transform: `translate(-50%,-50%) translate(${fx}vw, ${fy}vh) rotate(${rot}deg)` }, { opacity: 1, transform: `translate(-50%,-50%) translate(${tx}vw, ${ty}vh) rotate(${rot + 1080}deg)` }], { duration: 650, delay: 150 + i * 70, easing: "cubic-bezier(.2,.8,.3,1)", fill: "both" }),
         );
-        await fin(spiral.animate([{ strokeDashoffset: 1.05 }, { strokeDashoffset: 0 }], { duration: 750, delay: 80, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" }));
+        await fin(spiral.animate([{ strokeDashoffset: hidden }, { strokeDashoffset: "0px" }], { duration: 750, delay: 80, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" }));
         sfx.animate([{ opacity: 0, transform: "scale(1.7) rotate(-8deg)" }, { opacity: 1, transform: "scale(1) rotate(-6deg)" }], { duration: 280, easing: "ease-out", fill: "forwards" });
         await fin(lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-3deg)" }], { duration: 300, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "forwards" }));
         await wait(260);
