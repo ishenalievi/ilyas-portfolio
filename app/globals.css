@@ -26,6 +26,7 @@
   --stripe-mix: 24%;
   --sf-blue: #2f5fd0;
   --sf-gold: #d4ae3a;
+  --tw-gold: #e3c23c;
   --tbc-bg: #d4ae3a;
   --tbc-fg: #2a2414;
   --sepia: rgba(112, 66, 20, 0.22);
@@ -437,6 +438,35 @@ a.clip:hover { transform: rotate(0) translateY(-6px); }
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-4deg); opacity: 0; z-index: 3; white-space: nowrap;
   background-color: var(--paper); background-image: var(--noise); color: var(--ink);
   font: 400 clamp(2.4rem, 11vw, 9rem)/1 var(--f-display); padding: 0.25em 0.5em 0.18em;
+}
+
+/* The World time stop */
+.tw-inv { position: absolute; inset: 0; -webkit-backdrop-filter: invert(1) saturate(1.3); backdrop-filter: invert(1) saturate(1.3); clip-path: circle(0% at 50% 50%); z-index: 2; }
+.tw-gray { position: absolute; inset: 0; opacity: 0; -webkit-backdrop-filter: grayscale(1) contrast(1.15) brightness(0.9); backdrop-filter: grayscale(1) contrast(1.15) brightness(0.9); background: color-mix(in srgb, var(--tw-gold) 12%, transparent); }
+.tw-wall {
+  position: absolute; inset: 0; z-index: 3; clip-path: circle(0% at 50% 50%);
+  display: grid; place-content: center; justify-items: center; gap: 1.2rem;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, transparent 0 2.6rem, color-mix(in srgb, var(--navy-fixed) 10%, transparent) 2.6rem 2.8rem),
+    radial-gradient(circle at 50% 50%, #fbf0bd 0, var(--tw-gold) 48%, #6e5e17 100%);
+}
+.tw-clock { width: clamp(8rem, 22vw, 16rem); height: auto; }
+.tw-face { fill: #fbfaf6; stroke: var(--navy-fixed); stroke-width: 5; }
+.tw-tick { stroke: var(--navy-fixed); stroke-width: 2.4; stroke-linecap: round; }
+.tw-hour, .tw-min { stroke: var(--navy-fixed); stroke-linecap: round; }
+.tw-hour { stroke-width: 5; }
+.tw-min { stroke-width: 3.4; }
+.tw-sec { stroke: #d7263d; stroke-width: 1.6; stroke-linecap: round; }
+.tw-pin { fill: var(--navy-fixed); }
+.tw-label {
+  opacity: 0; white-space: nowrap; background-color: var(--paper); background-image: var(--noise); color: var(--ink);
+  font: 400 clamp(2.2rem, 9vw, 7.5rem)/1 var(--f-display); padding: 0.22em 0.5em 0.16em;
+}
+.tw-stamp { font: 700 0.85rem var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy-fixed); border: 2px solid var(--navy-fixed); padding: 0.4rem 0.7rem; transform: rotate(2deg); }
+.tw-sfx {
+  position: absolute; left: 50%; top: 6vh; z-index: 4; opacity: 0; white-space: nowrap;
+  font: 400 clamp(2.4rem, 9vw, 7.5rem)/1 var(--f-display); color: #fff8d6; -webkit-text-stroke: 3px var(--navy-fixed);
+  text-shadow: 0.25rem 0.25rem 0 var(--navy-fixed);
 }
 
 /* Heaven's Door book */

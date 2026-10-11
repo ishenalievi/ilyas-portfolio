@@ -4,7 +4,7 @@
 
 import { rng, tornClip } from "@/lib/torn";
 
-export type Kind = "strips" | "zipper" | "book" | "menace" | "tbc" | "fade";
+export type Kind = "strips" | "zipper" | "book" | "timestop" | "menace" | "tbc" | "fade";
 
 export type Run = {
   cover: () => Promise<void>;
@@ -151,6 +151,71 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
             return [pg.animate([{ transform: "rotateY(0deg)" }, { transform: "rotateY(-180deg)" }], o), shade.animate([{ opacity: 0 }, { opacity: 0.55, offset: 0.5 }, { opacity: 0 }], o)];
           }),
         );
+      },
+    };
+  }
+
+  if (kind === "timestop") {
+    // The World: an inverted sphere freezes the page, then a gold sphere covers it
+    // with a stopped clock. Time resumes on the new page.
+    const inv = el("tw-inv");
+    const gray = el("tw-gray");
+    const wall = el("tw-wall");
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 100 100");
+    svg.setAttribute("class", "tw-clock");
+    const make = (tag: string, attrs: Record<string, string | number>) => {
+      const n = document.createElementNS(NS, tag);
+      for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, String(v));
+      svg.appendChild(n);
+      return n as SVGElement;
+    };
+    make("circle", { cx: 50, cy: 50, r: 45, class: "tw-face" });
+    for (let i = 0; i < 12; i++) {
+      const a = (i * Math.PI) / 6;
+      const r1 = i % 3 === 0 ? 33 : 37;
+      make("line", { x1: 50 + Math.sin(a) * r1, y1: 50 - Math.cos(a) * r1, x2: 50 + Math.sin(a) * 41, y2: 50 - Math.cos(a) * 41, class: "tw-tick" });
+    }
+    const hand = (len: number, cls: string, deg: number) => {
+      const h = make("line", { x1: 50, y1: 54, x2: 50, y2: 50 - len, class: cls });
+      h.style.transformOrigin = "50px 50px";
+      h.style.transform = `rotate(${deg}deg)`;
+      return h;
+    };
+    const hour = hand(20, "tw-hour", 300);
+    const minute = hand(31, "tw-min", 54);
+    const second = hand(36, "tw-sec", 0);
+    make("circle", { cx: 50, cy: 50, r: 3, class: "tw-pin" });
+    wall.appendChild(svg);
+    const lab = el("tw-label", wall, text);
+    lab.style.clipPath = tornClip("trbl", 6, 77);
+    el("tw-stamp", wall, "Time: stopped");
+    const sfx = el("tw-sfx", ov, "ザ・ワールド!");
+
+    const C = (r: number, at = "50% 50%") => `circle(${r}% at ${at})`;
+    return {
+      cover: async () => {
+        // 1. the inverted sphere bursts out from the middle of the page
+        await fin(inv.animate([{ clipPath: C(0) }, { clipPath: C(78) }], { duration: 560, easing: "cubic-bezier(.2,.8,.3,1)", fill: "forwards" }));
+        // 2. it collapses, leaving the world frozen and grey
+        gray.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, fill: "forwards" });
+        sfx.animate([{ opacity: 0, transform: "translateX(-50%) scale(1.8) rotate(-6deg)" }, { opacity: 1, transform: "translateX(-50%) scale(1) rotate(-4deg)", offset: 0.4 }, { opacity: 1, transform: "translateX(-50%) scale(1.04) rotate(-4deg)" }], { duration: 700, easing: "ease-out", fill: "forwards" });
+        await fin(inv.animate([{ clipPath: C(78) }, { clipPath: C(0) }], { duration: 480, easing: "cubic-bezier(.6,0,.8,.4)", fill: "forwards" }));
+        await wait(220);
+        // 3. the gold sphere covers everything; the clock ticks, then stops
+        second.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(18deg)" }], { duration: 1500, easing: "steps(3, start)", fill: "forwards" });
+        await fin(wall.animate([{ clipPath: C(0) }, { clipPath: C(150) }], { duration: 560, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" }));
+        await fin(lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-4deg)" }], { duration: 300, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "forwards" }));
+        await wait(450);
+      },
+      reveal: async () => {
+        // time resumes: the hands spin, the sphere shrinks away, colour comes back
+        sfx.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" });
+        hour.animate([{ transform: "rotate(300deg)" }, { transform: "rotate(660deg)" }], { duration: 600, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" });
+        await fin(minute.animate([{ transform: "rotate(54deg)" }, { transform: "rotate(1134deg)" }], { duration: 600, easing: "cubic-bezier(.5,0,.3,1)", fill: "forwards" }));
+        await fin(wall.animate([{ clipPath: C(150) }, { clipPath: C(0) }], { duration: 560, easing: "cubic-bezier(.6,0,.4,1)", fill: "forwards" }));
+        await fin(gray.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: "ease-out", fill: "forwards" }));
       },
     };
   }
