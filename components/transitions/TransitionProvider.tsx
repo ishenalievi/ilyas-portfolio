@@ -151,7 +151,7 @@ export function TransitionProvider({
   // Every full page load (first visit or reload): the menacing intro.
   // Moving between pages inside the site keeps this provider mounted, so it doesn't replay.
   useEffect(() => {
-    play("menace", "Ilyas is approaching");
+    play("menace", "Ilyas’ portfolio");
   }, [play]);
 
   // Coming back with the browser's back button after leaving: clear the overlay.

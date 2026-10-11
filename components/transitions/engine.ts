@@ -89,9 +89,12 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     const sfx = el("zp-sfx", ov, "ZZZIP!");
     const lab = el("zp-label", ov, text);
     lab.style.clipPath = tornClip("trbl", 6, 51);
-    const zip = (from: number, to: number, ms: number, easing: string) => {
+    // gentle in-out for the zip itself (a strong curve stalls, then rushes the middle)
+    const ZIP_EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
+    const DRAWER = "cubic-bezier(0.32, 0.72, 0, 1)";
+    const zip = (from: number, to: number, ms: number, easing: string, delay = 0) => {
       const ts = steps.map((s) => from + (to - from) * s);
-      const opts: KeyframeAnimationOptions = { duration: ms, easing, fill: "forwards" };
+      const opts: KeyframeAnimationOptions = { duration: ms, delay, easing, fill: "both" };
       return [
         L.animate(ts.map((t) => ({ clipPath: shape("L", t) })), opts),
         R.animate(ts.map((t) => ({ clipPath: shape("R", t) })), opts),
@@ -100,19 +103,26 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
       ];
     };
     return {
+      // One continuous move: the zip starts while the panels are still landing, the
+      // label lands as the zip finishes, and on the way out the panels start leaving
+      // while it is still unzipping. No stops between phases.
       cover: async () => {
-        await all([L, R].map((p, i) => p.animate([{ transform: `translateX(${i ? 105 : -105}%)` }, { transform: "translateX(0)" }], { duration: 420, easing: OUT, fill: "forwards" })));
-        pull.style.opacity = "1";
-        sfx.animate([{ opacity: 0, transform: "scale(.6) rotate(-15deg)" }, { opacity: 1, transform: "scale(1.15) rotate(-6deg)", offset: 0.3 }, { opacity: 1, transform: "scale(1) rotate(-8deg)", offset: 0.8 }, { opacity: 0, transform: "scale(1) rotate(-8deg)" }], { duration: 800, easing: OUT, fill: "forwards" });
-        await all(zip(0, 1, 700, IN_OUT));
-        await fin(lab.animate([{ opacity: 0, transform: "translate(-50%,-50%) scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "translate(-50%,-50%) scale(1) rotate(-4deg)" }], { duration: 280, easing: POP, fill: "forwards" }));
-        await wait(120);
+        const ZIP_AT = 200;
+        const ZIP_MS = 620;
+        const slide = [L, R].map((p, i) => p.animate([{ transform: `translateX(${i ? 105 : -105}%)` }, { transform: "translateX(0)" }], { duration: 380, easing: OUT, fill: "forwards" }));
+        pull.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 120, delay: ZIP_AT, easing: OUT, fill: "both" });
+        sfx.animate([{ opacity: 0, transform: "scale(.6) rotate(-15deg)" }, { opacity: 1, transform: "scale(1.15) rotate(-6deg)", offset: 0.3 }, { opacity: 1, transform: "scale(1) rotate(-8deg)", offset: 0.8 }, { opacity: 0, transform: "scale(1) rotate(-8deg)" }], { duration: 760, delay: ZIP_AT, easing: OUT, fill: "both" });
+        const closing = zip(0, 1, ZIP_MS, ZIP_EASE, ZIP_AT);
+        const label = lab.animate([{ opacity: 0, transform: "translate(-50%,-50%) scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "translate(-50%,-50%) scale(1) rotate(-4deg)" }], { duration: 260, delay: ZIP_AT + ZIP_MS * 0.8, easing: POP, fill: "both" });
+        await all([...slide, ...closing, label]);
+        await wait(100);
       },
       reveal: async () => {
-        lab.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140, easing: OUT, fill: "forwards" });
-        await all(zip(1, 0, 450, OUT));
-        pull.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: OUT, fill: "forwards" });
-        await all([L, R].map((p, i) => p.animate([{ transform: "translateX(0)" }, { transform: `translateX(${i ? 105 : -105}%)` }], { duration: 340, easing: OUT, fill: "forwards" })));
+        lab.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: OUT, fill: "forwards" });
+        const opening = zip(1, 0, 420, DRAWER);
+        pull.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, delay: 260, easing: OUT, fill: "forwards" });
+        const leave = [L, R].map((p, i) => p.animate([{ transform: "translateX(0)" }, { transform: `translateX(${i ? 105 : -105}%)` }], { duration: 360, delay: 230, easing: OUT, fill: "both" }));
+        await all([...opening, ...leave]);
       },
     };
   }
@@ -333,14 +343,23 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
       g.appendChild(b);
       return b;
     });
-    el("ov-mlabel", bg, text);
+    // the welcome card: same torn-paper label as the other transitions, with a small kicker
+    const lab = el("ov-mlabel-wrap", bg); // carries the shadow, which the torn edge would clip off
+    const card = el("ov-mlabel", lab);
+    el("kicker", card, "Welcome to");
+    el("big", card, text);
+    card.style.clipPath = tornClip("trbl", 6, 23);
     return {
       cover: async () => {
         await fin(bg.animate([{ clipPath: "circle(0% at 85% 15%)" }, { clipPath: "circle(150% at 85% 15%)" }], { duration: 450, easing: OUT, fill: "forwards" }));
-        await all(chars.map((b, i) => b.animate([{ scale: "0.5", opacity: 0 }, { scale: "1.35", opacity: 1, offset: 0.6 }, { scale: "1", opacity: 1 }], { duration: 340, delay: i * 60, easing: OUT, fill: "both" })));
-        await wait(250);
+        const pops = chars.map((b, i) => b.animate([{ scale: "0.5", opacity: 0 }, { scale: "1.35", opacity: 1, offset: 0.6 }, { scale: "1", opacity: 1 }], { duration: 340, delay: i * 60, easing: OUT, fill: "both" }));
+        // the label lands as the last ゴ settles, like the labels in the other transitions
+        const label = lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-3deg)" }], { duration: 280, delay: 3 * 60 + 200, easing: POP, fill: "both" });
+        await all([...pops, label]);
+        await wait(300);
       },
       reveal: async () => {
+        lab.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: OUT, fill: "forwards" });
         await fin(bg.animate([{ clipPath: "circle(150% at 15% 85%)" }, { clipPath: "circle(0% at 15% 85%)" }], { duration: 450, easing: OUT, fill: "forwards" }));
       },
     };

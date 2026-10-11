@@ -472,7 +472,10 @@ img { max-width: 100%; height: auto; display: block; }
 .zp-panel {
   position: absolute; inset: 0;
   background-color: var(--sf-blue);
-  background-image: var(--noise), repeating-linear-gradient(135deg, transparent 0 2.2rem, color-mix(in srgb, #ffffff 14%, transparent) 2.2rem 2.6rem);
+  /* no grain texture here: these panels are re-clipped every frame, and the grain made that slow */
+  background-image: repeating-linear-gradient(135deg, transparent 0 2.2rem, color-mix(in srgb, #ffffff 14%, transparent) 2.2rem 2.6rem);
+  will-change: transform, clip-path;
+  contain: paint;
 }
 .zp-teeth {
   position: absolute; left: 50%; top: 0; bottom: 0; width: 1.6rem; transform: translateX(-50%);
@@ -574,7 +577,14 @@ img { max-width: 100%; height: auto; display: block; }
   background-size: 100% 100%, 16px 16px;
 }
 .ov-gogo { font-size: clamp(3.5rem, 12vw, 10rem); padding-bottom: 1.15em; }
-.ov-mlabel { font: 700 0.9rem var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; background: var(--paper); color: var(--ink); padding: 0.5rem 0.8rem; }
+.ov-mlabel-wrap { opacity: 0; filter: drop-shadow(0.3rem 0.35rem 0 #1a0a24); }
+.ov-mlabel {
+  display: grid; justify-items: center; gap: 0.35rem; max-width: 92vw;
+  background-color: var(--paper); background-image: var(--noise); color: var(--ink);
+  padding: 0.35em 0.7em 0.3em;
+}
+.ov-mlabel .kicker { font: 700 clamp(0.75rem, 1.4vw, 1rem)/1 var(--f-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--a4); }
+.ov-mlabel .big { font: 400 clamp(1.9rem, 7.5vw, 6.5rem)/1 var(--f-display); text-transform: uppercase; text-align: center; text-wrap: balance; }
 .ov-sepia { position: absolute; inset: 0; background: var(--sepia); -webkit-backdrop-filter: sepia(1) contrast(1.08) brightness(0.92); backdrop-filter: sepia(1) contrast(1.08) brightness(0.92); }
 .ov-tbc {
   position: absolute; left: 4vw; bottom: calc(7vh + env(safe-area-inset-bottom, 0px)); white-space: nowrap;
