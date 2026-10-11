@@ -81,7 +81,7 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     const pull = el("zp-pull");
     pull.style.top = "0%";
     pull.style.opacity = "0";
-    const sfx = el("zp-sfx", ov, "ジィーッ!");
+    const sfx = el("zp-sfx", ov, "ZZZIP!");
     const lab = el("zp-label", ov, text);
     lab.style.clipPath = tornClip("trbl", 6, 51);
     const zip = (from: number, to: number, ms: number) => {
@@ -132,13 +132,16 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
         el("bk-note", pg, "← it's all written down");
       }
       el("bk-shade", pg);
-      pg.style.transform = "rotateY(100deg)";
+      // starts folded toward the viewer (its back faces us, so it is hidden)
+      pg.style.transform = "rotateY(-100deg)";
       return pg;
     });
-    const sfx = el("bk-sfx", ov, "ペラッ");
+    const sfx = el("bk-sfx", ov, "FLIP!");
     return {
       cover: async () => {
-        await all(pages.map((pg, i) => pg.animate([{ transform: "rotateY(100deg)" }, { transform: "rotateY(0deg)" }], { duration: 650, delay: i * 130, easing: "cubic-bezier(.2,.7,.3,1)", fill: "forwards" })));
+        // each page comes down onto the stack from the viewer's side, so a page that
+        // is in front is always drawn in front and nothing cuts through the pile
+        await all(pages.map((pg, i) => pg.animate([{ transform: "rotateY(-100deg)" }, { transform: "rotateY(0deg)" }], { duration: 650, delay: i * 160, easing: "cubic-bezier(.2,.7,.3,1)", fill: "forwards" })));
         await wait(450);
       },
       reveal: async () => {
@@ -191,7 +194,7 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     const lab = el("tw-label", wall, text);
     lab.style.clipPath = tornClip("trbl", 6, 77);
     el("tw-stamp", wall, "Time: stopped");
-    const sfx = el("tw-sfx", ov, "ザ・ワールド!");
+    const sfx = el("tw-sfx", ov, "THE WORLD!");
 
     const C = (r: number, at = "50% 50%") => `circle(${r}% at ${at})`;
     return {
@@ -223,10 +226,12 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
   if (kind === "menace") {
     const bg = el("ov-menace");
     bg.style.clipPath = "circle(0% at 85% 15%)";
-    const g = el("ov-gogo", bg);
-    const chars = [0, 1, 2].map(() => {
-      const b = document.createElement("b");
+    // same markup as the <Menacing> component, so it gets the real ゴゴゴ look
+    const g = el("ov-gogo menacing", bg);
+    const chars = [0, 1, 2, 3].map((i) => {
+      const b = document.createElement("span");
       b.textContent = "ゴ";
+      b.style.setProperty("--i", String(i));
       b.style.opacity = "0";
       g.appendChild(b);
       return b;
@@ -235,7 +240,7 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     return {
       cover: async () => {
         await fin(bg.animate([{ clipPath: "circle(0% at 85% 15%)" }, { clipPath: "circle(150% at 85% 15%)" }], { duration: 650, easing: EASE, fill: "forwards" }));
-        await all(chars.map((b, i) => b.animate([{ transform: "scale(0) rotate(-30deg)", opacity: 0 }, { transform: "scale(1.3) rotate(8deg)", opacity: 1, offset: 0.6 }, { transform: "scale(1) rotate(0)", opacity: 1 }], { duration: 400, delay: i * 150, easing: "ease-out", fill: "both" })));
+        await all(chars.map((b, i) => b.animate([{ scale: "0", opacity: 0 }, { scale: "1.35", opacity: 1, offset: 0.6 }, { scale: "1", opacity: 1 }], { duration: 380, delay: i * 140, easing: "ease-out", fill: "both" })));
         await wait(600);
       },
       reveal: async () => {

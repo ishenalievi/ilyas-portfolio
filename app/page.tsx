@@ -6,6 +6,7 @@ import { site } from "@/content/site";
 import { Lift, Tape, Torn } from "@/components/collage";
 import { Clipping, HazardSlot, Ledger, Loves, SectionHead, Sheet } from "@/components/blocks";
 import { ContentWall } from "@/components/ContentWall";
+import { Menacing } from "@/components/Menacing";
 import { PaletteSwap } from "@/components/PaletteSwap";
 import { TLink } from "@/components/transitions/TLink";
 
@@ -37,9 +38,7 @@ export default function Home() {
           </div>
 
           <div className="hero-board">
-            <span className="gogo" aria-hidden="true">
-              ゴゴゴ
-            </span>
+            <Menacing className="gogo" />
             <Lift className="hb hb-1">
               <Torn className="hb-img" seed="hb-1" amp={7}>
                 <Image src="/images/posts/imprint.jpg" alt="After Hours reel cover" width={562} height={1000} loading="eager" fetchPriority="high" sizes="(max-width: 800px) 40vw, 22vw" />

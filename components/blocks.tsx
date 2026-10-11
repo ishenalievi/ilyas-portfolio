@@ -6,6 +6,7 @@ import { experience, loves, type Love, type Role } from "@/content/about";
 import type { Project } from "@/content/projects";
 import { site } from "@/content/site";
 import { Lift, Tape, Torn, TornSheet } from "./collage";
+import { Menacing } from "./Menacing";
 import { TLink } from "./transitions/TLink";
 
 export function SectionHead({ eyebrow, title, children }: { eyebrow: string; title: ReactNode; children?: ReactNode }) {
@@ -85,7 +86,7 @@ export function LoveCard({ l, i }: { l: Love; i: number }) {
     <Lift className="love">
       <Torn className="love-card paper" seed={`love-${i}`} amp={5}>
         <Torn className="love-ph" sides="b" amp={6} seed={`love-ph-${i}`} style={{ background: l.color }}>
-          <span>{l.tag}</span>
+          {l.tag === "ゴゴゴ" ? <Menacing count={3} className="love-menace" /> : <span>{l.tag}</span>}
         </Torn>
         <div className="love-body">
           <span className="fig">

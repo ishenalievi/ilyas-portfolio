@@ -120,7 +120,10 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
   const doSkip = () => {
     if (!busy.current || !ovRef.current) return;
     skip.current = true;
-    ovRef.current.getAnimations({ subtree: true }).forEach((a) => a.finish());
+    ovRef.current.getAnimations({ subtree: true }).forEach((a) => {
+      // looping effects (like the ゴゴゴ tremble) have no end to jump to
+      if (a.effect?.getComputedTiming().endTime !== Infinity) a.finish();
+    });
   };
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
