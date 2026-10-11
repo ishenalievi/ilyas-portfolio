@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { projects } from "@/content/projects";
+import { getProjects, getWorkPage } from "@/lib/content";
 import { Lift, Tape, Torn, TornSheet } from "@/components/collage";
 import { HazardSlot, MiniCollage, SectionHead } from "@/components/blocks";
 import { TLink } from "@/components/transitions/TLink";
 
 export const metadata: Metadata = { title: "Work" };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const [page, projects] = await Promise.all([getWorkPage(), getProjects()]);
   return (
     <section className="block page-top">
       <div className="wrap">
-        <SectionHead eyebrow="Work" title="Things I made, in order of how proud I am">
-          Three so far. More get taped up as they&apos;re finished.
+        <SectionHead eyebrow={page.header.eyebrow} title={page.header.title}>
+          {page.header.sub}
         </SectionHead>
         <div className="projects">
           {projects.map((p) => (
@@ -35,7 +36,7 @@ export default function WorkPage() {
                   </TLink>
                 </div>
                 <TLink href={`/work/${p.slug}`} label={p.short} className="proj-visual" aria-label={`Open ${p.title}`}>
-                  {p.videos ? (
+                  {p.videos.length ? (
                     <div className="vid-grid">
                       {p.videos.map((v) => (
                         <Torn key={v.href} className="vid-thumb" seed={`wv-${v.href}`} amp={4}>
@@ -58,7 +59,7 @@ export default function WorkPage() {
                 </TLink>
             </TornSheet>
           ))}
-          <HazardSlot text="No. 04 · Under construction" note="Something is being made. Probably another reel." />
+          {page.soonTitle && <HazardSlot text={page.soonTitle} note={page.soonNote} />}
         </div>
       </div>
     </section>

@@ -1,0 +1,44 @@
+{
+  "title": "This website",
+  "no": "03",
+  "subtitle": "the making-of",
+  "short": "MAKING OF",
+  "year": "2026",
+  "role": "Design + direction",
+  "platform": "Web",
+  "facts": [
+    "Web",
+    "Next.js",
+    "Oct 2026 →",
+    "Design + direction"
+  ],
+  "summary": "How this site went from an empty folder to live: the references, the storyboards, the palettes and the build.",
+  "body": [
+    {
+      "heading": "The brief",
+      "text": "Show the work, grow the audience a little, and don't look like every other portfolio. Not taking clients, so no hire-me buttons."
+    },
+    {
+      "heading": "The references",
+      "text": "Ralph Lauren for structure (navy, crests, stripes). Vox for the voice (cut-outs, highlighter, arrows). JoJo's Bizarre Adventure for the energy (colour that changes, poses, ゴゴゴ, To Be Continued)."
+    },
+    {
+      "heading": "The storyboards",
+      "text": "Three rounds. Version one was too clean. Version two added torn paper and full-screen transitions. Version three added real work, a moving background and a rip that tears in two stages."
+    },
+    {
+      "heading": "The palette",
+      "text": "Navy and oxford blue stay fixed. Four accent colours rotate, the way Araki recolours a character between panels. Hit the stamp in the menu to swap them."
+    },
+    {
+      "heading": "The build",
+      "text": "Next.js, hosted free on Vercel. Every tear on this page is generated from a seed, so it looks hand-made but stays the same every visit."
+    }
+  ],
+  "cover": null,
+  "coverAlt": "",
+  "links": [],
+  "episodes": [],
+  "videos": [],
+  "accent": "a4"
+}

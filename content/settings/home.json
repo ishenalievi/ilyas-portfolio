@@ -1,0 +1,57 @@
+{
+  "heroEyebrow": "Portfolio · Vol. 1 · 2026",
+  "primaryButton": "See the work",
+  "portrait": "/images/ilyas-headshot.png",
+  "clippings": [
+    {
+      "title": "After Hours",
+      "image": "/images/hero/imprint.jpg",
+      "alt": "After Hours reel cover"
+    },
+    {
+      "title": "Red Moon in Venus",
+      "image": "/images/hero/kali.jpg",
+      "alt": "Red Moon in Venus poster"
+    },
+    {
+      "title": "Baseball Sendoff",
+      "image": "/images/hero/baseball.jpg",
+      "alt": "ISM Baseball Sendoff thumbnail"
+    }
+  ],
+  "intro": {
+    "before": "I edit videos, design posters, and",
+    "highlight": "start hobbies faster than I finish them",
+    "middle": ". This site is",
+    "circled": "mostly",
+    "after": "proof I finished one.",
+    "note": "← accurate, sadly"
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "title": "Three clippings, one taped shut",
+    "sub": ""
+  },
+  "soonTitle": "04 · Under construction",
+  "soonNote": "The next IMPRINT reel goes here. Allegedly soon.",
+  "wall": {
+    "eyebrow": "Content wall",
+    "title": "Reels, posters, edits",
+    "sub": "A selection from Instagram and YouTube. The full wall has filters."
+  },
+  "wallButton": "See everything →",
+  "loves": {
+    "eyebrow": "Things I love",
+    "title": "The taste wall",
+    "sub": "Shows, sports, books and hobbies, labelled like a museum would if it had less dignity."
+  },
+  "lovesCount": 5,
+  "lovesButton": "All nine →",
+  "record": {
+    "eyebrow": "The record",
+    "title": "Where I've been",
+    "sub": "Marketing at UBC Sauder, plus whatever clubs and startups let me near their content."
+  },
+  "recordCount": 4,
+  "recordButton": "The full record →"
+}

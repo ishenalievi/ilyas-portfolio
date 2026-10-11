@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import type { Post } from "@/content/posts";
+import type { Post } from "@/lib/content";
 import { tornClip } from "@/lib/torn";
 import { TLink } from "./transitions/TLink";
 

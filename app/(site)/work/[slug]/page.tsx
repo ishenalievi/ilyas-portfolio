@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getProject, projects } from "@/content/projects";
+import { getProject, getProjects } from "@/lib/content";
 import { Lift, Tape, Torn, TornSheet } from "@/components/collage";
 import { MiniCollage } from "@/components/blocks";
 import { TLink } from "@/components/transitions/TLink";
@@ -9,19 +9,20 @@ import { TLink } from "@/components/transitions/TLink";
 // Every project page is built ahead of time, so a blocking load is fine.
 export const instant = false;
 
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getProjects()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const p = getProject(slug);
+  const p = await getProject(slug);
   return p ? { title: p.title, description: p.summary } : {};
 }
 
 export default async function ProjectPage({ params }: PageProps<"/work/[slug]">) {
   const { slug } = await params;
-  const p = getProject(slug);
+  const projects = await getProjects();
+  const p = projects.find((x) => x.slug === slug);
   if (!p) notFound();
   const next = projects[(projects.indexOf(p) + 1) % projects.length];
 
@@ -36,7 +37,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
               <em>{p.subtitle}</em>
             </Torn>
           </Lift>
-          {p.cover && !p.videos ? (
+          {p.cover && !p.videos.length ? (
             <div className="pp-cover">
               <Tape className="poster-tape" />
               <Lift>
@@ -45,11 +46,11 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
                 </Torn>
               </Lift>
             </div>
-          ) : p.videos ? (
+          ) : p.videos.length ? (
             <div className="pp-cover pp-cover-wide">
               <Lift>
                 <Torn className="poster-img" seed={`ppc-${p.slug}`} amp={6}>
-                  <Image src={p.videos[0].img.src} alt={p.videos[0].img.alt} width={1280} height={720} loading="eager" fetchPriority="high" sizes="(max-width: 800px) 90vw, 45vw" />
+                  <Image src={p.videos[0].img.src} alt={p.videos[0].img.alt} width={p.videos[0].img.w} height={p.videos[0].img.h} loading="eager" fetchPriority="high" sizes="(max-width: 800px) 90vw, 45vw" />
                 </Torn>
               </Lift>
             </div>
@@ -95,12 +96,12 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             </section>
           ))}
 
-          {p.episodes && (
+          {p.episodes.length > 0 && (
             <section>
               <h2>Episodes</h2>
               <div className="eps">
                 {p.episodes.map((e) =>
-                  "soon" in e ? (
+                  e.soon ? (
                     <div key={e.n} className="ep ep-soon">
                       <div className="hazard">
                         <span>Ep. {String(e.n).padStart(2, "0")} · soon</span>
@@ -108,9 +109,11 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
                     </div>
                   ) : (
                     <TLink key={e.n} href={e.href} className="ep">
-                      <Torn className="ep-img" seed={`ep-${e.n}`} amp={4}>
-                        <Image src={e.img.src} alt={e.img.alt} width={e.img.w} height={e.img.h} sizes="(max-width: 700px) 45vw, 16vw" />
-                      </Torn>
+                      {e.img && (
+                        <Torn className="ep-img" seed={`ep-${e.n}`} amp={4}>
+                          <Image src={e.img.src} alt={e.img.alt} width={e.img.w} height={e.img.h} sizes="(max-width: 700px) 45vw, 16vw" />
+                        </Torn>
+                      )}
                       <b>
                         Ep. {String(e.n).padStart(2, "0")} · {e.title}
                       </b>
@@ -121,7 +124,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             </section>
           )}
 
-          {p.videos && (
+          {p.videos.length > 0 && (
             <section>
               <h2>The videos</h2>
               <div className="vids">

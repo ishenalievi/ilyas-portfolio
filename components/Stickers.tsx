@@ -2,14 +2,12 @@
 // The drawn ones are originals: nods to Ralph Lauren and Wallace & Gromit,
 // not their actual characters or logos.
 //
-// TO USE YOUR OWN PNG: put it in /public/stickers/ named after the sticker
-// it replaces, e.g. public/stickers/bear.png. Names you can use:
-//   bear, cheese, rocket, crest, tea, sheep, patch, toast
-// A transparent background looks best: the white die-cut edge follows its shape.
+// TO USE YOUR OWN PNG: open the admin panel (/keystatic) → Background stickers,
+// and upload an image for the sticker you want to replace. Leave it empty to keep
+// the drawn one. A transparent background looks best: the white die-cut edge follows its shape.
 
-import fs from "node:fs";
-import path from "node:path";
 import Image from "next/image";
+import { getStickers } from "@/lib/content";
 import type { ReactNode } from "react";
 
 const INK = "#14213d";
@@ -156,27 +154,15 @@ const STICKERS: { id: string; node: ReactNode; cls: string }[] = [
   { id: "toast", node: <Toast />, cls: "st-8" },
 ];
 
-/** If public/stickers/<id>.png exists, return its path and pixel size. */
-function customSticker(id: string) {
-  const file = path.join(process.cwd(), "public", "stickers", `${id}.png`);
-  try {
-    const head = fs.readFileSync(file).subarray(0, 24);
-    // PNG files store width and height at bytes 16-23
-    return { src: `/stickers/${id}.png`, w: head.readUInt32BE(16), h: head.readUInt32BE(20) };
-  } catch {
-    return null;
-  }
-}
-
 export async function Stickers() {
-  "use cache"; // the folder is checked once per build, not on every visit
+  const own = await getStickers();
   return (
     <div className="stickers" aria-hidden="true">
       {STICKERS.map((s) => {
-        const own = customSticker(s.id);
+        const pic = own[s.id];
         return (
           <div key={s.id} className={`sticker ${s.cls}`}>
-            {own ? <Image src={own.src} alt="" width={own.w} height={own.h} sizes="10rem" /> : s.node}
+            {pic ? <Image src={pic.src} alt="" width={pic.w} height={pic.h} sizes="10rem" /> : s.node}
           </div>
         );
       })}

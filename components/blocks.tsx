@@ -2,17 +2,16 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { experience, loves, type Love, type Role } from "@/content/about";
-import type { Project } from "@/content/projects";
-import { site } from "@/content/site";
+import type { Love, Project, Role } from "@/lib/content";
 import { Lift, Tape, Torn, TornSheet } from "./collage";
 import { Menacing } from "./Menacing";
 import { TLink } from "./transitions/TLink";
 
+/** A section heading. Empty text from the admin panel is simply left out. */
 export function SectionHead({ eyebrow, title, children }: { eyebrow: string; title: ReactNode; children?: ReactNode }) {
   return (
     <div className="sh">
-      <span className="eyebrow">{eyebrow}</span>
+      {eyebrow && <span className="eyebrow">{eyebrow}</span>}
       <h2>{title}</h2>
       {children && <p>{children}</p>}
     </div>
@@ -47,14 +46,16 @@ export function MiniCollage({ seed }: { seed: string }) {
 }
 
 export function Clipping({ p, i }: { p: Project; i: number }) {
+  // no cover of its own? borrow the first video or episode image
+  const cover = p.cover ?? p.videos[0]?.img ?? p.episodes.find((e) => e.img)?.img;
   return (
     <TLink href={`/work/${p.slug}`} label={p.short} className={`clip clip-${i}`}>
       <Tape className="clip-tape" />
       <Lift>
         <Torn className="clip-paper paper-2" seed={`clip-${p.slug}`} amp={5}>
           <div className="clip-img" style={{ background: `var(--${p.accent})` }}>
-            {p.cover ? (
-              <Image src={p.cover.src} alt={p.cover.alt} width={p.cover.w} height={p.cover.h} sizes="(max-width: 700px) 90vw, 30vw" />
+            {cover ? (
+              <Image src={cover.src} alt={cover.alt} width={cover.w} height={cover.h} sizes="(max-width: 700px) 90vw, 30vw" />
             ) : (
               <MiniCollage seed={`clip-mc-${p.slug}`} />
             )}
@@ -105,8 +106,8 @@ export function LoveCard({ l, i }: { l: Love; i: number }) {
   );
 }
 
-export function Loves({ limit }: { limit?: number }) {
-  const list = limit ? loves.slice(0, limit) : loves;
+export function Loves({ items, limit }: { items: Love[]; limit?: number }) {
+  const list = limit ? items.slice(0, limit) : items;
   return (
     <div className="loves">
       {list.map((l, i) => (
@@ -116,7 +117,7 @@ export function Loves({ limit }: { limit?: number }) {
   );
 }
 
-export function Ledger({ rows = experience, detailed = false, linkedin = true }: { rows?: Role[]; detailed?: boolean; linkedin?: boolean }) {
+export function Ledger({ rows, detailed = false, linkedinUrl }: { rows: Role[]; detailed?: boolean; linkedinUrl?: string }) {
   return (
     <div className="ledger">
       <div className="crest" aria-hidden="true">
@@ -148,8 +149,8 @@ export function Ledger({ rows = experience, detailed = false, linkedin = true }:
           </li>
         ))}
       </ol>
-      {linkedin && (
-        <TLink href={site.linkedin.url} className="btn">
+      {linkedinUrl && (
+        <TLink href={linkedinUrl} className="btn">
           Full record on LinkedIn ↗
         </TLink>
       )}

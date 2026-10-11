@@ -7,7 +7,6 @@
 
 import Link from "next/link";
 import type { ComponentProps } from "react";
-import { pageLabels } from "@/content/site";
 import { useGo } from "./TransitionProvider";
 import type { Kind } from "./engine";
 
@@ -16,6 +15,9 @@ type Props = Omit<ComponentProps<"a">, "href"> & {
   kind?: Kind;
   label?: string;
 };
+
+// Big labels shown on the paper-stack, zipper and other transitions.
+const pageLabels: Record<string, string> = { "/": "HOME", "/work": "WORK", "/content": "CONTENT", "/about": "ABOUT" };
 
 const isExternal = (href: string) => /^https?:\/\//.test(href);
 

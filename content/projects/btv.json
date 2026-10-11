@@ -1,0 +1,58 @@
+{
+  "title": "BTV",
+  "no": "02",
+  "subtitle": "Bamboo Telegraph Video, ISM",
+  "short": "BTV",
+  "year": "2023–24",
+  "role": "Edit + produce",
+  "platform": "YouTube",
+  "facts": [
+    "YouTube",
+    "@BambooTelegraphVideoISM",
+    "2023–24",
+    "Edit + produce"
+  ],
+  "summary": "Videos edited or produced for the school's student channel: two IASAS sendoff hype videos and the first two episodes of BTV IASAS Hot Ones.",
+  "body": [
+    {
+      "heading": "The sendoffs",
+      "text": "Hype videos for the teams heading to IASAS. The job: make athletes look intimidating in under three minutes."
+    },
+    {
+      "heading": "Hot Ones",
+      "text": "A school-sized version of the interview show where the questions get harder as the sauce gets hotter. The job: make hot sauce look worse."
+    }
+  ],
+  "cover": null,
+  "coverAlt": "Thumbnail for ISM Baseball Sendoff, IASAS 2024",
+  "links": [
+    {
+      "label": "See the channel",
+      "href": "https://www.youtube.com/@BambooTelegraphVideoISM"
+    }
+  ],
+  "episodes": [],
+  "videos": [
+    {
+      "title": "ISM Baseball Sendoff, IASAS 2024",
+      "href": "https://www.youtube.com/watch?v=cocrM2CmRTM",
+      "image": "/images/projects/cocrM2CmRTM.jpg"
+    },
+    {
+      "title": "ISM Volleyball Sendoff 2023",
+      "href": "https://www.youtube.com/watch?v=rQMtM5s5GJc",
+      "image": "/images/projects/rQMtM5s5GJc.jpg"
+    },
+    {
+      "title": "BTV IASAS Hot Ones, Ep. 1",
+      "href": "https://www.youtube.com/watch?v=3TAkjXcQMv0",
+      "image": "/images/projects/3TAkjXcQMv0.jpg"
+    },
+    {
+      "title": "BTV IASAS Hot Ones, Ep. 2",
+      "href": "https://www.youtube.com/watch?v=nBnC-iMoNgE",
+      "image": "/images/projects/nBnC-iMoNgE.jpg"
+    }
+  ],
+  "accent": "a2"
+}

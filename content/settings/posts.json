@@ -1,0 +1,112 @@
+{
+  "items": [
+    {
+      "title": "After Hours",
+      "note": "IMPRINT Reels, ep. 1, on @ubcimprint",
+      "href": "https://www.instagram.com/p/DeK9--tBvPo/",
+      "image": "/images/posts/imprint.jpg",
+      "platform": "ig",
+      "type": "video",
+      "stamp": "IG reel"
+    },
+    {
+      "title": "Alternate Realities",
+      "note": "After a scene from Everything Everywhere All at Once",
+      "href": "https://www.instagram.com/reel/CtOA6naPweE/",
+      "image": "/images/posts/altreal.jpg",
+      "platform": "ig",
+      "type": "video",
+      "stamp": "IG reel"
+    },
+    {
+      "title": "Red Moon in Venus",
+      "note": "Kali Uchis album poster",
+      "href": "https://www.instagram.com/p/Cq4RFnLPb1U/",
+      "image": "/images/posts/kali.jpg",
+      "platform": "ig",
+      "type": "design",
+      "stamp": "IG"
+    },
+    {
+      "title": "Fake It Flowers",
+      "note": "beabadoobee poster, a new style",
+      "href": "https://www.instagram.com/p/Cq1sR0Jhk7A/",
+      "image": "/images/posts/beab1.jpg",
+      "platform": "ig",
+      "type": "design",
+      "stamp": "IG"
+    },
+    {
+      "title": "Baseball Sendoff",
+      "note": "BTV · IASAS 2024",
+      "href": "https://www.youtube.com/watch?v=cocrM2CmRTM",
+      "image": "/images/posts/cocrM2CmRTM.jpg",
+      "platform": "yt",
+      "type": "video",
+      "stamp": "YouTube"
+    },
+    {
+      "title": "Commission",
+      "note": "Poster for @mateojjimz",
+      "href": "https://www.instagram.com/p/Cq6hSCivL5I/",
+      "image": "/images/posts/mateo.jpg",
+      "platform": "ig",
+      "type": "design",
+      "stamp": "IG"
+    },
+    {
+      "title": "Keep scrolling",
+      "note": "“Continually scrolling until something stops you.”",
+      "href": "https://www.instagram.com/reel/CsLS_krrYdI/",
+      "image": "/images/posts/scroll.jpg",
+      "platform": "ig",
+      "type": "video",
+      "stamp": "IG reel"
+    },
+    {
+      "title": "Hot Ones, Ep. 1",
+      "note": "BTV · IASAS",
+      "href": "https://www.youtube.com/watch?v=3TAkjXcQMv0",
+      "image": "/images/posts/3TAkjXcQMv0.jpg",
+      "platform": "yt",
+      "type": "video",
+      "stamp": "YouTube"
+    },
+    {
+      "title": "Neo-tribalism",
+      "note": "Photoshop study",
+      "href": "https://www.instagram.com/p/CrasHEPPJoK/",
+      "image": "/images/posts/tribal.jpg",
+      "platform": "ig",
+      "type": "design",
+      "stamp": "IG"
+    },
+    {
+      "title": "Perspective",
+      "note": "Graphic design piece",
+      "href": "https://www.instagram.com/p/CrvBwCkvtgG/",
+      "image": "/images/posts/persp.jpg",
+      "platform": "ig",
+      "type": "design",
+      "stamp": "IG"
+    },
+    {
+      "title": "Volleyball Sendoff",
+      "note": "BTV · 2023",
+      "href": "https://www.youtube.com/watch?v=rQMtM5s5GJc",
+      "image": "/images/posts/rQMtM5s5GJc.jpg",
+      "platform": "yt",
+      "type": "video",
+      "stamp": "YouTube"
+    },
+    {
+      "title": "Hot Ones, Ep. 2",
+      "note": "BTV · IASAS",
+      "href": "https://www.youtube.com/watch?v=nBnC-iMoNgE",
+      "image": "/images/posts/nBnC-iMoNgE.jpg",
+      "platform": "yt",
+      "type": "video",
+      "stamp": "YouTube"
+    }
+  ]
+}

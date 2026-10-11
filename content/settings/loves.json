@@ -1,0 +1,85 @@
+{
+  "items": [
+    {
+      "title": "JoJo's Bizarre Adventure",
+      "fig": "Manga, 1987–",
+      "line": "The reason I can no longer stand normally in photos.",
+      "tag": "ゴゴゴ",
+      "color": "a4",
+      "linkLabel": "",
+      "linkHref": ""
+    },
+    {
+      "title": "Manchester City",
+      "fig": "Football",
+      "line": "Yes, I liked them before the trophies. No, I will not be providing evidence.",
+      "tag": "MCFC",
+      "color": "city",
+      "linkLabel": "",
+      "linkHref": ""
+    },
+    {
+      "title": "Bouldering",
+      "fig": "V4–6 · Scarpa Instinct VSR LV",
+      "line": "I pay money to fall off walls in shoes a size too small.",
+      "tag": "V4–6",
+      "color": "a2",
+      "linkLabel": "Proof: @ishenslabs",
+      "linkHref": "https://www.instagram.com/ishenslabs"
+    },
+    {
+      "title": "Books",
+      "fig": "Now reading",
+      "line": "Currently on The Place of the Skull by Chingiz Aitmatov. Exactly as cheerful as it sounds.",
+      "tag": "p. 1 of many",
+      "color": "a3",
+      "linkLabel": "",
+      "linkHref": ""
+    },
+    {
+      "title": "Video editing",
+      "fig": "Premiere Pro, After Effects",
+      "line": "Four hours on a fifteen-second clip that people will watch once, at 2× speed.",
+      "tag": "00:00:15",
+      "color": "a1",
+      "linkLabel": "",
+      "linkHref": ""
+    },
+    {
+      "title": "Guitar",
+      "fig": "Since summer 2026",
+      "line": "I know four chords. My neighbours know them too.",
+      "tag": "G · C · D",
+      "color": "navy",
+      "linkLabel": "",
+      "linkHref": ""
+    },
+    {
+      "title": "Wallace & Gromit",
+      "fig": "Claymation",
+      "line": "Gromit is the most competent character in British film and he never says a word.",
+      "tag": "CHEESE",
+      "color": "a3",
+      "linkLabel": "",
+      "linkHref": ""
+    },
+    {
+      "title": "The Nightmare Before Christmas",
+      "fig": "Stop-motion, 1993",
+      "line": "Settled the Halloween-or-Christmas argument by refusing to pick one.",
+      "tag": "Oct → Dec",
+      "color": "a4",
+      "linkLabel": "",
+      "linkHref": ""
+    },
+    {
+      "title": "Theatre & musicals",
+      "fig": "Trained in acting · fave: Little Shop of Horrors",
+      "line": "My favourite musical is a feel-good story about a florist and his carnivorous plant.",
+      "tag": "ENCORE?",
+      "color": "a2",
+      "linkLabel": "",
+      "linkHref": ""
+    }
+  ]
+}

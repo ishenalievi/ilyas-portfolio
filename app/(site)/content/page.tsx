@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { posts } from "@/content/posts";
-import { site } from "@/content/site";
+import { getContentPage, getPosts, getSite } from "@/lib/content";
 import { SectionHead } from "@/components/blocks";
 import { ContentWall } from "@/components/ContentWall";
 import { TLink } from "@/components/transitions/TLink";
 
 export const metadata: Metadata = { title: "Content" };
 
-export default function ContentPage() {
+export default async function ContentPage() {
+  const [page, posts, site] = await Promise.all([getContentPage(), getPosts(), getSite()]);
   return (
     <section className="block page-top">
       <div className="wrap">
-        <SectionHead eyebrow="Content" title="The wall of everything">
-          Reels, posters and edits from Instagram and YouTube. New ones weekly, allegedly.
+        <SectionHead eyebrow={page.header.eyebrow} title={page.header.title}>
+          {page.header.sub}
         </SectionHead>
         <ContentWall posts={posts} />
         <p className="more">
-          <TLink href={site.instagram.url} className="btn">
-            Follow {site.instagram.handle} ↗
+          <TLink href={site.instagramUrl} className="btn">
+            Follow {site.instagramHandle} ↗
           </TLink>
         </p>
       </div>

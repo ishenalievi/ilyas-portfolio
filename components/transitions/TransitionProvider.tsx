@@ -20,8 +20,10 @@ export const useGo = () => useContext(Ctx);
 
 export function TransitionProvider({
   children,
+  introLabel,
 }: {
   children: React.ReactNode;
+  introLabel: string;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -151,7 +153,8 @@ export function TransitionProvider({
   // Every full page load (first visit or reload): the menacing intro.
   // Moving between pages inside the site keeps this provider mounted, so it doesn't replay.
   useEffect(() => {
-    play("menace", "Ilyas’ portfolio");
+    play("menace", introLabel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- play once per page load
   }, [play]);
 
   // Coming back with the browser's back button after leaving: clear the overlay.
