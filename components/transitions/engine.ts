@@ -13,7 +13,8 @@ export type Run = {
 
 const EASE = "cubic-bezier(.7,0,.25,1)";
 
-export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: () => boolean): Run {
+/** origin: where the visitor clicked, so some transitions can burst out from that spot. */
+export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: () => boolean, origin?: { x: number; y: number }): Run {
   const el = (cls: string, parent: HTMLElement = ov, html?: string) => {
     const d = document.createElement("div");
     d.className = cls;
@@ -229,7 +230,8 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     // Tusk ACT 4: a golden spiral draws itself through its golden rectangles,
     // spinning nails fly in, then everything spins down into the spiral's eye.
     const bg = el("tk-bg");
-    bg.style.clipPath = "circle(0% at 50% 50%)";
+    const from = origin ? `${Math.round(origin.x)}px ${Math.round(origin.y)}px` : "50% 50%";
+    bg.style.clipPath = `circle(0% at ${from})`;
     const NS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(NS, "svg");
     svg.setAttribute("viewBox", "0 0 1618 1000");
@@ -253,9 +255,11 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     const spiral = add("path", {
       d: "M0 1000 A1000 1000 0 0 1 1000 0 A618 618 0 0 1 1618 618 A382 382 0 0 1 1236 1000 A236 236 0 0 1 1000 764 A146 146 0 0 1 1146 618 A90 90 0 0 1 1236 708 A56 56 0 0 1 1180 764 A34 34 0 0 1 1146 730",
       class: "tk-spiral",
+      // one dash as long as the spiral, then a long gap, so nothing peeks out at the
+      // end of the line before the drawing reaches it
       pathLength: 1,
-      "stroke-dasharray": 1,
-      "stroke-dashoffset": 1,
+      "stroke-dasharray": "1 3",
+      "stroke-dashoffset": 1.05,
     });
     const EYE = [1168, 744];
     bg.appendChild(svg);
@@ -279,13 +283,14 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
 
     return {
       cover: async () => {
-        await fin(bg.animate([{ clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(150% at 50% 50%)" }], { duration: 450, easing: "cubic-bezier(.2,.8,.3,1)", fill: "forwards" }));
-        rects.forEach((rc, i) => rc.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: i * 70, fill: "both" }));
+        // bursts out from the click straight away; the spiral starts drawing at the same time
+        bg.animate([{ clipPath: `circle(0% at ${from})` }, { clipPath: `circle(150% at ${from})` }], { duration: 420, easing: "cubic-bezier(.1,.9,.2,1)", fill: "forwards" });
+        rects.forEach((rc, i) => rc.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: 80 + i * 60, fill: "both" }));
         stars.forEach((st, i) => st.animate([{ opacity: 0, transform: "scale(0) rotate(-90deg)" }, { opacity: 1, transform: "scale(1) rotate(0deg)" }], { duration: 380, delay: 200 + i * 120, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "both" }));
         nails.forEach(({ n, fx, fy, tx, ty, rot }, i) =>
           n.animate([{ opacity: 0, transform: `translate(-50%,-50%) translate(${fx}vw, ${fy}vh) rotate(${rot}deg)` }, { opacity: 1, transform: `translate(-50%,-50%) translate(${tx}vw, ${ty}vh) rotate(${rot + 1080}deg)` }], { duration: 650, delay: 150 + i * 70, easing: "cubic-bezier(.2,.8,.3,1)", fill: "both" }),
         );
-        await fin(spiral.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 750, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" }));
+        await fin(spiral.animate([{ strokeDashoffset: 1.05 }, { strokeDashoffset: 0 }], { duration: 750, delay: 80, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" }));
         sfx.animate([{ opacity: 0, transform: "scale(1.7) rotate(-8deg)" }, { opacity: 1, transform: "scale(1) rotate(-6deg)" }], { duration: 280, easing: "ease-out", fill: "forwards" });
         await fin(lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-3deg)" }], { duration: 300, easing: "cubic-bezier(.3,1.6,.5,1)", fill: "forwards" }));
         await wait(260);

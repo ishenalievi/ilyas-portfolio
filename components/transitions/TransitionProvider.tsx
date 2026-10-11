@@ -19,6 +19,19 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
   const busy = useRef(false);
   const skip = useRef(false);
   const pending = useRef<{ path: string; resolve: () => void } | null>(null);
+  // where and when the visitor last pressed, so a transition can start from that spot
+  const lastPress = useRef<{ x: number; y: number; t: number } | null>(null);
+  useEffect(() => {
+    const onDown = (e: PointerEvent) => {
+      lastPress.current = { x: e.clientX, y: e.clientY, t: performance.now() };
+    };
+    window.addEventListener("pointerdown", onDown, { capture: true, passive: true });
+    return () => window.removeEventListener("pointerdown", onDown, { capture: true });
+  }, []);
+  const pressOrigin = () => {
+    const p = lastPress.current;
+    return p && performance.now() - p.t < 1500 ? { x: p.x, y: p.y } : undefined;
+  };
 
   // Resolve the waiting transition once the new page is on screen.
   useEffect(() => {
@@ -39,7 +52,7 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
     ov.replaceChildren();
     ov.hidden = false;
     try {
-      const run = createRun(ov, reduced() ? "fade" : kind, label, () => skip.current);
+      const run = createRun(ov, reduced() ? "fade" : kind, label, () => skip.current, pressOrigin());
       await run.cover();
       if (between) await between();
       skip.current = false;
