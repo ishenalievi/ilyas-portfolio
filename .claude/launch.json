@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "portfolio-github",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev:github"
+      ],
+      "port": 3000
+    }
+  ]
+}

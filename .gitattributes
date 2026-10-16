@@ -1,0 +1,11 @@
+# Same line endings on the Mac and the Windows PC, so files don't show up as "changed" for no reason.
+* text=auto eol=lf
+
+# Images and documents are never touched.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
