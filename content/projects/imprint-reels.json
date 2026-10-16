@@ -7,12 +7,12 @@
   "role": "VP Content Marketing",
   "platform": "Instagram",
   "facts": [
-    "Instagram reel",
+    "Instagram reels",
     "@ubcimprint",
     "Oct 2026",
     "Film + edit"
   ],
-  "summary": "A run of reels for UBC Imprint Conference & Competition, where I'm VP Content Marketing. The first one teases After Hours on 20 October 2026. More land over the next few weeks.",
+  "summary": "A run of reels for UBC Imprint Conference & Competition, where I'm VP Content Marketing. The first two tease After Hours on 20 October 2026. More land over the next few weeks.",
   "body": [
     {
       "heading": "The brief",
@@ -31,6 +31,10 @@
   "coverAlt": "After Hours reel cover: two figures in a dark room under red title type",
   "links": [
     {
+      "label": "Watch episode 2",
+      "href": "https://www.instagram.com/p/DedA2LcSkZt/"
+    },
+    {
       "label": "Watch episode 1",
       "href": "https://www.instagram.com/p/DeK9--tBvPo/"
     }
@@ -42,9 +46,9 @@
       "image": "/images/projects/imprint.jpg"
     },
     {
-      "title": "Episode 2",
-      "href": "",
-      "image": null
+      "title": "After Hours, Pt. 2",
+      "href": "https://www.instagram.com/p/DedA2LcSkZt/",
+      "image": "/images/projects/imprint-2.jpg"
     },
     {
       "title": "Episode 3",
