@@ -15,6 +15,9 @@
       "line": "Yes, I liked them before the trophies. No, I will not be providing evidence.",
       "tag": "MCFC",
       "color": "city",
+      "image": "/images/loves/manchester-city.webp",
+      "imageAlt": "Manchester City crest",
+      "imageFit": "contain",
       "linkLabel": "",
       "linkHref": ""
     },
@@ -42,6 +45,9 @@
       "line": "Four hours on a fifteen-second clip that people will watch once, at 2× speed.",
       "tag": "00:00:15",
       "color": "a1",
+      "image": "/images/loves/premiere-pro.webp",
+      "imageAlt": "Adobe Premiere Pro icon",
+      "imageFit": "contain",
       "linkLabel": "",
       "linkHref": ""
     },
@@ -69,6 +75,9 @@
       "line": "Settled the Halloween-or-Christmas argument by refusing to pick one.",
       "tag": "Oct → Dec",
       "color": "a4",
+      "image": "/images/loves/nightmare-before-christmas.jpg",
+      "imageAlt": "Jack Skellington on the spiral hill in front of the full moon",
+      "imageFit": "cover",
       "linkLabel": "",
       "linkHref": ""
     },

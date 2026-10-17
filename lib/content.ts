@@ -98,7 +98,16 @@ export async function getResume() {
 
 // ---------- loves ----------
 
-export type Love = { fig: string; title: string; line: string; tag: string; color: string; link?: { label: string; href: string } };
+export type Love = {
+  fig: string;
+  title: string;
+  line: string;
+  tag: string;
+  color: string;
+  img?: Img;
+  fit: "cover" | "contain";
+  link?: { label: string; href: string };
+};
 
 const loveColour: Record<string, string> = { city: "var(--city)", navy: "var(--navy-fixed)" };
 
@@ -106,14 +115,18 @@ export async function getLoves(): Promise<Love[]> {
   "use cache";
   life();
   const l = must(await reader.singletons.loves.read(), "loves");
-  return l.items.map((x) => ({
-    fig: x.fig,
-    title: x.title,
-    line: x.line,
-    tag: x.tag,
-    color: loveColour[x.color] ?? `var(--${x.color})`,
-    link: x.linkHref ? { label: x.linkLabel || "More", href: x.linkHref } : undefined,
-  }));
+  return Promise.all(
+    l.items.map(async (x) => ({
+      fig: x.fig,
+      title: x.title,
+      line: x.line,
+      tag: x.tag,
+      color: loveColour[x.color] ?? `var(--${x.color})`,
+      img: await img(x.image, x.imageAlt || x.title),
+      fit: x.imageFit,
+      link: x.linkHref ? { label: x.linkLabel || "More", href: x.linkHref } : undefined,
+    })),
+  );
 }
 
 // ---------- content wall ----------
@@ -135,7 +148,9 @@ export async function getPosts(): Promise<Post[]> {
   life();
   const p = must(await reader.singletons.posts.read(), "posts");
   const out: Post[] = [];
-  for (const x of p.items) {
+  // newest first by date posted; posts without a date go last, in the editor's order
+  const items = p.items.map((x, i) => ({ x, i })).sort((a, b) => (b.x.date ?? "").localeCompare(a.x.date ?? "") || a.i - b.i);
+  for (const { x } of items) {
     const i = await img(x.image, x.title);
     if (!i) continue;
     out.push({ title: x.title, note: x.note, href: x.href ?? "", img: i.src, w: i.w, h: i.h, platform: x.platform, type: x.type, stamp: x.stamp });

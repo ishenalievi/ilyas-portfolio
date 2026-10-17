@@ -198,6 +198,21 @@ export default config({
               ],
               defaultValue: "a1",
             }),
+            image: fields.image({
+              label: "Picture on the strip (optional)",
+              description: "Replaces the big word. Leave empty to keep the word.",
+              directory: "public/images/loves",
+              publicPath: "/images/loves/",
+            }),
+            imageAlt: text("Picture description", "What's in the picture, for screen readers"),
+            imageFit: fields.select({
+              label: "How the picture sits",
+              options: [
+                { label: "Fill the strip (photos, posters)", value: "cover" },
+                { label: "Fit inside the strip (logos, badges)", value: "contain" },
+              ],
+              defaultValue: "cover",
+            }),
             linkLabel: text("Link text (optional)"),
             linkHref: text("Link (optional)"),
           }),
@@ -216,6 +231,7 @@ export default config({
             title: text("Title"),
             note: text("Small caption"),
             href: link("Link to the post"),
+            date: fields.date({ label: "Date posted", description: "The wall sorts itself by this, newest first" }),
             image: fields.image({ label: "Thumbnail", directory: "public/images/posts", publicPath: "/images/posts/", validation: { isRequired: true } }),
             platform: fields.select({
               label: "Platform",

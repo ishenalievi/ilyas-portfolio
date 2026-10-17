@@ -44,6 +44,23 @@ export default async function WorkPage() {
                         </Torn>
                       ))}
                     </div>
+                  ) : p.episodes.filter((e) => e.img).length > 1 ? (
+                    // a series: every episode poster that's out, side by side
+                    <div className="posters">
+                      {p.episodes.map(
+                        (e) =>
+                          e.img && (
+                            <div key={e.n} className="poster">
+                              <Tape className="poster-tape" />
+                              <Lift>
+                                <Torn className="poster-img" seed={`wp-${p.slug}-${e.n}`} amp={6}>
+                                  <Image src={e.img.src} alt={e.img.alt} width={e.img.w} height={e.img.h} sizes="(max-width: 800px) 40vw, 18vw" />
+                                </Torn>
+                              </Lift>
+                            </div>
+                          ),
+                      )}
+                    </div>
                   ) : p.cover ? (
                     <div className="poster">
                       <Tape className="poster-tape" />
