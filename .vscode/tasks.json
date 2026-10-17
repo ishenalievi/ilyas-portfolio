@@ -1,0 +1,31 @@
+{
+  // Terminal → Run Task… lists these. "Start the site" is also Cmd/Ctrl + Shift + B.
+  "version": "2.0.0",
+  "windows": { "options": { "shell": { "executable": "cmd.exe", "args": ["/d", "/c"] } } },
+  "tasks": [
+    {
+      "label": "Get latest from GitHub",
+      "type": "shell",
+      "command": "git pull --ff-only",
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": { "reveal": "always", "focus": false, "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install packages",
+      "type": "shell",
+      "command": "npm install",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start the site",
+      "type": "shell",
+      "command": "npm run dev",
+      "dependsOn": "Install packages",
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    }
+  ]
+}

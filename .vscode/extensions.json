@@ -1,0 +1,4 @@
+{
+  // VS Code offers to install these when the project is opened on a new computer.
+  "recommendations": ["anthropic.claude-code"]
+}

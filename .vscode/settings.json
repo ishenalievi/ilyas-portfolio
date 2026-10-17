@@ -1,0 +1,17 @@
+{
+  // Check GitHub in the background, so the Source Control button shows when the other computer (or the live editor) saved something.
+  "git.autofetch": true,
+  // "Commit" saves every changed file, no staging step.
+  "git.enableSmartCommit": true,
+
+  // Same line endings on the Mac and the PC.
+  "files.eol": "\n",
+
+  // Hide the build cache: it's generated and never edited.
+  "files.exclude": { "**/.next": true },
+  "files.watcherExclude": { "**/.next/**": true },
+  "search.exclude": { "**/.next": true },
+
+  // On Windows, use Git Bash in the terminal so commands work the same as on the Mac.
+  "terminal.integrated.defaultProfile.windows": "Git Bash"
+}

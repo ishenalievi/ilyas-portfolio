@@ -9,6 +9,7 @@ Personal-brand portfolio. Live at https://ishenaliev.vercel.app (Vercel Hobby, f
 - The owner is new to code and hosting. Explain each step plainly and do account actions (logins, GitHub/Vercel settings) together, never on their behalf.
 - The project is worked on from two computers (a Mac and a Windows PC). Start each session with `git pull`; finish with a commit and `git push` when asked. Unfinished work that needs to move between computers goes on a separate branch, so it doesn't go live.
 - The live editor at `/keystatic` also commits straight to GitHub, so always pull before editing content files.
+- The owner works in VS Code with the Claude Code extension on both machines. `.vscode/tasks.json` pulls on folder open and has "Start the site" (`npm install` then `npm run dev`); keep the README's VS Code steps in sync with it.
 
 ## Brief
 

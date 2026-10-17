@@ -4,39 +4,28 @@ Live site: https://ishenaliev.vercel.app · Site editor: https://ishenaliev.verc
 
 ## Set up a new computer (once)
 
-1. Install **Git** (https://git-scm.com) and **Node.js LTS** (https://nodejs.org). The default options are fine.
-2. Tell Git who you are (use the same details on every computer):
+1. Install **Git** (https://git-scm.com), **Node.js LTS** (https://nodejs.org) and **VS Code** (https://code.visualstudio.com). The default options are fine.
+2. Open VS Code → **Terminal → New Terminal**, and tell Git who you are (same details on every computer):
 
    ```bash
    git config --global user.name "ilyasishenaliev"
    git config --global user.email "your GitHub email"
    ```
 
-3. Open a terminal in the folder where the project should live (for example Documents), then download it:
+3. Press **Cmd/Ctrl + Shift + P**, run **Git: Clone**, paste `https://github.com/ishenalievi/ilyas-portfolio.git`, pick a folder (for example Documents) and click **Open**.
+4. Click **Yes, I trust the authors**, then **Install** when VS Code recommends the Claude Code extension. Sign in to Claude when it asks.
+5. When VS Code asks about tasks that run automatically when the folder opens, click **Allow**. That's what pulls the latest version every time.
 
-   ```bash
-   git clone https://github.com/ishenalievi/ilyas-portfolio.git
-   cd ilyas-portfolio
-   npm install
-   ```
-
-4. Run it with `npm run dev` and open http://localhost:3000 (editor: http://localhost:3000/keystatic).
-
-The first time you push from a new computer, a GitHub sign-in window opens. Sign in once and it's remembered.
+The first time you sync from a new computer, a GitHub sign-in window opens. Sign in once and it's remembered.
 
 ## Every session
 
-1. **Start:** `git pull` to get changes from the other computer and from the live editor.
-2. Work as usual.
-3. **Finish:** save your changes to GitHub:
+1. **Start:** open the project in VS Code. It pulls the latest changes from the other computer and the live editor by itself (the "Get latest from GitHub" panel should say `Already up to date` or list the new files).
+2. **Run the site:** **Cmd/Ctrl + Shift + B** (or ask Claude), then open http://localhost:3000. The editor is at http://localhost:3000/keystatic.
+3. Work with Claude in the side panel (the Claude icon, top right of the editor).
+4. **Finish:** open **Source Control** (the branch icon on the left), type a short note about what changed, click **Commit**, then **Sync Changes**. Or ask Claude to "commit and push".
 
-   ```bash
-   git add -A
-   git commit -m "Short note about what changed"
-   git push
-   ```
-
-Pushing to `main` updates the live site in about a minute. To carry unfinished work to the other computer without it going live, put it on a separate branch.
+Pushing (syncing) to `main` updates the live site in about a minute. To carry unfinished work to the other computer without it going live, ask Claude to put it on a separate branch.
 
 ## Where things are
 
