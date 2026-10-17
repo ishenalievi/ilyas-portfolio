@@ -68,6 +68,9 @@ html {
   background: var(--wood-base) var(--wood) 0 0 / var(--wood-floor-size) repeat;
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* Lenis does the smoothing itself when it's running */
+html.lenis.lenis-smooth { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
 
 body {
   position: relative;
@@ -212,6 +215,9 @@ img { max-width: 100%; height: auto; display: block; }
 .hb-1 { left: 0; top: 4%; width: 31%; transform: rotate(-6deg); z-index: 1; }
 .hb-2 { right: 0; top: 0; width: 33%; transform: rotate(6deg); z-index: 1; }
 .hb-3 { left: 2%; bottom: 10%; width: 46%; transform: rotate(-4deg); z-index: 2; }
+/* cursor drift (components/motion): --px/--py run -1..1 on the board, --d is each layer's depth */
+.hb-img, .hb-portrait img, .hero-board .tape { translate: calc(var(--px, 0) * var(--d, 0) * 1cqw) calc(var(--py, 0) * var(--d, 0) * 1cqw); }
+.hb-1 { --d: -1.2; } .hb-2 { --d: 1; } .hb-3 { --d: -0.7; } .hb-portrait { --d: 1.8; } .hb-tape1, .hb-tape2 { --d: -1.4; }
 .hb-tape1 { left: 8%; top: 1%; transform: rotate(-30deg); }
 .hb-tape2 { right: 10%; top: -2%; transform: rotate(14deg); }
 .hb-portrait {
@@ -239,9 +245,13 @@ img { max-width: 100%; height: auto; display: block; }
 .intro { padding-block: 0 var(--space); }
 .intro-grid { display: grid; gap: 1rem; max-width: 62rem; }
 .intro-line { font: italic 400 clamp(1.8rem, 4vw, 4rem)/1.2 var(--f-serif); }
-.hl { background: linear-gradient(transparent 58%, color-mix(in srgb, var(--a1) 90%, transparent) 58%); color: inherit; padding-inline: 0.05em; }
+/* --hl and --circ let components/motion draw the highlighter and the circle on (both default to fully drawn) */
+.hl { background: linear-gradient(transparent 58%, color-mix(in srgb, var(--a1) 90%, transparent) 58%) no-repeat 0 0 / var(--hl, 100%) 100%; color: inherit; padding-inline: 0.05em; }
 .circ { position: relative; white-space: nowrap; }
-.circ::after { content: ""; position: absolute; inset: -0.2em -0.35em; border: 0.12rem solid var(--a3); border-width: 3px; border-radius: 50%; transform: rotate(-4deg); }
+.circ::after {
+  content: ""; position: absolute; inset: -0.2em -0.35em; border: 0.12rem solid var(--a3); border-width: 3px; border-radius: 50%; transform: rotate(-4deg);
+  mask: conic-gradient(from 200deg, #000 calc(var(--circ, 1) * 360deg), transparent 0);
+}
 .margin-note { justify-self: end; font: 700 0.85rem var(--f-mono); color: var(--a3); text-transform: uppercase; letter-spacing: 0.06em; transform: rotate(-3deg); }
 
 /* ---------- sections ---------- */
@@ -249,6 +259,9 @@ img { max-width: 100%; height: auto; display: block; }
 .page-top { padding-top: clamp(2.5rem, 6vw, 6rem); }
 .sh { display: grid; gap: 0.6rem; margin-bottom: clamp(1.8rem, 3vw, 3rem); max-width: 60rem; }
 .sh h2 { font: 400 clamp(2rem, 4.5vw, 4.4rem)/1.02 var(--f-serif); }
+/* headings cut into words (SplitWords): each word rises out of its own slot */
+.w { display: inline-block; overflow: clip; overflow-clip-margin: 0.12em; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.w > span { display: inline-block; translate: 0 var(--wy, 0%); }
 .sh p { opacity: 0.8; max-width: 60ch; font-size: 1.05rem; }
 .sheet-sec { padding-block: 1rem; }
 .sheet { padding-block: calc(var(--space) * 0.85); }
@@ -303,7 +316,11 @@ img { max-width: 100%; height: auto; display: block; }
 .love:nth-child(odd) { transform: rotate(-0.8deg); }
 .love:nth-child(even) { transform: rotate(0.7deg); }
 .love-card { height: 100%; padding-bottom: 1.2rem; }
-.love-ph { height: 6rem; display: grid; place-items: center; }
+.love-ph { position: relative; height: clamp(7rem, 11vw, 9rem); display: grid; place-items: center; overflow: hidden; }
+/* an optional picture on the strip: posters fill it, logos sit inside it on the strip colour */
+.love-img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.love-img.fit-cover { object-fit: cover; object-position: 50% 8%; }
+.love-img.fit-contain { object-fit: contain; padding: 0.9rem 0 1.1rem; filter: drop-shadow(0.2rem 0.2rem 0 var(--shade)); }
 .love-ph span { font: 400 1.5rem/1 var(--f-display); color: var(--paper); -webkit-text-stroke: 1px var(--navy-fixed); }
 .love-body { padding: 0.9rem 1.1rem 0; display: grid; gap: 0.35rem; }
 .fig { font: 700 0.66rem var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
@@ -380,6 +397,9 @@ img { max-width: 100%; height: auto; display: block; }
 .poster { position: relative; width: min(18rem, 75%); margin-inline: auto; transform: rotate(-3deg); }
 .poster-tape { left: 50%; top: -0.8rem; transform: translateX(-50%) rotate(4deg); }
 .poster-img img { width: 100%; }
+.posters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); align-items: start; }
+.posters .poster { width: 100%; }
+.posters .poster:nth-child(even) { transform: rotate(2.5deg); margin-top: 2.5rem; }
 
 /* ---------- project page ---------- */
 .pp-hero { padding-block: clamp(2rem, 5vw, 5rem) clamp(6rem, 10vw, 10rem); background-size: 1.1rem 1.1rem; }

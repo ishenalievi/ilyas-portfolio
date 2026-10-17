@@ -1,18 +1,40 @@
 // Shared page sections.
 
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import type { Love, Project, Role } from "@/lib/content";
 import { Lift, Tape, Torn, TornSheet } from "./collage";
 import { Menacing } from "./Menacing";
 import { TLink } from "./transitions/TLink";
 
+/** Heading text cut into words, so it can come in word by word (components/motion).
+    Screen readers get the whole sentence once; the cut-up words are hidden from them. */
+export function SplitWords({ text }: { text: string }) {
+  const words = text.split(/\s+/).filter(Boolean);
+  return (
+    <>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">
+        {words.map((w, i) => (
+          <Fragment key={i}>
+            <span className="w">
+              <span>{w}</span>
+            </span>
+            {i < words.length - 1 && " "}
+          </Fragment>
+        ))}
+      </span>
+    </>
+  );
+}
+
 /** A section heading. Empty text from the admin panel is simply left out. */
 export function SectionHead({ eyebrow, title, children }: { eyebrow: string; title: ReactNode; children?: ReactNode }) {
+  const split = typeof title === "string";
   return (
     <div className="sh">
       {eyebrow && <span className="eyebrow">{eyebrow}</span>}
-      <h2>{title}</h2>
+      <h2 data-split={split || undefined}>{split ? <SplitWords text={title} /> : title}</h2>
       {children && <p>{children}</p>}
     </div>
   );
@@ -87,7 +109,13 @@ export function LoveCard({ l, i }: { l: Love; i: number }) {
     <Lift className="love">
       <Torn className="love-card paper" seed={`love-${i}`} amp={5}>
         <Torn className="love-ph" sides="b" amp={6} seed={`love-ph-${i}`} style={{ background: l.color }}>
-          {l.tag === "ゴゴゴ" ? <Menacing count={3} className="love-menace" /> : <span>{l.tag}</span>}
+          {l.img ? (
+            <Image className={`love-img fit-${l.fit}`} src={l.img.src} alt={l.img.alt} width={l.img.w} height={l.img.h} sizes="(max-width: 700px) 90vw, 22vw" />
+          ) : l.tag === "ゴゴゴ" ? (
+            <Menacing count={3} className="love-menace" />
+          ) : (
+            <span>{l.tag}</span>
+          )}
         </Torn>
         <div className="love-body">
           <span className="fig">

@@ -12,6 +12,7 @@ import {
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createRun, type Kind } from "./engine";
+import { setCovering } from "../motion/bus";
 
 type Go = (href: string, opts: { kind: Kind; label: string }) => void;
 
@@ -72,6 +73,7 @@ export function TransitionProvider({
       if (!ov || busy.current) return;
       busy.current = true;
       skip.current = false;
+      setCovering(true);
       ov.replaceChildren();
       ov.hidden = false;
       try {
@@ -93,6 +95,8 @@ export function TransitionProvider({
         ov.hidden = true;
         ov.replaceChildren();
         busy.current = false;
+        // the transition is done: page motion may start now
+        setCovering(false);
       }
     },
     [],

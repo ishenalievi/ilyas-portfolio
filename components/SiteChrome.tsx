@@ -4,6 +4,7 @@
 import type { ReactNode } from "react";
 import { getSite } from "@/lib/content";
 import { Footer } from "./Footer";
+import { Motion } from "./motion/Motion";
 import { Nav } from "./Nav";
 import { Stickers } from "./Stickers";
 import { TransitionProvider } from "./transitions/TransitionProvider";
@@ -20,6 +21,7 @@ export async function SiteChrome({ children }: { children: ReactNode }) {
         <Nav />
         <main id="main">{children}</main>
         <Footer />
+        <Motion />
         <div className="floor" aria-hidden="true" />
       </TransitionProvider>
     </>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProject, getProjects } from "@/lib/content";
 import { Lift, Tape, Torn, TornSheet } from "@/components/collage";
-import { MiniCollage } from "@/components/blocks";
+import { MiniCollage, SplitWords } from "@/components/blocks";
 import { TLink } from "@/components/transitions/TLink";
 
 // Every project page is built ahead of time, so a blocking load is fine.
@@ -91,14 +91,18 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           <p className="pp-lede">{p.summary}</p>
           {p.body.map((b) => (
             <section key={b.heading}>
-              <h2>{b.heading}</h2>
+              <h2 data-split>
+                <SplitWords text={b.heading} />
+              </h2>
               <p>{b.text}</p>
             </section>
           ))}
 
           {p.episodes.length > 0 && (
             <section>
-              <h2>Episodes</h2>
+              <h2 data-split>
+                <SplitWords text="Episodes" />
+              </h2>
               <div className="eps">
                 {p.episodes.map((e) =>
                   e.soon ? (
@@ -126,7 +130,9 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
           {p.videos.length > 0 && (
             <section>
-              <h2>The videos</h2>
+              <h2 data-split>
+                <SplitWords text="The videos" />
+              </h2>
               <div className="vids">
                 {p.videos.map((v) => (
                   <TLink key={v.href} href={v.href} className="vid">
