@@ -104,7 +104,7 @@ export function HazardSlot({ text, note }: { text: string; note: string }) {
   );
 }
 
-export function LoveCard({ l, i }: { l: Love; i: number }) {
+function LoveCard({ l, i }: { l: Love; i: number }) {
   return (
     <Lift className="love">
       <Torn className="love-card paper" seed={`love-${i}`} amp={5}>

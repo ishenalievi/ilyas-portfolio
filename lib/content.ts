@@ -171,8 +171,8 @@ export async function getStickers() {
 
 // ---------- projects ----------
 
-export type Video = { title: string; href: string; img: Img };
-export type Episode = { n: number; title: string; href: string; img?: Img; soon: boolean };
+type Video = { title: string; href: string; img: Img };
+type Episode = { n: number; title: string; href: string; img?: Img; soon: boolean };
 
 export type Project = {
   slug: string;
