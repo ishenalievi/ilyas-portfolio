@@ -43,3 +43,6 @@ next-env.d.ts
 # local tools and planning files (the preview config is shared so both computers have it)
 /.claude/*
 !/.claude/launch.json
+
+# design-taste-frontend checker output
+/.taste-skill/

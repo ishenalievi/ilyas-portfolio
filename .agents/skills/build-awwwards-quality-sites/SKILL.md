@@ -1,6 +1,7 @@
 ---
 name: build-awwwards-quality-sites
 description: Art-direct and implement distinctive, motion-rich marketing, editorial, portfolio, and landing websites with original reference-inspired imagery, standout heroes, GSAP choreography, one smooth-scroll engine, optional Three.js shaders, honest icon and logo sourcing, photo avatars, accessibility, and performance safeguards. Use when a user asks for an Awwwards-quality, premium, cinematic, interactive, high-concept, or motion-led website, or explicitly requests this visual and motion system.
+disable-model-invocation: true
 ---
 
 # Build Awwwards-Quality Sites
@@ -25,7 +26,7 @@ Build a cohesive, memorable site whose visual idea, media, typography, and motio
 ## 2. Build an honest asset system
 
 - Generate original hero or project imagery when it materially improves the concept. Use appropriately licensed media when it is stronger, and keep provenance in the site source.
-- Do not draw illustrations with model-authored SVG, CSS, or canvas paths. Use original generated or appropriately licensed transparent PNG cutouts for illustrative elements. Simple authored brand marks, interface icons, data graphics, and a justified Three.js shader canvas are allowed.
+- Illustrations follow the brand booklet: the background stickers are original drawings (never real copyrighted characters or logos), and the owner may upload their own PNGs.
 - Use photographs for every avatar. Prefer provided or appropriately licensed photos; never ship initials, illustrated heads, faceless silhouettes, or generated people presented as real customers, staff, or endorsers.
 - Use Solar icons through Iconify for interface symbols. Use Iconify SVG Logos only for legitimate real-company marks in truthful contexts. Use Logo Ipsum only for explicitly disclosed fictional brand specimens, never as customer proof. Omit a logo wall when no honest proof exists.
 - Provide deliberate aspect ratios, crop behavior, alt text, loading behavior, and missing-media fallbacks. Avoid generic stock imagery, copied mockups, watermarks, and decorative media without a narrative role.
@@ -39,7 +40,7 @@ Build a cohesive, memorable site whose visual idea, media, typography, and motio
 
 ## 4. Build the motion system
 
-- Use GSAP as the primary animation system.
+- Use GSAP for page motion. The page transitions stay on the Web Animations API.
 - Evaluate Lenis and Locomotive Scroll, then choose exactly one as the site's sole smooth-scroll engine. Never install or initialize both. Connect the chosen engine correctly to GSAP ScrollTrigger, refresh measurements after media and font changes, and destroy it during cleanup.
 - Bypass smooth scrolling and scrubbed timelines under `prefers-reduced-motion: reduce`. Render final states immediately instead of merely shortening animations.
 - Choreograph the page section by section. Reveal major headings word by word with a restrained stagger, then sequence supporting copy and media.
