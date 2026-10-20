@@ -46,6 +46,22 @@ const role = fields.object({
 
 const sticker = (label: string) => fields.image({ label, directory: "public/stickers", publicPath: "/stickers/" });
 
+// ---------- brand booklet helpers ----------
+const hex = (label: string) =>
+  fields.text({
+    label,
+    description: "A colour code like #9b1d30",
+    validation: { pattern: { regex: /^#[0-9a-fA-F]{6}$/, message: "Use # and six letters/numbers, e.g. #9b1d30" } },
+  });
+const list = (label: string, item: string, description?: string) =>
+  fields.array(longText(item), { label, description, itemLabel: (p) => p.value || item });
+const colour = fields.object({
+  name: text("Name"),
+  hex: hex("Colour"),
+  token: text("Code name (optional)", "The name the site's code uses, e.g. --ground. Leave empty if it has none."),
+  use: longText("Where it's used"),
+});
+
 export default config({
   storage: useGithub ? { kind: "github", repo: { owner: "ishenalievi", name: "ilyas-portfolio" } } : { kind: "local" },
   ui: {
@@ -54,6 +70,7 @@ export default config({
       "Site & pages": ["site", "home", "workPage", "contentPage", "aboutPage"],
       "Your stuff": ["projects", "resume", "posts", "loves"],
       Extras: ["stickers"],
+      Brand: ["brand"],
     },
   },
 
@@ -269,6 +286,118 @@ export default config({
         sheep: sticker("Sheep"),
         patch: sticker("Patch"),
         toast: sticker("Toast"),
+      },
+    }),
+
+    brand: singleton({
+      label: "Brand booklet",
+      path: "content/settings/brand",
+      format: { data: "json" },
+      schema: {
+        title: text("Booklet title", "Only you see this booklet; the website never shows it. Change anything here, then ask Claude to sync the site with the booklet."),
+        edition: text("Edition", "e.g. Vol. 1 · 2026"),
+        essence: longText("The brand in one line"),
+
+        identity: fields.object(
+          {
+            monogram: text("Monogram", "The small logo in the nav"),
+            wordmark: longText("How the name is set"),
+            words: fields.array(text("Word"), { label: "Brand words", itemLabel: (p) => p.value || "Word" }),
+            is: list("The site is…", "Point"),
+            isNot: list("The site is never…", "Point"),
+          },
+          { label: "01 · Identity" },
+        ),
+
+        voice: fields.object(
+          {
+            summary: longText("Voice in a sentence"),
+            principles: list("Principles", "Principle"),
+            do: list("Do", "Do"),
+            dont: list("Don't", "Don't"),
+            samples: fields.array(fields.object({ line: longText("Line"), where: text("Where it appears") }), {
+              label: "Sample lines",
+              itemLabel: (p) => p.fields.line.value || "Line",
+            }),
+            sfx: longText("Sound effects"),
+          },
+          { label: "02 · Voice" },
+        ),
+
+        colourGroups: fields.array(
+          fields.object({
+            title: text("Group"),
+            note: longText("About this group"),
+            colours: fields.array(colour, { label: "Colours", itemLabel: (p) => `${p.fields.name.value || "Colour"} ${p.fields.hex.value}` }),
+          }),
+          { label: "03 · Colours", description: "Fixed colours, grouped. They stay the same in every palette.", itemLabel: (p) => p.fields.title.value || "Group" },
+        ),
+        palettes: fields.array(
+          fields.object({
+            name: text("Palette name"),
+            mood: longText("Mood"),
+            a1: hex("Accent 1"),
+            a2: hex("Accent 2"),
+            a3: hex("Accent 3"),
+            a4: hex("Accent 4"),
+          }),
+          { label: "03 · Palettes", description: "The palette swap in the nav cycles these, in this order. The first is the default.", itemLabel: (p) => p.fields.name.value || "Palette" },
+        ),
+        accentRoles: list("03 · What each accent does", "Role"),
+
+        type: fields.array(
+          fields.object({
+            role: text("Role", "e.g. Display"),
+            font: text("Font", "A Google Fonts name, e.g. Bowlby One"),
+            token: text("Code name", "e.g. --f-display"),
+            use: longText("Where it's used"),
+            sample: text("Sample text"),
+          }),
+          { label: "04 · Typography", itemLabel: (p) => `${p.fields.role.value}: ${p.fields.font.value}` },
+        ),
+        typeNote: longText("04 · Type notes"),
+
+        motifs: fields.array(fields.object({ name: text("Motif"), how: longText("How it's used") }), {
+          label: "05 · Motifs & textures",
+          itemLabel: (p) => p.fields.name.value || "Motif",
+        }),
+        imagery: list("06 · Imagery & stickers", "Rule"),
+
+        motion: fields.object(
+          {
+            principles: list("Principles", "Principle"),
+            easing: fields.array(fields.object({ name: text("Name"), value: text("Curve"), use: text("Use for") }), {
+              label: "Easing curves",
+              itemLabel: (p) => p.fields.name.value || "Curve",
+            }),
+            transitions: fields.array(
+              fields.object({
+                kind: fields.select({
+                  label: "Transition",
+                  options: [
+                    { label: "Menacing intro", value: "menace" },
+                    { label: "Tusk ACT 4", value: "tusk" },
+                    { label: "Sticky Fingers", value: "zipper" },
+                    { label: "Heaven's Door", value: "book" },
+                    { label: "The World", value: "timestop" },
+                    { label: "Paper stack", value: "strips" },
+                    { label: "To Be Continued", value: "tbc" },
+                  ],
+                  defaultValue: "strips",
+                }),
+                where: text("Where it plays"),
+                stand: text("Name"),
+                sfx: text("Sound effect"),
+                feel: longText("What happens"),
+              }),
+              { label: "Page transitions", itemLabel: (p) => `${p.fields.where.value} → ${p.fields.stand.value}` },
+            ),
+            ambient: list("Everything else that moves", "Motion"),
+          },
+          { label: "07 · Motion" },
+        ),
+
+        layout: list("08 · Layout", "Rule"),
       },
     }),
   },

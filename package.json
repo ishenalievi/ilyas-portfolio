@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "dev:github": "cross-env NEXT_PUBLIC_KEYSTATIC_STORAGE=github next dev"
+    "dev:github": "cross-env NEXT_PUBLIC_KEYSTATIC_STORAGE=github next dev",
+    "brand:check": "node scripts/brand-check.mjs"
   },
   "dependencies": {
     "@keystatic/core": "^0.6.9",

@@ -27,6 +27,10 @@ The first time you sync from a new computer, a GitHub sign-in window opens. Sign
 
 Pushing (syncing) to `main` updates the live site in about a minute. To carry unfinished work to the other computer without it going live, ask Claude to put it on a separate branch.
 
+## Brand booklet
+
+All the branding (voice, colours, palettes, fonts, motifs, transitions, layout) lives in one place: **/keystatic → Brand booklet**. Only you can see it; the website never shows it. Change anything there, then ask Claude to "sync the site with the booklet". `npm run brand:check` lists anything in the site that no longer matches.
+
 ## Where things are
 
 - Text, images, projects, experience: `content/` (edit through `/keystatic`)
