@@ -37,7 +37,24 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
               <em>{p.subtitle}</em>
             </Torn>
           </Lift>
-          {p.cover && !p.videos.length ? (
+          {p.episodes.filter((e) => e.img).length > 1 ? (
+            // a series: every episode poster that's out, side by side
+            <div className="pp-cover pp-cover-wide posters">
+              {p.episodes.map(
+                (e) =>
+                  e.img && (
+                    <div key={e.n} className="poster">
+                      <Tape className="poster-tape" />
+                      <Lift>
+                        <Torn className="poster-img" seed={`ppc-${p.slug}-${e.n}`} amp={6}>
+                          <Image src={e.img.src} alt={e.img.alt} width={e.img.w} height={e.img.h} loading="eager" fetchPriority={e.n === 1 ? "high" : undefined} sizes="(max-width: 800px) 30vw, 15vw" />
+                        </Torn>
+                      </Lift>
+                    </div>
+                  ),
+              )}
+            </div>
+          ) : p.cover && !p.videos.length ? (
             <div className="pp-cover">
               <Tape className="poster-tape" />
               <Lift>

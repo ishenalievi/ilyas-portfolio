@@ -397,7 +397,8 @@ img { max-width: 100%; height: auto; display: block; }
 .poster { position: relative; width: min(18rem, 75%); margin-inline: auto; transform: rotate(-3deg); }
 .poster-tape { left: 50%; top: -0.8rem; transform: translateX(-50%) rotate(4deg); }
 .poster-img img { width: 100%; }
-.posters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); align-items: start; }
+/* one row however many episodes are out */
+.posters { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: clamp(0.8rem, 1.6vw, 1.6rem); align-items: start; }
 .posters .poster { width: 100%; }
 .posters .poster:nth-child(even) { transform: rotate(2.5deg); margin-top: 2.5rem; }
 

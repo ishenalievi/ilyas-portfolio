@@ -12,24 +12,36 @@
     "Oct 2026",
     "Film + edit"
   ],
-  "summary": "A run of reels for UBC Imprint Conference & Competition, where I'm VP Content Marketing. The first two tease After Hours on 20 October 2026. More land over the next few weeks.",
+  "summary": "A run of reels for UBC Imprint Conference & Competition, where I'm VP Content Marketing. The first three tease After Hours on 20 October 2026. More land over the next few weeks.",
   "body": [
     {
       "heading": "The brief",
-      "text": "Make people want to show up to After Hours without telling them much about it. The first rule of After Hours, as the caption says, you already know."
+      "text": "Make people want to show up to After Hours on 20 October without telling them much about it. Three reels, zero spoilers. The first rule of After Hours, as the caption says, you already know."
     },
     {
-      "heading": "The reel",
-      "text": "Shot and cut as a short film teaser, opening on a title card that reads “a film by Ilyas Ishenaliev”. Red type, dark rooms, two people who clearly know something you don't."
+      "heading": "Ep. 01 · After Hours",
+      "text": "Shot and cut as a short film teaser, opening on a title card that reads “a film by Ilyas Ishenaliev”. If you're going to make a reel, you might as well credit yourself like it's Cannes. Red type, dark rooms, two people who clearly know something you don't."
+    },
+    {
+      "heading": "Ep. 02 · After Hours, Pt. 2",
+      "text": "Same mood, new set. Someone walks toward a wall of gothic arched doors under red neon script, and nobody explains anything. That's the point."
+    },
+    {
+      "heading": "Ep. 03 · After Hours, Pt. 3",
+      "text": "Made with ACE UBC. The colour drains to black and white, the cast gets bigger, and someone grins through a phone call in front of a laptop while a wall of tuxedo portraits watches on. Still no explanation."
     },
     {
       "heading": "What's next",
-      "text": "New episodes are on the way. They get added here as they're posted."
+      "text": "More episodes are on the way. They get added here as they're posted."
     }
   ],
   "cover": "/images/projects/imprint.jpg",
   "coverAlt": "After Hours reel cover: two figures in a dark room under red title type",
   "links": [
+    {
+      "label": "Watch episode 3",
+      "href": "https://www.instagram.com/p/DerygqZSF2k/"
+    },
     {
       "label": "Watch episode 2",
       "href": "https://www.instagram.com/p/DedA2LcSkZt/"
@@ -51,9 +63,9 @@
       "image": "/images/projects/imprint-2.jpg"
     },
     {
-      "title": "Episode 3",
-      "href": "",
-      "image": null
+      "title": "After Hours, Pt. 3",
+      "href": "https://www.instagram.com/p/DerygqZSF2k/",
+      "image": "/images/projects/imprint-3.jpg"
     }
   ],
   "videos": [],
