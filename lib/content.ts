@@ -169,6 +169,14 @@ export async function getStickers() {
   return out;
 }
 
+// ---------- brand booklet (only shown at /brand, to the owner: see proxy.ts) ----------
+
+export async function getBrand() {
+  "use cache";
+  life();
+  return must(await reader.singletons.brand.read(), "brand booklet");
+}
+
 // ---------- projects ----------
 
 type Video = { title: string; href: string; img: Img };

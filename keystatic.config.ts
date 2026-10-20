@@ -294,7 +294,7 @@ export default config({
       path: "content/settings/brand",
       format: { data: "json" },
       schema: {
-        title: text("Booklet title", "Only you see this booklet; the website never shows it. Change anything here, then ask Claude to sync the site with the booklet."),
+        title: text("Booklet title", "Laid out at /brand, which only opens for you (signed in here with GitHub). Change anything here, then ask Claude to sync the site with the booklet."),
         edition: text("Edition", "e.g. Vol. 1 · 2026"),
         essence: longText("The brand in one line"),
 

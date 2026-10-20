@@ -22,7 +22,7 @@ Personal-brand portfolio. Live at https://ishenaliev.vercel.app (Vercel Hobby, f
 
 ## Brand booklet
 
-- Source of truth for branding: `content/settings/brand.json` (Keystatic → Brand → Brand booklet). Covers identity, voice, colours, palettes, type, motifs, imagery, motion, layout. Website never reads or shows it; keep it that way (no `/brand` page).
+- Source of truth for branding: `content/settings/brand.json` (Keystatic → Brand → Brand booklet). Covers identity, voice, colours, palettes, type, motifs, imagery, motion, layout. Laid out at `/brand`, which only the owner can open: `proxy.ts` checks the Keystatic GitHub sign-in (`keystatic-gh-access-token` → GitHub `/user` login `ishenalievi`, renewing expired sign-ins) and shows everyone else the 404 page. Never link to `/brand` from the site. With `npm run dev` (local editor, no sign-in) it opens freely.
 - Owner says "sync the site with the booklet" → read it, change code to match, run `npm run brand:check` until clean, then review written rules (voice, motifs, imagery) by hand.
 - Any branding change made in code goes into the booklet in the same change. Run `npm run brand:check` before finishing.
 

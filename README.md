@@ -29,7 +29,7 @@ Pushing (syncing) to `main` updates the live site in about a minute. To carry un
 
 ## Brand booklet
 
-All the branding (voice, colours, palettes, fonts, motifs, transitions, layout) lives in one place: **/keystatic → Brand booklet**. Only you can see it; the website never shows it. Change anything there, then ask Claude to "sync the site with the booklet". `npm run brand:check` lists anything in the site that no longer matches.
+All the branding (voice, colours, palettes, fonts, motifs, transitions, layout) lives in one place: **/keystatic → Brand booklet**. See it laid out at **/brand**: it only opens for you, signed in to /keystatic with GitHub. Everyone else gets “page not found”. Change anything there, then ask Claude to "sync the site with the booklet". `npm run brand:check` lists anything in the site that no longer matches.
 
 ## Where things are
 

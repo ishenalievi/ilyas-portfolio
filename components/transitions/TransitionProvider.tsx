@@ -19,6 +19,11 @@ type Go = (href: string, opts: { kind: Kind; label: string }) => void;
 const Ctx = createContext<Go>(() => {});
 export const useGo = () => useContext(Ctx);
 
+// Plays a transition on the spot, without changing page (the brand booklet's previews).
+type Play = (kind: Kind, label: string) => void;
+const PlayCtx = createContext<Play>(() => {});
+export const usePlay = () => useContext(PlayCtx);
+
 export function TransitionProvider({
   children,
   introLabel,
@@ -154,6 +159,9 @@ export function TransitionProvider({
     [play, router],
   );
 
+  // Same transition, but the page stays put: cover, then reveal straight away.
+  const preview = useCallback<Play>((kind, label) => void play(kind, label), [play]);
+
   // Every full page load (first visit or reload): the menacing intro.
   // Moving between pages inside the site keeps this provider mounted, so it doesn't replay.
   useEffect(() => {
@@ -196,14 +204,16 @@ export function TransitionProvider({
 
   return (
     <Ctx.Provider value={go}>
-      {children}
-      <div
-        ref={ovRef}
-        className="ov"
-        hidden
-        aria-hidden="true"
-        onClick={doSkip}
-      />
+      <PlayCtx.Provider value={preview}>
+        {children}
+        <div
+          ref={ovRef}
+          className="ov"
+          hidden
+          aria-hidden="true"
+          onClick={doSkip}
+        />
+      </PlayCtx.Provider>
     </Ctx.Provider>
   );
 }
