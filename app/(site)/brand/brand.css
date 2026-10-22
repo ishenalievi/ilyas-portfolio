@@ -11,12 +11,12 @@
 .bb-cover-side { display: grid; justify-items: center; gap: 1.2rem; font-size: clamp(2.4rem, 6vw, 6rem); }
 .bb-gogo { margin-bottom: 0.9em; }
 .bb-private {
-  font: 700 0.72rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase;
+  font: 700 max(13px, 0.72rem)/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase;
   border: 0.18rem solid var(--a3); color: var(--a3); padding: 0.55rem 0.7rem; transform: rotate(-6deg);
 }
 .bb-toc { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: clamp(2rem, 4vw, 3.5rem); }
 .bb-toc a {
-  text-decoration: none; font: 700 0.75rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; font: 700 max(13px, 0.75rem)/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase;
   background: var(--paper); color: var(--ink); padding: 0.6rem 0.75rem; box-shadow: 0.2rem 0.2rem 0 var(--shade);
   transition: transform 0.15s, box-shadow 0.15s;
 }
@@ -36,7 +36,7 @@
 .bb-x li::before { content: "✗"; color: var(--a1); }
 .bb-wide { max-width: 70ch; }
 .bb-tape { left: 50%; top: -0.7rem; transform: translateX(-50%) rotate(-3deg); }
-.bb-anchor code { font: 400 0.78rem/1.3 var(--f-mono); }
+.bb-anchor code { font: 400 max(13px, 0.78rem)/1.3 var(--f-mono); }
 
 /* ---------- identity ---------- */
 .bb-id { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
@@ -46,7 +46,7 @@
   border: 0.3rem solid var(--brass); box-shadow: inset 0 0 0 0.15rem var(--wood-seam), 0.35rem 0.4rem 0 var(--shade);
 }
 .bb-mono span { font: italic 400 clamp(3.4rem, 7vw, 6rem)/1 var(--f-serif); }
-.bb-mono small { font: 700 0.65rem/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass-light); }
+.bb-mono small { font: 700 max(13px, 0.65rem)/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass-light); }
 .bb-wordmark { display: grid; gap: 0.8rem; max-width: 46rem; }
 .bb-mini .r1 { font-size: clamp(1.8rem, 4vw, 3.4rem); }
 .bb-mini .r2 { font-size: clamp(1.4rem, 3vw, 2.5rem); }
@@ -63,14 +63,14 @@
 /* ---------- voice ---------- */
 .bb-principles { counter-reset: p; list-style: none; padding: 0; margin: 0 0 clamp(2rem, 4vw, 3rem); display: grid; gap: 0.9rem; max-width: 64rem; }
 .bb-principles li { counter-increment: p; display: grid; grid-template-columns: 3rem minmax(0, 1fr); align-items: baseline; font: italic 400 clamp(1.15rem, 2vw, 1.7rem)/1.3 var(--f-serif); }
-.bb-principles li::before { content: counter(p, decimal-leading-zero); font: 700 0.8rem var(--f-mono); color: var(--a3); font-style: normal; }
+.bb-principles li::before { content: counter(p, decimal-leading-zero); font: 700 max(13px, 0.8rem) var(--f-mono); color: var(--a3); font-style: normal; }
 .bb-dodont { margin-bottom: clamp(2.2rem, 4vw, 3.5rem); }
 .bb-samples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: clamp(1.2rem, 2.5vw, 2rem); align-items: start; }
 .bb-sample { position: relative; margin: 0; }
 .bb-sample:nth-child(odd) { transform: rotate(-1.2deg); }
 .bb-sample:nth-child(even) { transform: rotate(1deg); margin-top: 1rem; }
 .bb-sample blockquote { margin: 0 0 0.8rem; font: italic 400 clamp(1.1rem, 1.6vw, 1.4rem)/1.3 var(--f-serif); }
-.bb-sample figcaption { font: 700 0.68rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--a4); }
+.bb-sample figcaption { font: 700 max(13px, 0.68rem)/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--a4); }
 .bb-sfx { display: grid; grid-template-columns: minmax(0, 32rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; margin-top: clamp(2.5rem, 5vw, 4rem); }
 .bb-sfx-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.2rem; }
 .bb-sfx-row > span:not(.menacing) {
@@ -87,14 +87,14 @@
 .bb-swatch b { font-size: 0.95rem; }
 .bb-swatch code { color: var(--ink-soft); }
 .bb-swatch .bb-token { color: var(--a4); }
-.bb-swatch small { font-size: 0.8rem; color: var(--ink-soft); line-height: 1.4; }
+.bb-swatch small { font-size: max(13px, 0.8rem); color: var(--ink-soft); line-height: 1.4; }
 .bb-chip { display: block; aspect-ratio: 2 / 1; margin-bottom: 0.3rem; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12), 0.25rem 0.3rem 0 var(--shade); }
 .bb-palettes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: clamp(1rem, 2vw, 1.6rem); }
 .bb-pal { display: grid; gap: 0.35rem; align-content: start; }
 .bb-pal-stripes { height: clamp(4rem, 7vw, 6rem); box-shadow: 0.25rem 0.3rem 0 var(--shade); }
 .bb-pal-chips { display: grid; grid-template-columns: repeat(4, 1fr); height: 1.6rem; margin-bottom: 0.3rem; }
 .bb-pal small { color: var(--ink-soft); }
-.bb-pal code { color: var(--ink-soft); font-size: 0.7rem; }
+.bb-pal code { color: var(--ink-soft); font-size: max(13px, 0.7rem); }
 .bb-try { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; margin-top: clamp(1.6rem, 3vw, 2.4rem); container-type: inline-size; }
 @media (max-width: 600px) { .bb-try { grid-template-columns: 1fr; } }
 
@@ -123,12 +123,12 @@
   display: grid; grid-template-columns: minmax(8rem, 12rem) minmax(9rem, 14rem) minmax(0, 1fr) auto; gap: 0.4rem clamp(1rem, 2vw, 2rem);
   align-items: center; padding: 0.9rem 0; border-bottom: 1.5px solid var(--line);
 }
-.bb-where { font: 700 0.7rem/1.3 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--a4); }
+.bb-where { font: 700 max(13px, 0.7rem)/1.3 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--a4); }
 .bb-transitions b { font: italic 400 1.35rem/1.1 var(--f-serif); }
 .bb-tsfx { display: block; margin-top: 0.3rem; font: 400 0.95rem/1 var(--f-display); font-style: normal; color: var(--a1); }
 .bb-transitions p { margin: 0; font-size: 0.92rem; }
 .bb-play {
-  font: 700 0.7rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+  font: 700 max(13px, 0.7rem)/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
   background: var(--navy-fixed); color: #f3ead7; border: 0; padding: 0.6rem 0.8rem; box-shadow: 0.2rem 0.2rem 0 var(--a1);
   transition: transform 0.15s, box-shadow 0.15s;
 }

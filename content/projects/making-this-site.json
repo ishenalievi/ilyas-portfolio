@@ -40,5 +40,39 @@
   "links": [],
   "episodes": [],
   "videos": [],
-  "accent": "a4"
+  "accent": "a4",
+  "gallery": [
+    {
+      "caption": "Storyboard v1, the cover: still too clean",
+      "image": "/images/gallery/storyboard-cover.jpg"
+    },
+    {
+      "caption": "Storyboard v1, frame 2: the margin note that became “← accurate, sadly”",
+      "image": "/images/gallery/storyboard-intro.jpg"
+    },
+    {
+      "caption": "Storyboard v1, frame 3: three clippings on the table",
+      "image": "/images/gallery/storyboard-work.jpg"
+    },
+    {
+      "caption": "Storyboard v1, frame 7: the To Be Continued sign-off",
+      "image": "/images/gallery/storyboard-footer.jpg"
+    },
+    {
+      "caption": "Home: Tusk ACT 4, mid-spiral",
+      "image": "/images/gallery/transition-tusk.jpg"
+    },
+    {
+      "caption": "Work: Sticky Fingers, zipped shut",
+      "image": "/images/gallery/transition-sticky-fingers.jpg"
+    },
+    {
+      "caption": "About: The World, time stopped",
+      "image": "/images/gallery/transition-the-world.jpg"
+    },
+    {
+      "caption": "Project pages: Heaven's Door, mid-flip",
+      "image": "/images/gallery/transition-heavens-door.jpg"
+    }
+  ]
 }

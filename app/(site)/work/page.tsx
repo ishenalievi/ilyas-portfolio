@@ -4,6 +4,7 @@ import { getProjects, getWorkPage } from "@/lib/content";
 import { Lift, Tape, Torn, TornSheet } from "@/components/collage";
 import { HazardSlot, MiniCollage, SectionHead } from "@/components/blocks";
 import { TLink } from "@/components/transitions/TLink";
+import { LoopVideo } from "@/components/LoopVideo";
 
 export const metadata: Metadata = { title: "Work" };
 
@@ -12,7 +13,7 @@ export default async function WorkPage() {
   return (
     <section className="block page-top">
       <div className="wrap">
-        <SectionHead eyebrow={page.header.eyebrow} title={page.header.title}>
+        <SectionHead level={1} eyebrow={page.header.eyebrow} title={page.header.title}>
           {page.header.sub}
         </SectionHead>
         <div className="projects">
@@ -22,9 +23,8 @@ export default async function WorkPage() {
                   <span className="eyebrow">
                     No. {p.no} · {p.role}
                   </span>
-                  <h3>
-                    {p.title} <em>{p.subtitle}</em>
-                  </h3>
+                  <h3>{p.title}</h3>
+                  {p.subtitle && <p className="proj-sub">{p.subtitle}</p>}
                   <p>{p.summary}</p>
                   <div className="facts">
                     {p.facts.map((f) => (
@@ -54,7 +54,7 @@ export default async function WorkPage() {
                               <Tape className="poster-tape" />
                               <Lift>
                                 <Torn className="poster-img" seed={`wp-${p.slug}-${e.n}`} amp={6}>
-                                  <Image src={e.img.src} alt={e.img.alt} width={e.img.w} height={e.img.h} sizes="(max-width: 800px) 40vw, 18vw" />
+                                  {e.video ? <LoopVideo src={e.video} poster={e.img} /> : <Image src={e.img.src} alt={e.img.alt} width={e.img.w} height={e.img.h} sizes="(max-width: 800px) 40vw, 18vw" />}
                                 </Torn>
                               </Lift>
                             </div>

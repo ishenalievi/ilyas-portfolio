@@ -45,6 +45,13 @@ const role = fields.object({
 });
 
 const sticker = (label: string) => fields.image({ label, directory: "public/stickers", publicPath: "/stickers/" });
+const clip = () =>
+  fields.file({
+    label: "Looping clip (optional MP4, 5–15 seconds)",
+    description: "Plays silently on repeat in place of the picture. The picture above stays as its first frame and for anyone who turns motion off.",
+    directory: "public/videos",
+    publicPath: "/videos/",
+  });
 
 // ---------- brand booklet helpers ----------
 const hex = (label: string) =>
@@ -109,6 +116,7 @@ export default config({
             title: text("Name (for your reference)"),
             image: fields.image({ label: "Image", directory: "public/images/hero", publicPath: "/images/hero/" }),
             alt: text("Description for screen readers"),
+            video: clip(),
           }),
           { label: "Hero clippings (first three are used)", itemLabel: (p) => p.fields.title.value || "Clipping", slugField: "title" },
         ),
@@ -164,6 +172,8 @@ export default config({
       schema: {
         eyebrow: text("Small label above the greeting"),
         greeting: text("Greeting before your first name", "e.g. Hi, I'm"),
+        photo: fields.image({ label: "Photo of you (optional)", description: "Taped up next to the greeting. Something more casual than the Home headshot works best.", directory: "public/images", publicPath: "/images/" }),
+        photoAlt: text("Photo description for screen readers", "e.g. Ilyas mid-climb at the bouldering gym"),
         bio: fields.array(longText("Paragraph"), { label: "Bio paragraphs", itemLabel: (p) => (p.value || "Paragraph").slice(0, 60) }),
         loves: heading("Loves section"),
         record: heading("Experience section"),
@@ -286,6 +296,12 @@ export default config({
         sheep: sticker("Sheep"),
         patch: sticker("Patch"),
         toast: sticker("Toast"),
+        go: fields.image({
+          label: "ゴ letter for the menacing ゴゴゴ (transparent PNG)",
+          description: "One ゴ, drawn the way you want it. It replaces the typed letter everywhere ゴゴゴ appears, including the intro.",
+          directory: "public/stickers",
+          publicPath: "/stickers/",
+        }),
       },
     }),
 
@@ -434,6 +450,7 @@ export default config({
             title: text("Episode title"),
             href: link("Link (leave empty for a taped-shut ‘soon’ slot)"),
             image: fields.image({ label: "Cover", directory: "public/images/projects", publicPath: "/images/projects/" }),
+            video: clip(),
           }),
           { label: "Episodes (optional)", itemLabel: (p) => p.fields.title.value || "Episode", slugField: "title" },
         ),
@@ -444,6 +461,13 @@ export default config({
             image: fields.image({ label: "Thumbnail", directory: "public/images/projects", publicPath: "/images/projects/" }),
           }),
           { label: "Videos (optional)", itemLabel: (p) => p.fields.title.value || "Video", slugField: "title" },
+        ),
+        gallery: fields.array(
+          fields.object({
+            caption: text("Caption", "What it is, e.g. Storyboard v1, the cover"),
+            image: fields.image({ label: "Picture", directory: "public/images/gallery", publicPath: "/images/gallery/" }),
+          }),
+          { label: "Pictures from the process (optional)", description: "Taped up under the write-up.", itemLabel: (p) => p.fields.caption.value || "Picture", slugField: "caption" },
         ),
         accent,
       },

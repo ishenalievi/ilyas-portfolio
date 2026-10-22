@@ -48,7 +48,14 @@ export async function getHome() {
   "use cache";
   life();
   const h = must(await reader.singletons.home.read(), "home");
-  const clippings = (await Promise.all(h.clippings.map((c) => img(c.image, c.alt)))).filter((x): x is Img => !!x);
+  const clippings = (
+    await Promise.all(
+      h.clippings.map(async (c) => {
+        const i = await img(c.image, c.alt);
+        return i && { ...i, video: c.video || undefined };
+      }),
+    )
+  ).filter((x): x is Img & { video: string | undefined } => !!x);
   return { ...h, portrait: await img(h.portrait, ""), clippings };
 }
 
@@ -67,7 +74,8 @@ export async function getContentPage() {
 export async function getAboutPage() {
   "use cache";
   life();
-  return must(await reader.singletons.aboutPage.read(), "about page");
+  const a = must(await reader.singletons.aboutPage.read(), "about page");
+  return { ...a, photo: await img(a.photo, a.photoAlt) };
 }
 
 // ---------- experience ----------
@@ -180,7 +188,7 @@ export async function getBrand() {
 // ---------- projects ----------
 
 type Video = { title: string; href: string; img: Img };
-type Episode = { n: number; title: string; href: string; img?: Img; soon: boolean };
+type Episode = { n: number; title: string; href: string; img?: Img; video?: string; soon: boolean };
 
 export type Project = {
   slug: string;
@@ -198,6 +206,7 @@ export type Project = {
   links: { label: string; href: string }[];
   episodes: Episode[];
   videos: Video[];
+  gallery: Img[];
   accent: "a1" | "a2" | "a3" | "a4";
 };
 
@@ -218,6 +227,7 @@ export async function getProjects(): Promise<Project[]> {
           title: ep.title,
           href: ep.href ?? "",
           img: await img(ep.image, `${ep.title} cover`),
+          video: ep.video || undefined,
           soon: !ep.href,
         })),
       );
@@ -237,6 +247,7 @@ export async function getProjects(): Promise<Project[]> {
         links: e.links.filter((l) => l.href).map((l) => ({ label: l.label, href: l.href ?? "" })),
         episodes,
         videos,
+        gallery: (await Promise.all(e.gallery.map((g) => img(g.image, g.caption)))).filter((x): x is Img => !!x),
         accent: e.accent,
       } satisfies Project;
     }),

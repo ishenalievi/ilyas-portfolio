@@ -6,6 +6,7 @@ import { ContentWall } from "@/components/ContentWall";
 import { Menacing } from "@/components/Menacing";
 import { PaletteSwap } from "@/components/PaletteSwap";
 import { TLink } from "@/components/transitions/TLink";
+import { LoopVideo } from "@/components/LoopVideo";
 
 // a space between sentence parts, unless the next part starts with punctuation
 const glue = (next: string) => (/^[.,!?;:)]/.test(next) ? "" : " ");
@@ -45,7 +46,7 @@ export default async function Home() {
             {home.clippings.slice(0, 3).map((c, i) => (
               <Lift key={c.src} className={`hb hb-${i + 1}`}>
                 <Torn className="hb-img" seed={`hb-${i + 1}`} amp={i === 2 ? 6 : 7}>
-                  <Image src={c.src} alt={c.alt} width={c.w} height={c.h} loading={i < 2 ? "eager" : undefined} fetchPriority={i < 2 ? "high" : undefined} sizes="(max-width: 800px) 45vw, 24vw" />
+                  {c.video ? <LoopVideo src={c.video} poster={c} /> : <Image src={c.src} alt={c.alt} width={c.w} height={c.h} loading={i < 2 ? "eager" : undefined} fetchPriority={i < 2 ? "high" : undefined} sizes="(max-width: 800px) 45vw, 24vw" />}
                 </Torn>
               </Lift>
             ))}

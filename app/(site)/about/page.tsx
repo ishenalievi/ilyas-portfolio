@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getAboutPage, getLoves, getResume, getSite } from "@/lib/content";
 import { Ledger, Loves, SectionHead, Sheet } from "@/components/blocks";
-import { Lift, Torn } from "@/components/collage";
+import Image from "next/image";
+import { Lift, Tape, Torn } from "@/components/collage";
 import { TLink } from "@/components/transitions/TLink";
 
 export const metadata: Metadata = { title: "About" };
@@ -12,11 +13,21 @@ export default async function AboutPage() {
     <>
       <section className="block page-top">
         <div className="wrap about-grid">
-          <div>
+          <div className="about-head">
             {page.eyebrow && <span className="eyebrow">{page.eyebrow}</span>}
             <h1 className="about-title">
               {page.greeting} <span className="hl">{site.firstName}</span>.
             </h1>
+            {page.photo && (
+              <div className="about-photo">
+                <Tape className="poster-tape" />
+                <Lift>
+                  <Torn className="poster-img" seed="about-photo" amp={6}>
+                    <Image src={page.photo.src} alt={page.photo.alt} width={page.photo.w} height={page.photo.h} loading="eager" sizes="(max-width: 800px) 70vw, 26vw" />
+                  </Torn>
+                </Lift>
+              </div>
+            )}
           </div>
           <Lift>
             <Torn className="about-card paper" seed="about-card" amp={6}>

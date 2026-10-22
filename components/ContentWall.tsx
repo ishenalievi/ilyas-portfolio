@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { Post } from "@/lib/content";
 import { tornClip } from "@/lib/torn";
 import { TLink } from "./transitions/TLink";
+import { fitCols } from "@/lib/grid";
 
 const FILTERS = [
   { id: "all", label: "All" },
@@ -31,7 +32,7 @@ export function ContentWall({ posts, filters = true }: { posts: Post[]; filters?
           ))}
         </div>
       )}
-      <div className="wall">
+      <div className="wall" style={filters ? undefined : ({ "--cols": fitCols(shown.length) } as React.CSSProperties)}>
         {shown.map((p) => (
           <TLink key={p.href} href={p.href} className="post">
             <div className="pic" style={{ clipPath: tornClip("trbl", 4, p.href) }}>

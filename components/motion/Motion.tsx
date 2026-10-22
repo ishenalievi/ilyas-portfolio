@@ -32,7 +32,11 @@ const curves = () => {
 const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // things that paste themselves in as they scroll into view
-const PASTE = [".sh .eyebrow", ".sh > p", ".clip", ".post", ".love", ".ledger-rows > li", ".proj", ".vid", ".ep", ".more"].join(",");
+const PASTE = [".sh .eyebrow", ".sh > p", ".clip", ".post", ".love", ".ledger-rows > li", ".proj", ".vid", ".ep", ".gallery-item", ".more"].join(",");
+
+// A torn sheet draws its shadow as a separate layer beside the paper (TornSheet), so paste the
+// wrapper: otherwise the black shadow shows on its own until the paper arrives.
+const sheetOf = (el: HTMLElement) => (el.parentElement?.classList.contains("tsheet") ? el.parentElement : el);
 
 export function Motion() {
   const pathname = usePathname();
@@ -128,7 +132,7 @@ export function Motion() {
       gsap.set(circles, { "--circ": 0 });
 
       // --- paper that pastes in on scroll (nothing inside the hero)
-      const paste = $(PASTE).filter((el) => !el.closest(".hero"));
+      const paste = $(PASTE).filter((el) => !el.closest(".hero")).map(sheetOf);
       usesVars(paste, ["translate"]);
       gsap.set(paste, { opacity: 0, "--my": "1.75rem" });
     }, main);
@@ -165,7 +169,7 @@ export function Motion() {
           gsap.to(c, { "--circ": 1, duration: 0.8, ease: out, delay: 0.55, scrollTrigger: { trigger: c, start: "top 85%", once: true } });
         });
 
-        const paste = $(PASTE).filter((el) => !el.closest(".hero"));
+        const paste = $(PASTE).filter((el) => !el.closest(".hero")).map(sheetOf);
         ScrollTrigger.batch(paste, {
           start: "top 90%",
           once: true,

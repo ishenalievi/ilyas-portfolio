@@ -6,6 +6,7 @@ import type { Love, Project, Role } from "@/lib/content";
 import { Lift, Tape, Torn, TornSheet } from "./collage";
 import { Menacing } from "./Menacing";
 import { TLink } from "./transitions/TLink";
+import { fitCols } from "@/lib/grid";
 
 /** Heading text cut into words, so it can come in word by word (components/motion).
     Screen readers get the whole sentence once; the cut-up words are hidden from them. */
@@ -28,13 +29,14 @@ export function SplitWords({ text }: { text: string }) {
   );
 }
 
-/** A section heading. Empty text from the admin panel is simply left out. */
-export function SectionHead({ eyebrow, title, children }: { eyebrow: string; title: ReactNode; children?: ReactNode }) {
+/** A section heading (level 1 when it is the page's title). Empty text from the admin panel is simply left out. */
+export function SectionHead({ eyebrow, title, children, level = 2 }: { eyebrow: string; title: ReactNode; children?: ReactNode; level?: 1 | 2 }) {
   const split = typeof title === "string";
+  const H = level === 1 ? "h1" : "h2";
   return (
     <div className="sh">
       {eyebrow && <span className="eyebrow">{eyebrow}</span>}
-      <h2 data-split={split || undefined}>{split ? <SplitWords text={title} /> : title}</h2>
+      <H data-split={split || undefined}>{split ? <SplitWords text={title} /> : title}</H>
       {children && <p>{children}</p>}
     </div>
   );
@@ -137,7 +139,7 @@ function LoveCard({ l, i }: { l: Love; i: number }) {
 export function Loves({ items, limit }: { items: Love[]; limit?: number }) {
   const list = limit ? items.slice(0, limit) : items;
   return (
-    <div className="loves">
+    <div className="loves" style={{ "--cols": fitCols(list.length) } as React.CSSProperties}>
       {list.map((l, i) => (
         <LoveCard key={l.title} l={l} i={i} />
       ))}

@@ -5,7 +5,13 @@
   "identity": {
     "monogram": "II.",
     "wordmark": "ILYAS in Bowlby One on an amber block, Ishenaliev in DM Serif Display italic on paper: a ransom note cut from two papers, each piece a few degrees off straight.",
-    "words": ["Playful", "Cinematic", "Collaged", "Dry", "Old money, new tricks"],
+    "words": [
+      "Playful",
+      "Cinematic",
+      "Collaged",
+      "Dry",
+      "Old money, new tricks"
+    ],
     "is": [
       "A showcase of projects, experience and content.",
       "A way to grow the audience a little.",
@@ -36,10 +42,22 @@
       "Asking for collabs, clients or DMs."
     ],
     "samples": [
-      { "line": "Creative · Marketer · Professionally falls off walls", "where": "Tagline" },
-      { "line": "I edit videos, design posters, and start hobbies faster than I finish them. This site is mostly proof I finished one.", "where": "Home intro" },
-      { "line": "Shows, sports, books and hobbies, labelled like a museum would if it had less dignity.", "where": "Taste wall" },
-      { "line": "Torn by hand, more or less.", "where": "Footer" }
+      {
+        "line": "Creative · Marketer · Professionally falls off walls",
+        "where": "Tagline"
+      },
+      {
+        "line": "I edit videos, design posters, and start hobbies faster than I finish them. This site is mostly proof I finished one.",
+        "where": "Home intro"
+      },
+      {
+        "line": "Shows, sports, books and hobbies, labelled like a museum would if it had less dignity.",
+        "where": "Taste wall"
+      },
+      {
+        "line": "Torn by hand, more or less.",
+        "where": "Footer"
+      }
     ],
     "sfx": "Sound effects are English comic lettering: ZZZIP!, FLIP!, THE WORLD!, ACT 4!. The only Japanese on the site is the menacing ゴゴゴ, drawn in purple with a dark outline."
   },
@@ -48,57 +66,210 @@
       "title": "Ground & paper",
       "note": "The base everything sits on.",
       "colours": [
-        { "name": "Ground", "hex": "#15120f", "token": "--ground", "use": "Page background: warm near-black, like a film still." },
-        { "name": "Ivory", "hex": "#efe6d4", "token": "--on-ground", "use": "Text that sits straight on the background." },
-        { "name": "Paper", "hex": "#fbfaf6", "token": "--paper", "use": "Sheets, cards and labels." },
-        { "name": "Paper 2", "hex": "#f1ecdf", "token": "--paper-2", "use": "A second paper, for layering." },
-        { "name": "Ink navy", "hex": "#14213d", "token": "--ink", "use": "Text on paper." },
-        { "name": "Soft ink", "hex": "#4a5672", "token": "--ink-soft", "use": "Quieter text on paper." },
-        { "name": "Rule", "hex": "#c9d1de", "token": "--line", "use": "Hairlines and dividers." },
-        { "name": "Shade", "hex": "#070605", "token": "--shade", "use": "Hard shadows under paper." }
+        {
+          "name": "Ground",
+          "hex": "#15120f",
+          "token": "--ground",
+          "use": "Page background: warm near-black, like a film still."
+        },
+        {
+          "name": "Ivory",
+          "hex": "#efe6d4",
+          "token": "--on-ground",
+          "use": "Text that sits straight on the background."
+        },
+        {
+          "name": "Paper",
+          "hex": "#fbfaf6",
+          "token": "--paper",
+          "use": "Sheets, cards and labels."
+        },
+        {
+          "name": "Paper 2",
+          "hex": "#f1ecdf",
+          "token": "--paper-2",
+          "use": "A second paper, for layering."
+        },
+        {
+          "name": "Ink navy",
+          "hex": "#14213d",
+          "token": "--ink",
+          "use": "Text on paper."
+        },
+        {
+          "name": "Soft ink",
+          "hex": "#4a5672",
+          "token": "--ink-soft",
+          "use": "Quieter text on paper."
+        },
+        {
+          "name": "Rule",
+          "hex": "#c9d1de",
+          "token": "--line",
+          "use": "Hairlines and dividers."
+        },
+        {
+          "name": "Shade",
+          "hex": "#070605",
+          "token": "--shade",
+          "use": "Hard shadows under paper."
+        }
       ]
     },
     {
       "title": "Ralph Lauren stripes",
       "note": "Always in the moving background, whatever the palette.",
       "colours": [
-        { "name": "RL navy", "hex": "#23365e", "token": "--rl-navy", "use": "Stripe 1." },
-        { "name": "RL red", "hex": "#7d1424", "token": "--rl-red", "use": "Stripe 3." },
-        { "name": "RL green", "hex": "#1f4d3a", "token": "--rl-green", "use": "Stripe 5." }
+        {
+          "name": "RL navy",
+          "hex": "#23365e",
+          "token": "--rl-navy",
+          "use": "Stripe 1."
+        },
+        {
+          "name": "RL red",
+          "hex": "#7d1424",
+          "token": "--rl-red",
+          "use": "Stripe 3."
+        },
+        {
+          "name": "RL green",
+          "hex": "#1f4d3a",
+          "token": "--rl-green",
+          "use": "Stripe 5."
+        }
       ]
     },
     {
       "title": "Walnut & brass",
       "note": "Old-money panelling on the nav bar and the floor under the footer.",
       "colours": [
-        { "name": "Walnut", "hex": "#2f1b10", "token": "--wood-base", "use": "The wood itself." },
-        { "name": "Seam", "hex": "#1a0e07", "token": "--wood-seam", "use": "Gaps between boards." },
-        { "name": "Wood text", "hex": "#f3ead7", "token": "--wood-text", "use": "Text on wood." },
-        { "name": "Brass", "hex": "#b08d57", "token": "--brass", "use": "Trim and rails." },
-        { "name": "Brass light", "hex": "#d9bd85", "token": "--brass-light", "use": "Hovered nav links and highlights on brass." }
+        {
+          "name": "Walnut",
+          "hex": "#2f1b10",
+          "token": "--wood-base",
+          "use": "The wood itself."
+        },
+        {
+          "name": "Seam",
+          "hex": "#1a0e07",
+          "token": "--wood-seam",
+          "use": "Gaps between boards."
+        },
+        {
+          "name": "Wood text",
+          "hex": "#f3ead7",
+          "token": "--wood-text",
+          "use": "Text on wood."
+        },
+        {
+          "name": "Brass",
+          "hex": "#b08d57",
+          "token": "--brass",
+          "use": "Trim and rails."
+        },
+        {
+          "name": "Brass light",
+          "hex": "#d9bd85",
+          "token": "--brass-light",
+          "use": "Hovered nav links and highlights on brass."
+        }
       ]
     },
     {
       "title": "Stand colours",
       "note": "Used inside the page transitions and a few special spots.",
       "colours": [
-        { "name": "Menacing purple", "hex": "#a62bc0", "token": "", "use": "ゴゴゴ fill. It runs as a gradient from #ffd1ff to #4b0f66." },
-        { "name": "Menacing outline", "hex": "#1a0a24", "token": "", "use": "ゴゴゴ outline and the intro card's shadow." },
-        { "name": "Sticky Fingers blue", "hex": "#2f5fd0", "token": "--sf-blue", "use": "Zipper panels." },
-        { "name": "Sticky Fingers gold", "hex": "#d4ae3a", "token": "--sf-gold", "use": "Zip teeth and pull." },
-        { "name": "The World gold", "hex": "#e3c23c", "token": "--tw-gold", "use": "The time-stop wall." },
-        { "name": "Tusk gold", "hex": "#e8c766", "token": "--tk-gold", "use": "Golden rectangles and spiral." },
-        { "name": "To Be Continued", "hex": "#d4ae3a", "token": "--tbc-bg", "use": "The arrow." },
-        { "name": "To Be Continued ink", "hex": "#2a2414", "token": "--tbc-fg", "use": "Text on the arrow." },
-        { "name": "Man City blue", "hex": "#6cabdd", "token": "--city", "use": "The Man City card on the taste wall." }
+        {
+          "name": "Menacing purple",
+          "hex": "#a62bc0",
+          "token": "",
+          "use": "ゴゴゴ fill. It runs as a gradient from #ffd1ff to #4b0f66."
+        },
+        {
+          "name": "Menacing outline",
+          "hex": "#1a0a24",
+          "token": "",
+          "use": "ゴゴゴ outline and the intro card's shadow."
+        },
+        {
+          "name": "Sticky Fingers blue",
+          "hex": "#2f5fd0",
+          "token": "--sf-blue",
+          "use": "Zipper panels."
+        },
+        {
+          "name": "Sticky Fingers gold",
+          "hex": "#d4ae3a",
+          "token": "--sf-gold",
+          "use": "Zip teeth and pull."
+        },
+        {
+          "name": "The World gold",
+          "hex": "#e3c23c",
+          "token": "--tw-gold",
+          "use": "The time-stop wall."
+        },
+        {
+          "name": "Tusk gold",
+          "hex": "#e8c766",
+          "token": "--tk-gold",
+          "use": "Golden rectangles and spiral."
+        },
+        {
+          "name": "To Be Continued",
+          "hex": "#d4ae3a",
+          "token": "--tbc-bg",
+          "use": "The arrow."
+        },
+        {
+          "name": "To Be Continued ink",
+          "hex": "#2a2414",
+          "token": "--tbc-fg",
+          "use": "Text on the arrow."
+        },
+        {
+          "name": "Man City blue",
+          "hex": "#6cabdd",
+          "token": "--city",
+          "use": "The Man City card on the taste wall."
+        }
       ]
     }
   ],
   "palettes": [
-    { "name": "Technicolor", "mood": "The default. Oxblood, deep teal, amber, aubergine.", "a1": "#9b1d30", "a2": "#1b6b73", "a3": "#d9a441", "a4": "#5a2a6b" },
-    { "name": "Teal & Orange", "mood": "Blockbuster colour grade.", "a1": "#c2541f", "a2": "#145467", "a3": "#e0b04a", "a4": "#6d1f3d" },
-    { "name": "Giallo", "mood": "1970s Italian thriller.", "a1": "#b3262e", "a2": "#2f5d3a", "a3": "#e2b33c", "a4": "#3d2a6b" },
-    { "name": "Neo-noir", "mood": "Neon in the rain.", "a1": "#c23b6b", "a2": "#1f4f8a", "a3": "#d8b25a", "a4": "#4b1d5c" }
+    {
+      "name": "Technicolor",
+      "mood": "The default. Oxblood, deep teal, amber, aubergine.",
+      "a1": "#9b1d30",
+      "a2": "#1b6b73",
+      "a3": "#d9a441",
+      "a4": "#5a2a6b"
+    },
+    {
+      "name": "Teal & Orange",
+      "mood": "Blockbuster colour grade.",
+      "a1": "#c2541f",
+      "a2": "#145467",
+      "a3": "#e0b04a",
+      "a4": "#6d1f3d"
+    },
+    {
+      "name": "Giallo",
+      "mood": "1970s Italian thriller.",
+      "a1": "#b3262e",
+      "a2": "#2f5d3a",
+      "a3": "#e2b33c",
+      "a4": "#3d2a6b"
+    },
+    {
+      "name": "Neo-noir",
+      "mood": "Neon in the rain.",
+      "a1": "#c23b6b",
+      "a2": "#1f4f8a",
+      "a3": "#d8b25a",
+      "a4": "#4b1d5c"
+    }
   ],
   "accentRoles": [
     "Accent 1: highlighter swipes, focus rings, stripe 2.",
@@ -107,26 +278,81 @@
     "Accent 4: labels and roles on paper."
   ],
   "type": [
-    { "role": "Display", "font": "Bowlby One", "token": "--f-display", "use": "Shouty headlines, ILYAS, sound effects.", "sample": "ILYAS" },
-    { "role": "Serif", "font": "DM Serif Display", "token": "--f-serif", "use": "Italic accents: Ishenaliev, the II. monogram, big statements.", "sample": "Ishenaliev" },
-    { "role": "Body", "font": "Instrument Sans", "token": "--f-body", "use": "Everything read in sentences.", "sample": "I edit videos, design posters, and start hobbies faster than I finish them." },
-    { "role": "Mono", "font": "Space Mono", "token": "--f-mono", "use": "Small labels, stamps and dates, in tracked-out capitals.", "sample": "Portfolio · Vol. 1 · 2026" }
+    {
+      "role": "Display",
+      "font": "Bowlby One",
+      "token": "--f-display",
+      "use": "Shouty headlines, ILYAS, sound effects.",
+      "sample": "ILYAS"
+    },
+    {
+      "role": "Serif",
+      "font": "DM Serif Display",
+      "token": "--f-serif",
+      "use": "Italic accents: Ishenaliev, the II. monogram, big statements.",
+      "sample": "Ishenaliev"
+    },
+    {
+      "role": "Body",
+      "font": "Instrument Sans",
+      "token": "--f-body",
+      "use": "Everything read in sentences.",
+      "sample": "I edit videos, design posters, and start hobbies faster than I finish them."
+    },
+    {
+      "role": "Mono",
+      "font": "Space Mono",
+      "token": "--f-mono",
+      "use": "Small labels, stamps and dates, in tracked-out capitals.",
+      "sample": "Portfolio · Vol. 1 · 2026"
+    }
   ],
-  "typeNote": "Type grows with the window: the base size runs from about 15px on phones to 24px on big monitors.",
+  "typeNote": "Type grows with the window: the base size runs from 16px on phones to 24px on big monitors. Nothing meant to be read goes below 13px, labels and stamps included.",
   "motifs": [
-    { "name": "Torn paper", "how": "Every sheet, photo and label has ripped edges. Each tear is seeded, so it's unique but never changes between visits." },
-    { "name": "Ransom-note name", "how": "The name is cut from two papers and two fonts, each piece tilted a few degrees." },
-    { "name": "Tape", "how": "Translucent strips pin photos and posters down, always crooked." },
-    { "name": "Hard shadows", "how": "Paper casts a solid offset shadow in the shape of its tear. No blur." },
-    { "name": "Moving stripes", "how": "Thick vertical stripes pan sideways forever: RL navy, accent 1, RL red, accent 2, RL green." },
-    { "name": "Walnut & brass", "how": "Dark panelled wood with brass trim on the nav and as a floor under the footer, like a Ralph Lauren Home study." },
-    { "name": "Die-cut stickers", "how": "Stickers with a white cut edge float in the margins: bear, cheese, rocket, crest, tea, Gromit, patch, toast." },
-    { "name": "Menacing ゴゴゴ", "how": "Purple katakana stepping down a diagonal and trembling. Drama only, used sparingly." },
-    { "name": "Marker notes", "how": "Highlighter swipes, hand-circled words and margin notes that talk back." },
-    { "name": "Stamps", "how": "Round rubber stamps and platform tags in mono capitals." }
+    {
+      "name": "Torn paper",
+      "how": "Every sheet, photo and label has ripped edges. Each tear is seeded, so it's unique but never changes between visits."
+    },
+    {
+      "name": "Ransom-note name",
+      "how": "The name is cut from two papers and two fonts, each piece tilted a few degrees."
+    },
+    {
+      "name": "Tape",
+      "how": "Translucent strips pin photos and posters down, always crooked."
+    },
+    {
+      "name": "Hard shadows",
+      "how": "Paper casts a solid offset shadow in the shape of its tear. No blur."
+    },
+    {
+      "name": "Moving stripes",
+      "how": "Thick vertical stripes pan sideways forever: RL navy, accent 1, RL red, accent 2, RL green."
+    },
+    {
+      "name": "Walnut & brass",
+      "how": "Dark panelled wood with brass trim on the nav and as a floor under the footer, like a Ralph Lauren Home study."
+    },
+    {
+      "name": "Die-cut stickers",
+      "how": "Stickers with a white cut edge float in the margins: bear, cheese, rocket, crest, tea, Gromit, patch, toast."
+    },
+    {
+      "name": "Menacing ゴゴゴ",
+      "how": "Purple katakana stepping down a diagonal and trembling. Drama only, used sparingly."
+    },
+    {
+      "name": "Marker notes",
+      "how": "Highlighter swipes, hand-circled words and margin notes that talk back."
+    },
+    {
+      "name": "Stamps",
+      "how": "Round rubber stamps and platform tags in mono capitals."
+    }
   ],
   "imagery": [
     "Real photos only: events, posters, video thumbnails, the headshot. No stock.",
+    "Video work is shown moving: a short silent loop of the real clip, with its still as the first frame.",
     "Photos are clippings: torn edges, a slight tilt, taped down.",
     "The headshot is cut out like a sticker and sits in front of the collage.",
     "The drawn stickers are originals. Any of them can be swapped for an uploaded PNG with a transparent background."
@@ -140,24 +366,79 @@
       "Only move and fade things. Nothing grows from zero."
     ],
     "easing": [
-      { "name": "Out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "use": "Things arriving" },
-      { "name": "In-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "use": "Things crossing the screen" },
-      { "name": "Pop", "value": "cubic-bezier(.3,1.6,.5,1)", "use": "Cards and labels that land with a bounce" }
+      {
+        "name": "Out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "use": "Things arriving"
+      },
+      {
+        "name": "In-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "use": "Things crossing the screen"
+      },
+      {
+        "name": "Pop",
+        "value": "cubic-bezier(.3,1.6,.5,1)",
+        "use": "Cards and labels that land with a bounce"
+      }
     ],
     "transitions": [
-      { "kind": "menace", "where": "First load and every reload", "stand": "Menacing intro", "sfx": "ゴゴゴ", "feel": "Purple ゴゴゴ trembles in, then a torn card lands: “Welcome to Ilyas’ portfolio”." },
-      { "kind": "tusk", "where": "Home", "stand": "Tusk ACT 4", "sfx": "ACT 4!", "feel": "Golden rectangles and a spiral draw in, nails fly, and the scene spins away around the eye." },
-      { "kind": "zipper", "where": "Work", "stand": "Sticky Fingers", "sfx": "ZZZIP!", "feel": "Blue panels slide in, a gold zip closes the screen, then unzips onto the page." },
-      { "kind": "book", "where": "Project pages", "stand": "Heaven's Door", "sfx": "FLIP!", "feel": "The screen becomes a book and the pages swing over to the project." },
-      { "kind": "timestop", "where": "About", "stand": "The World", "sfx": "THE WORLD!", "feel": "Time stops from the click: a grey freeze, a gold wall and a clock." },
-      { "kind": "strips", "where": "Content and anything else", "stand": "Paper stack", "sfx": "", "feel": "Torn strips in the palette colours stack across the screen with the page name." },
-      { "kind": "tbc", "where": "Links to other websites", "stand": "To Be Continued", "sfx": "", "feel": "A sepia freeze and the To Be Continued arrow before leaving the site." }
+      {
+        "kind": "menace",
+        "where": "First load and every reload",
+        "stand": "Menacing intro",
+        "sfx": "ゴゴゴ",
+        "feel": "Purple ゴゴゴ trembles in, then a torn card lands: “Welcome to Ilyas’ portfolio”."
+      },
+      {
+        "kind": "tusk",
+        "where": "Home",
+        "stand": "Tusk ACT 4",
+        "sfx": "ACT 4!",
+        "feel": "Golden rectangles and a spiral draw in, nails fly, and the scene spins away around the eye."
+      },
+      {
+        "kind": "zipper",
+        "where": "Work",
+        "stand": "Sticky Fingers",
+        "sfx": "ZZZIP!",
+        "feel": "Blue panels slide in, a gold zip closes the screen, then unzips onto the page."
+      },
+      {
+        "kind": "book",
+        "where": "Project pages",
+        "stand": "Heaven's Door",
+        "sfx": "FLIP!",
+        "feel": "The screen becomes a book and the pages swing over to the project."
+      },
+      {
+        "kind": "timestop",
+        "where": "About",
+        "stand": "The World",
+        "sfx": "THE WORLD!",
+        "feel": "Time stops from the click: a grey freeze, a gold wall and a clock."
+      },
+      {
+        "kind": "strips",
+        "where": "Content and anything else",
+        "stand": "Paper stack",
+        "sfx": "",
+        "feel": "Torn strips in the palette colours stack across the screen with the page name."
+      },
+      {
+        "kind": "tbc",
+        "where": "Links to other websites",
+        "stand": "To Be Continued",
+        "sfx": "",
+        "feel": "A sepia freeze and the To Be Continued arrow before leaving the site."
+      }
     ],
     "ambient": [
       "Background stripes pan across every 30 seconds.",
       "Stickers bob gently.",
       "Smooth scrolling, paused while a transition is on screen.",
-      "After a transition: headings come in word by word, highlighter and circles draw themselves on, and paper pastes in as it scrolls into view."
+      "After a transition: headings come in word by word, highlighter and circles draw themselves on, and paper pastes in as it scrolls into view.",
+      "Real clips from the work play as silent loops in place of their stills: only while on screen, only after the transition, never with reduced motion."
     ]
   },
   "layout": [

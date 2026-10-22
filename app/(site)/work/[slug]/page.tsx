@@ -3,8 +3,10 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProject, getProjects } from "@/lib/content";
 import { Lift, Tape, Torn, TornSheet } from "@/components/collage";
-import { MiniCollage, SplitWords } from "@/components/blocks";
+import { MiniCollage, SectionHead, SplitWords } from "@/components/blocks";
 import { TLink } from "@/components/transitions/TLink";
+import { LoopVideo } from "@/components/LoopVideo";
+import { fitCols } from "@/lib/grid";
 
 // Every project page is built ahead of time, so a blocking load is fine.
 export const instant = false;
@@ -47,7 +49,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
                       <Tape className="poster-tape" />
                       <Lift>
                         <Torn className="poster-img" seed={`ppc-${p.slug}-${e.n}`} amp={6}>
-                          <Image src={e.img.src} alt={e.img.alt} width={e.img.w} height={e.img.h} loading="eager" fetchPriority={e.n === 1 ? "high" : undefined} sizes="(max-width: 800px) 30vw, 15vw" />
+                          {e.video ? <LoopVideo src={e.video} poster={e.img} /> : <Image src={e.img.src} alt={e.img.alt} width={e.img.w} height={e.img.h} loading="eager" fetchPriority={e.n === 1 ? "high" : undefined} sizes="(max-width: 800px) 30vw, 15vw" />}
                         </Torn>
                       </Lift>
                     </div>
@@ -166,6 +168,27 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
       </div>
         </TornSheet>
       </div>
+
+      {p.gallery.length > 0 && (
+        <section className="block">
+          <div className="wrap">
+            <SectionHead eyebrow="From the process" title="Evidence, taped up" />
+            <div className="gallery" style={{ "--cols": fitCols(p.gallery.length, [4, 3]) } as React.CSSProperties}>
+              {p.gallery.map((g, i) => (
+                <figure key={g.src} className="gallery-item">
+                  {i % 3 === 0 && <Tape className="poster-tape" />}
+                  <Lift>
+                    <Torn className="poster-img" seed={`gal-${p.slug}-${i}`} amp={5}>
+                      <Image src={g.src} alt={g.alt} width={g.w} height={g.h} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 30vw" />
+                    </Torn>
+                  </Lift>
+                  <figcaption>{g.alt}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <div className="wrap pp-next">
         <TLink href={`/work/${next.slug}`} label={next.short} className="btn btn-big">

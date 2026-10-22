@@ -11,7 +11,7 @@ export default async function ContentPage() {
   return (
     <section className="block page-top">
       <div className="wrap">
-        <SectionHead eyebrow={page.header.eyebrow} title={page.header.title}>
+        <SectionHead level={1} eyebrow={page.header.eyebrow} title={page.header.title}>
           {page.header.sub}
         </SectionHead>
         <ContentWall posts={posts} />
