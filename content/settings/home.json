@@ -1,21 +1,21 @@
 {
-  "heroEyebrow": "Portfolio · Vol. 1 · 2026",
+  "heroEyebrow": "Hello! My name is",
   "primaryButton": "See the work",
-  "portrait": "/images/ilyas-headshot.png",
+  "portrait": "/images/portrait.png",
   "clippings": [
     {
       "title": "After Hours",
-      "image": "/images/hero/imprint.jpg",
+      "image": "/images/hero/clippings/After Hours/image.jpg",
       "alt": "After Hours reel cover"
     },
     {
       "title": "Red Moon in Venus",
-      "image": "/images/hero/kali.jpg",
+      "image": "/images/hero/clippings/Red Moon in Venus/image.jpg",
       "alt": "Red Moon in Venus poster"
     },
     {
       "title": "Baseball Sendoff",
-      "image": "/images/hero/baseball.jpg",
+      "image": "/images/hero/clippings/Baseball Sendoff/image.jpg",
       "alt": "ISM Baseball Sendoff thumbnail"
     }
   ],
@@ -29,11 +29,8 @@
   },
   "work": {
     "eyebrow": "Selected work",
-    "title": "Three clippings, one taped shut",
-    "sub": ""
+    "title": "Three clippings, one taped shut"
   },
-  "soonTitle": "",
-  "soonNote": "",
   "wall": {
     "eyebrow": "Content wall",
     "title": "Reels, posters, edits",
