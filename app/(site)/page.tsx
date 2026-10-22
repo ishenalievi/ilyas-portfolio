@@ -7,6 +7,7 @@ import { Menacing } from "@/components/Menacing";
 import { PaletteSwap } from "@/components/PaletteSwap";
 import { TLink } from "@/components/transitions/TLink";
 import { LoopVideo } from "@/components/LoopVideo";
+import { NowPlaying } from "@/components/NowPlaying";
 
 // a space between sentence parts, unless the next part starts with punctuation
 const glue = (next: string) => (/^[.,!?;:)]/.test(next) ? "" : " ");
@@ -44,11 +45,15 @@ export default async function Home() {
           <div className="hero-board">
             <Menacing className="gogo" />
             {home.clippings.slice(0, 3).map((c, i) => (
-              <Lift key={c.src} className={`hb hb-${i + 1}`}>
-                <Torn className="hb-img" seed={`hb-${i + 1}`} amp={i === 2 ? 6 : 7}>
-                  {c.video ? <LoopVideo src={c.video} poster={c} /> : <Image src={c.src} alt={c.alt} width={c.w} height={c.h} loading={i < 2 ? "eager" : undefined} fetchPriority={i < 2 ? "high" : undefined} sizes="(max-width: 800px) 45vw, 24vw" />}
-                </Torn>
-              </Lift>
+              <div key={c.src} className={`hb hb-${i + 1}`}>
+                <Lift>
+                  <Torn className="hb-img" seed={`hb-${i + 1}`} amp={i === 2 ? 6 : 7}>
+                    {c.video ? <LoopVideo src={c.video} poster={c} /> : <Image src={c.src} alt={c.alt} width={c.w} height={c.h} loading={i < 2 ? "eager" : undefined} fetchPriority={i < 2 ? "high" : undefined} sizes="(max-width: 800px) 45vw, 24vw" />}
+                  </Torn>
+                </Lift>
+                {/* the tape rides on its clipping, so it drifts and drops in with it */}
+                {i < 2 && <Tape className={`hb-tape${i + 1}`} />}
+              </div>
             ))}
             {/* the headshot, cut out like a sticker, in front of the clippings */}
             {home.portrait && (
@@ -56,8 +61,8 @@ export default async function Home() {
                 <Image src={home.portrait.src} alt={site.name} width={home.portrait.w} height={home.portrait.h} loading="eager" fetchPriority="high" sizes="(max-width: 800px) 70vw, 36vw" />
               </div>
             )}
-            <Tape className="hb-tape1" />
-            <Tape className="hb-tape2" />
+            {/* what's playing on Spotify, stuck under the headshot (shows once Spotify is connected) */}
+            <NowPlaying />
             <div className="hb-stamp">
               <PaletteSwap variant="stamp" />
             </div>

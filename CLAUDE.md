@@ -37,6 +37,7 @@ Personal-brand portfolio. Live at https://ishenaliev.vercel.app (Vercel Hobby, f
 ## Secrets
 
 - Keystatic GitHub keys live in Vercel production env vars and git-ignored `.env` on Mac. Never print or commit them. `npm run dev` doesn't need them.
+- Spotify "now spinning" (Home): `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN` in `.env` and Vercel production. Get them via `npm run dev` → http://127.0.0.1:3000/api/spotify/connect (dev-only routes write `.env`). App owner needs Spotify Premium (Spotify dev-mode rule since Feb 2026). Without keys `/api/now-playing` returns 503 and the label hides.
 
 ## Gotchas
 

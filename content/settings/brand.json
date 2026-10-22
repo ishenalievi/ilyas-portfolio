@@ -348,6 +348,10 @@
     {
       "name": "Stamps",
       "how": "Round rubber stamps and platform tags in mono capitals."
+    },
+    {
+      "name": "Now spinning",
+      "how": "A torn label taped under the headshot on Home shows what's playing on Spotify right now (with three little equaliser bars), or the last thing played. It links to the song."
     }
   ],
   "imagery": [

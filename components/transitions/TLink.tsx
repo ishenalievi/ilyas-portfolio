@@ -35,6 +35,7 @@ function autoLabel(href: string): string {
     if (href.includes("instagram.com")) return "Off to Instagram";
     if (href.includes("linkedin.com")) return "Off to LinkedIn";
     if (href.includes("youtube.com")) return "Off to YouTube";
+    if (href.includes("spotify.com")) return "Off to Spotify";
     return "Leaving the site";
   }
   return pageLabels[href.split(/[?#]/)[0]] ?? "ONE SEC";
