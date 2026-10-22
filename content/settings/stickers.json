@@ -1,10 +1,4 @@
 {
-  "bear": null,
-  "cheese": null,
-  "rocket": null,
-  "crest": null,
-  "tea": null,
-  "sheep": "/stickers/sheep.png",
-  "patch": null,
-  "toast": null
+  "cheese": "/stickers/cheese.png",
+  "sheep": "/stickers/sheep.png"
 }
