@@ -335,7 +335,7 @@
     },
     {
       "name": "Die-cut stickers",
-      "how": "Stickers with a white cut edge float in the margins: bear, cheese, rocket, crest, tea, Gromit, patch, toast."
+      "how": "Stickers with a white cut edge float in the margins, four down each side. Eight slots (bear, cheese, rocket, crest, tea, sheep, patch, toast), each holding a drawn original or an uploaded picture."
     },
     {
       "name": "Menacing ゴゴゴ",
@@ -360,7 +360,7 @@
     "Photos are clippings: torn edges, a slight tilt, taped down.",
     "The headshot is cut out like a sticker and sits in front of the collage.",
     "Project pages can carry a process gallery: storyboards and screenshots taped up as evidence.",
-    "The drawn stickers are originals. Any of them can be swapped for an uploaded PNG with a transparent background.",
+    "The drawn stickers are originals. Any of them can be swapped for an uploaded PNG with a transparent background. Uploads are scaled to cover about the same area as the others, so a tall guitar comes out narrower, not bigger.",
     "Artwork, characters and products owned by others are covered by a general disclaimer at the foot of every page (Keystatic → Site details → Footer disclaimer)."
   ],
   "motion": {

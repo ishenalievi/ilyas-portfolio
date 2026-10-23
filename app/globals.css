@@ -110,21 +110,23 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- background stickers ---------- */
 .stickers { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+/* --w is each slot's size; --fit narrows tall uploads and widens wide ones so every sticker covers about the same area */
 .sticker {
-  position: absolute; width: clamp(3.2rem, 4.4vw, 6.5rem);
+  --w: clamp(3.2rem, 4.4vw, 6.5rem);
+  position: absolute; width: calc(var(--w) * var(--fit, 1));
   filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
           drop-shadow(1.5px 1.5px 0 #fff) drop-shadow(-1.5px -1.5px 0 #fff) drop-shadow(0.2rem 0.3rem 0 color-mix(in srgb, var(--shade) 35%, transparent));
 }
 .sticker svg, .sticker img { display: block; width: 100%; height: auto; }
-.st-1 { left: -0.4%; top: 16%; transform: rotate(-12deg); width: clamp(3.6rem, 5vw, 7.5rem); }
+.st-1 { left: -0.4%; top: 16%; transform: rotate(-12deg); --w: clamp(3.6rem, 5vw, 7.5rem); }
 .st-2 { right: -0.6%; top: 24%; transform: rotate(9deg); }
-.st-3 { left: 0.2%; top: 56%; transform: rotate(14deg); width: clamp(2.6rem, 3.4vw, 5rem); }
-.st-4 { right: 0.2%; top: 62%; transform: rotate(-8deg); width: clamp(2.8rem, 3.8vw, 5.5rem); }
+.st-3 { left: 0.2%; top: 56%; transform: rotate(14deg); --w: clamp(2.6rem, 3.4vw, 5rem); }
+.st-4 { right: 0.2%; top: 62%; transform: rotate(-8deg); --w: clamp(2.8rem, 3.8vw, 5.5rem); }
 .st-5 { left: 0%; top: 86%; transform: rotate(6deg); }
 .st-6 { right: 0%; top: 42%; transform: rotate(-5deg); }
 .st-7 { left: -0.6%; top: 38%; transform: rotate(-84deg); }
-.st-8 { right: 0.4%; top: 84%; transform: rotate(-16deg); width: clamp(2.6rem, 3.4vw, 5rem); }
-@media (max-width: 800px) { .st-2, .st-5, .st-6, .st-7 { display: none; } .sticker { width: 2.6rem; } }
+.st-8 { right: 0.4%; top: 79%; transform: rotate(-16deg); --w: clamp(2.6rem, 3.4vw, 5rem); }
+@media (max-width: 800px) { .st-2, .st-5, .st-6, .st-7 { display: none; } .sticker { --w: 2.6rem; } }
 @media (prefers-reduced-motion: no-preference) {
   .sticker { animation: bob 7s ease-in-out infinite; }
   .st-2, .st-5, .st-8 { animation-duration: 9s; animation-delay: -3s; }

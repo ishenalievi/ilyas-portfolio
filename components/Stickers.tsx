@@ -8,7 +8,7 @@
 
 import Image from "next/image";
 import { getStickers } from "@/lib/content";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 const INK = "#14213d";
 const RED = "#a3122a";
@@ -154,6 +154,9 @@ const STICKERS: { id: string; node: ReactNode; cls: string }[] = [
   { id: "toast", node: <Toast />, cls: "st-8" },
 ];
 
+/** Width factor that gives an uploaded picture about the area of a square sticker, within limits. */
+const fit = (w: number, h: number) => Math.min(1.15, Math.max(0.75, Math.sqrt(w / h))).toFixed(3);
+
 export async function Stickers() {
   const own = await getStickers();
   return (
@@ -161,7 +164,7 @@ export async function Stickers() {
       {STICKERS.map((s) => {
         const pic = own[s.id];
         return (
-          <div key={s.id} className={`sticker ${s.cls}`}>
+          <div key={s.id} className={`sticker ${s.cls}`} style={pic ? ({ "--fit": fit(pic.w, pic.h) } as CSSProperties) : undefined}>
             {pic ? <Image src={pic.src} alt="" width={pic.w} height={pic.h} sizes="10rem" /> : s.node}
           </div>
         );
