@@ -325,6 +325,20 @@ img { max-width: 100%; height: auto; display: block; }
 .post-stamp { position: absolute; top: 0.6rem; right: 0.4rem; font: 700 max(13px, 0.62rem)/1 var(--f-mono); letter-spacing: 0.05em; text-transform: uppercase; background: var(--paper); color: var(--ink); padding: 0.3rem 0.45rem; transform: rotate(4deg); }
 .post-stamp.yt { background: var(--a1); color: #f3ead7; }
 .post-stamp.li { background: var(--a2); color: #f3ead7; }
+/* posts with several pieces: the pictures stack and crossfade; arrows sit under them */
+.pic.slides { display: grid; }
+.pic.slides img { grid-area: 1 / 1; opacity: 0; transition: opacity 0.25s cubic-bezier(0.23, 1, 0.32, 1); }
+.pic.slides img.on { opacity: 1; }
+.slide-nav { display: flex; align-items: center; gap: 0.6rem; font: 700 max(13px, 0.72rem)/1 var(--f-mono); letter-spacing: 0.06em; }
+.slide-nav button {
+  width: max(44px, 2.4rem); aspect-ratio: 1; display: grid; place-items: center; cursor: pointer; border: 0;
+  font: 700 1.1rem/1 var(--f-mono); background: var(--paper); color: var(--ink); box-shadow: 0.2rem 0.2rem 0 var(--a1);
+  transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.15s;
+}
+.slide-nav button:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .slide-nav button:hover { transform: translate(-2px, -2px); box-shadow: 0.3rem 0.3rem 0 var(--a1); } }
+.post b a { color: inherit; }
+@media (prefers-reduced-motion: reduce) { .pic.slides img { transition: none; } }
 .post b { font: italic 400 1.1rem/1.15 var(--f-serif); }
 .post small { font-size: max(13px, 0.8rem); opacity: 0.75; line-height: 1.35; }
 

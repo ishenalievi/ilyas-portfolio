@@ -261,12 +261,18 @@ export default config({
             href: link("Link to the post"),
             date: fields.date({ label: "Date posted", description: "The wall sorts itself by this, newest first" }),
             image: fields.image({ label: "Thumbnail", directory: "public/images/posts", publicPath: "/images/posts/", validation: { isRequired: true } }),
+            more: fields.array(fields.image({ label: "Picture", directory: "public/images/posts", publicPath: "/images/posts/" }), {
+              label: "More pictures (optional)",
+              description: "Adds arrows to the card so people can flip from the thumbnail through these",
+              itemLabel: () => "Picture",
+            }),
             platform: fields.select({
               label: "Platform",
               options: [
                 { label: "Instagram", value: "ig" },
                 { label: "YouTube", value: "yt" },
                 { label: "LinkedIn", value: "li" },
+                { label: "None (only on this site)", value: "site" },
               ],
               defaultValue: "ig",
             }),

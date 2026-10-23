@@ -146,7 +146,9 @@ export type Post = {
   img: string;
   w: number;
   h: number;
-  platform: "ig" | "yt" | "li";
+  /** every picture on the card, thumbnail first; more than one gets arrows */
+  slides: Img[];
+  platform: "ig" | "yt" | "li" | "site";
   type: "video" | "design";
   stamp: string;
 };
@@ -161,7 +163,8 @@ export async function getPosts(): Promise<Post[]> {
   for (const { x } of items) {
     const i = await img(x.image, x.title);
     if (!i) continue;
-    out.push({ title: x.title, note: x.note, href: x.href ?? "", img: i.src, w: i.w, h: i.h, platform: x.platform, type: x.type, stamp: x.stamp });
+    const more = (await Promise.all((x.more ?? []).map((m) => img(m, x.title)))).filter((m): m is Img => !!m);
+    out.push({ title: x.title, note: x.note, href: x.href ?? "", img: i.src, w: i.w, h: i.h, slides: [i, ...more], platform: x.platform, type: x.type, stamp: x.stamp });
   }
   return out;
 }
