@@ -146,7 +146,7 @@ export type Post = {
   img: string;
   w: number;
   h: number;
-  platform: "ig" | "yt";
+  platform: "ig" | "yt" | "li";
   type: "video" | "design";
   stamp: string;
 };

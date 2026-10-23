@@ -13,6 +13,7 @@ const FILTERS = [
   { id: "design", label: "Design" },
   { id: "ig", label: "Instagram" },
   { id: "yt", label: "YouTube" },
+  { id: "li", label: "LinkedIn" },
 ] as const;
 
 type F = (typeof FILTERS)[number]["id"];

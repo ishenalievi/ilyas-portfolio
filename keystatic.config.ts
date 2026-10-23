@@ -266,6 +266,7 @@ export default config({
               options: [
                 { label: "Instagram", value: "ig" },
                 { label: "YouTube", value: "yt" },
+                { label: "LinkedIn", value: "li" },
               ],
               defaultValue: "ig",
             }),
