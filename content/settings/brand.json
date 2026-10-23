@@ -319,7 +319,7 @@
     },
     {
       "name": "Tape",
-      "how": "Translucent strips pin photos and posters down, always crooked."
+      "how": "Translucent strips pin photos and posters down, always crooked. A strip belongs to what it holds and moves with it."
     },
     {
       "name": "Hard shadows",
@@ -339,7 +339,7 @@
     },
     {
       "name": "Menacing ゴゴゴ",
-      "how": "Purple katakana stepping down a diagonal and trembling. Drama only, used sparingly."
+      "how": "Purple ゴ letters stepping down a diagonal and trembling. Each letter is the uploaded ゴ picture (Keystatic → Stickers), or the font if none is uploaded. Drama only, used sparingly."
     },
     {
       "name": "Marker notes",
@@ -347,11 +347,11 @@
     },
     {
       "name": "Stamps",
-      "how": "Round rubber stamps and platform tags in mono capitals."
+      "how": "Platform tags and tilted labels in mono capitals."
     },
     {
       "name": "Now spinning",
-      "how": "A torn label taped under the headshot on Home shows what's playing on Spotify right now (with three little equaliser bars), or the last thing played. It links to the song."
+      "how": "A torn label taped under the headshot on Home shows what's playing on Spotify right now (with three little equaliser bars), or the last thing played. It links to the song and hides when Spotify isn't connected."
     }
   ],
   "imagery": [
@@ -359,6 +359,7 @@
     "Video work is shown moving: a short silent loop of the real clip, with its still as the first frame.",
     "Photos are clippings: torn edges, a slight tilt, taped down.",
     "The headshot is cut out like a sticker and sits in front of the collage.",
+    "Project pages can carry a process gallery: storyboards and screenshots taped up as evidence.",
     "The drawn stickers are originals. Any of them can be swapped for an uploaded PNG with a transparent background."
   ],
   "motion": {
@@ -440,6 +441,8 @@
     "ambient": [
       "Background stripes pan across every 30 seconds.",
       "Stickers bob gently.",
+      "On Home the hero collage drifts slightly with the mouse, each layer at its own depth. Mouse only; it settles back when the cursor leaves.",
+      "The Now spinning label checks Spotify every 30 seconds while the page is open, and swaps the song without a reload.",
       "Smooth scrolling, paused while a transition is on screen.",
       "After a transition: headings come in word by word, highlighter and circles draw themselves on, and paper pastes in as it scrolls into view.",
       "Real clips from the work play as silent loops in place of their stills: only while on screen, only after the transition, never with reduced motion."
