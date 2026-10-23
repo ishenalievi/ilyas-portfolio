@@ -95,6 +95,7 @@ export default config({
         year: text("Year in the footer"),
         introLabel: text("Intro card text", "Shown under ゴゴゴ when the site loads, after “Welcome to”"),
         footerNote: text("Footer small print"),
+        disclaimer: longText("Footer disclaimer", "Small print at the bottom of every page about artwork and characters owned by others"),
         instagramHandle: text("Instagram handle"),
         instagramUrl: link("Instagram link"),
         climbingHandle: text("Climbing Instagram handle"),

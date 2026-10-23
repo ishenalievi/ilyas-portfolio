@@ -28,6 +28,7 @@ export async function Footer() {
         <p className="foot-small">
           © {site.year} {site.name}. {site.footerNote}
         </p>
+        {site.disclaimer && <p className="foot-disclaimer">{site.disclaimer}</p>}
       </div>
     </footer>
   );
