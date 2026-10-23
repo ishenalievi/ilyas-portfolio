@@ -12,7 +12,7 @@ Live site: https://ishenaliev.vercel.app · Site editor: https://ishenaliev.verc
    git config --global user.email "your GitHub email"
    ```
 
-3. Press **Cmd/Ctrl + Shift + P**, run **Git: Clone**, paste `https://github.com/ishenalievi/ilyas-portfolio.git`, pick a folder (for example Documents) and click **Open**.
+3. Press **Cmd/Ctrl + Shift + P**, run **Git: Clone**, paste `https://github.com/ishenalievi/ilyas-portfolio.git`, pick a folder that iCloud or OneDrive doesn't sync (on the Mac: `ClaudeProjects` in your home folder; not Documents or Desktop) and click **Open**.
 4. Click **Yes, I trust the authors**, then **Install** when VS Code recommends the Claude Code extension. Sign in to Claude when it asks.
 5. When VS Code asks about tasks that run automatically when the folder opens, click **Allow**. That's what pulls the latest version every time.
 

@@ -43,5 +43,5 @@ Personal-brand portfolio. Live at https://ishenaliev.vercel.app (Vercel Hobby, f
 ## Gotchas
 
 - Safari: don't combine SVG `pathLength` with `vector-effect: non-scaling-stroke` for dash animations; measure with `getTotalLength()`.
-- Mac folder sits in iCloud-synced Documents → can create `"* 2"` duplicate files in `.next` and stale CSS. Fix: delete them, `rm -rf .next/dev`, restart dev server.
+- Mac folder lives at `~/ClaudeProjects/Ilyas-Ishenaliev-Portfolio-Website`, outside iCloud (moved Oct 2026). Never put it in iCloud-synced Documents/Desktop or OneDrive: syncing creates `"* 2"` duplicates in `.next` and stale CSS. If it happens: delete them, `rm -rf .next/dev`, restart dev server.
 - Preview tests: dispatch `pointerdown` before click, else click counts as keyboard navigation and gets fade.
