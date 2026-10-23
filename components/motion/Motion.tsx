@@ -107,7 +107,7 @@ export function Motion() {
       const clippings = $(".hero-board .hb");
       const tapes = $(".hero-board .tape");
       const portrait = $(".hb-portrait");
-      const extras = $(".hero-board .gogo, .hb-stamp");
+      const extras = $(".hero-board .gogo");
       if (hero) {
         usesVars(name, ["scale"]);
         usesVars([...heroLines, ...clippings, ...portrait], ["translate"]);
@@ -148,7 +148,7 @@ export function Motion() {
             .to($(".hero-board .hb"), { opacity: 1, "--my": "0rem", duration: 0.7, stagger: 0.09 }, 0.05)
             .to($(".hb-portrait"), { opacity: 1, "--my": "0rem", duration: 0.8 }, 0.3)
             .to($(".hero-board .tape"), { opacity: 1, duration: 0.25, stagger: 0.08 }, 0.55)
-            .to($(".hero-board .gogo, .hb-stamp"), { opacity: 1, "--ms": 1, duration: 0.45, ease: pop, stagger: 0.1 }, 0.7);
+            .to($(".hero-board .gogo"), { opacity: 1, "--ms": 1, duration: 0.45, ease: pop, stagger: 0.1 }, 0.7);
           undo.push(parallax(hero));
         }
 

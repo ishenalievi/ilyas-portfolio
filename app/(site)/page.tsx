@@ -4,7 +4,6 @@ import { Lift, Tape, Torn } from "@/components/collage";
 import { Clipping, HazardSlot, Ledger, Loves, SectionHead, Sheet } from "@/components/blocks";
 import { ContentWall } from "@/components/ContentWall";
 import { Menacing } from "@/components/Menacing";
-import { PaletteSwap } from "@/components/PaletteSwap";
 import { TLink } from "@/components/transitions/TLink";
 import { LoopVideo } from "@/components/LoopVideo";
 import { NowPlaying } from "@/components/NowPlaying";
@@ -63,9 +62,6 @@ export default async function Home() {
             )}
             {/* what's playing on Spotify, stuck under the headshot (shows once Spotify is connected) */}
             <NowPlaying />
-            <div className="hb-stamp">
-              <PaletteSwap variant="stamp" />
-            </div>
           </div>
         </div>
       </section>

@@ -95,8 +95,7 @@
 .bb-pal-chips { display: grid; grid-template-columns: repeat(4, 1fr); height: 1.6rem; margin-bottom: 0.3rem; }
 .bb-pal small { color: var(--ink-soft); }
 .bb-pal code { color: var(--ink-soft); font-size: max(13px, 0.7rem); }
-.bb-try { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 2.5rem); align-items: center; margin-top: clamp(1.6rem, 3vw, 2.4rem); container-type: inline-size; }
-@media (max-width: 600px) { .bb-try { grid-template-columns: 1fr; } }
+.bb-roles { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
 
 /* ---------- type ---------- */
 .bb-type { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: clamp(1.2rem, 2.5vw, 2rem); }

@@ -14,7 +14,6 @@ const css = read("app/globals.css");
 const engine = read("components/transitions/engine.ts");
 const layout = read("app/layout.tsx");
 const nav = read("components/Nav.tsx");
-const swap = read("components/PaletteSwap.tsx");
 
 const problems = [];
 let checked = 0;
@@ -23,7 +22,7 @@ const check = (ok, message) => {
   if (!ok) problems.push(message);
 };
 
-/** The variables set inside one CSS rule, e.g. block(":root") or block(":root.pal-2"). */
+/** The variables set inside one CSS rule, e.g. block(":root"). */
 function block(selector) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const m = css.match(new RegExp(`^${escaped}\\s*\\{([\\s\\S]*?)\\}`, "m"));
@@ -49,15 +48,12 @@ for (const group of brand.colourGroups) {
 }
 
 // ---------- palettes ----------
-const count = Number(swap.match(/const COUNT = (\d+)/)?.[1]);
-check(count === brand.palettes.length, `Palettes: booklet has ${brand.palettes.length}, the palette swap cycles ${count} (components/PaletteSwap.tsx).`);
-brand.palettes.forEach((p, i) => {
-  const vars = i === 0 ? root : block(`:root.pal-${i + 1}`);
-  for (const a of ["a1", "a2", "a3", "a4"]) {
-    const actual = vars[`--${a}`];
-    check(actual === p[a].toLowerCase(), `Palette ${i + 1} “${p.name}” accent ${a.slice(1)}: booklet ${p[a].toLowerCase()}, site ${actual ?? "missing"}.`);
-  }
-});
+// the site uses the first palette; the others are spares in the booklet
+const [pal] = brand.palettes;
+for (const a of ["a1", "a2", "a3", "a4"]) {
+  const actual = root[`--${a}`];
+  check(actual === pal[a].toLowerCase(), `Palette “${pal.name}” accent ${a.slice(1)}: booklet ${pal[a].toLowerCase()}, site ${actual ?? "missing"}.`);
+}
 
 // ---------- fonts ----------
 for (const t of brand.type) {

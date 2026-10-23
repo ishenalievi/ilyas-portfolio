@@ -24,7 +24,7 @@ const heading = (label: string) =>
 
 const accent = fields.select({
   label: "Accent colour",
-  description: "Follows the palette swap",
+  description: "One of the four accent colours from the brand palette",
   options: [
     { label: "Accent 1", value: "a1" },
     { label: "Accent 2", value: "a2" },
@@ -357,7 +357,7 @@ export default config({
             a3: hex("Accent 3"),
             a4: hex("Accent 4"),
           }),
-          { label: "03 · Palettes", description: "The palette swap in the nav cycles these, in this order. The first is the default.", itemLabel: (p) => p.fields.name.value || "Palette" },
+          { label: "03 · Palettes", description: "The site uses the first one. The others are spares: move one to the top and ask Claude to sync the site with the booklet.", itemLabel: (p) => p.fields.name.value || "Palette" },
         ),
         accentRoles: list("03 · What each accent does", "Role"),
 

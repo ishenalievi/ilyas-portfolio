@@ -52,7 +52,7 @@ passes `--allow`.
 | --- | --- | --- | --- | --- |
 | Easing | `0.23,1,0.32,1` out, `0.77,0,0.175,1` in-out | `0.22,1,0.36,1` out, expo `0.16,1,0.3,1`, ease-in for exits | GSAP choreography | **Site tokens only:** OUT `cubic-bezier(0.23, 1, 0.32, 1)`, IN_OUT `cubic-bezier(0.77, 0, 0.175, 1)`, POP `cubic-bezier(.3,1.6,.5,1)` (same as Emil's). Taste's curves are not used. |
 | Durations | UI under 300ms; press 100–160ms | reveals 600–1,000ms; openings 1,100–1,600ms | — | Controls and hovers: Emil (≤300ms). Scroll reveals and the hero entrance: taste's 600–1,000ms band. |
-| Overshoot / bounce | subtle, playful only | banned on interface | — | POP is brand: stamped labels, the name, the swap stamp. Nowhere else. |
+| Overshoot / bounce | subtle, playful only | banned on interface | — | POP is brand: stamped labels, the name. Nowhere else. |
 | Should it animate? | frequency table; never on keyboard actions | at least 8 moving elements or FAIL | motion needs a narrative role | Emil's frequency test decides. Keyboard navigation gets the fade. Taste's motion count is not a goal. |
 | Stagger | 30–80ms | 60–90ms, heading → text → picture | word-by-word headings | 45–90ms. Headings word by word (`SplitWords` + `[data-split]`); sections paste in via `ScrollTrigger.batch`. |
 | Reduced motion | fewer and gentler, keep fades | final state immediately | bypass smooth scroll and scrubs | Final state immediately; Lenis off. The transitions' own fade stays. |

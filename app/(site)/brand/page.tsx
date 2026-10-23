@@ -9,7 +9,6 @@ import { getBrand, getSite } from "@/lib/content";
 import { Lift, Tape, Torn } from "@/components/collage";
 import { SectionHead, Sheet } from "@/components/blocks";
 import { Menacing } from "@/components/Menacing";
-import { PaletteSwap } from "@/components/PaletteSwap";
 import { PlayButton } from "@/components/BrandPlay";
 import type { Kind } from "@/components/transitions/engine";
 
@@ -221,7 +220,7 @@ export default async function BrandPage() {
 
         <div className="bb-group">
           <h3 className="bb-h">Palettes</h3>
-          <p className="bb-note">Each one recolours the four accents and two of the background stripes. The first is the default.</p>
+          <p className="bb-note">Each one sets the four accents and two of the background stripes. The site uses the first; the others are spares.</p>
           <div className="bb-palettes">
             {b.palettes.map((p, i) => (
               <div key={p.name} className="bb-pal">
@@ -245,14 +244,11 @@ export default async function BrandPage() {
               </div>
             ))}
           </div>
-          <div className="bb-try">
-            <PaletteSwap variant="stamp" />
-            <ul className="bb-list">
-              {b.accentRoles.map((x) => (
-                <li key={x}>{x}</li>
-              ))}
-            </ul>
-          </div>
+          <ul className="bb-list bb-roles">
+            {b.accentRoles.map((x) => (
+              <li key={x}>{x}</li>
+            ))}
+          </ul>
         </div>
       </Sheet>
 

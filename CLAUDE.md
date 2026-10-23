@@ -15,7 +15,7 @@ Personal-brand portfolio. Live at https://ishenaliev.vercel.app (Vercel Hobby, f
 
 - Showcase projects, experience, content; grow audience a little. NOT open to collabs or client work: no hire-me, services or pricing sections.
 - Copy tone sarcastic/cynical. Owner writes final words; drafted copy is placeholder.
-- Look: playful torn-paper collage (Vox explainer collage, Ralph Lauren Home old-money dark walnut, JoJo/Araki colour). Dark cinematic palettes, no pastels. Thick vertical stripes panning horizontally; RL navy, red, green always present, two stripes follow palette swap.
+- Look: playful torn-paper collage (Vox explainer collage, Ralph Lauren Home old-money dark walnut, JoJo/Araki colour). Dark cinematic palettes, no pastels. Thick vertical stripes panning horizontally; RL navy, red, green always present, two stripes use accent colours. One palette only (booklet's first); no palette swap.
 - Sound effects in English; only menacing ゴゴゴ stays Japanese (purple style).
 - Layout fully fluid, phone to ultra-wide.
 - No phone number or email on public site. Drawn stickers are originals; Claude never draws real copyrighted characters or logos. Owner may upload own PNGs (sheep slot is a Gromit image).

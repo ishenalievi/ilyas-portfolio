@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bowlby_One, DM_Serif_Display, Instrument_Sans, Space_Mono } from "next/font/google";
-import Script from "next/script";
 import { getSite } from "@/lib/content";
-import { paletteScript } from "@/components/PaletteSwap";
 
 // The bare page shell shared by the site and the admin panel.
 // The site's styles and chrome live in app/(site)/layout.tsx.
@@ -30,9 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${serif.variable} ${body.variable} ${mono.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
-        <Script id="palette" strategy="beforeInteractive">
-          {paletteScript}
-        </Script>
         {children}
       </body>
     </html>

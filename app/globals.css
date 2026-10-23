@@ -3,7 +3,7 @@
 /* =========================================================
    Design tokens
    Layout: a torn-paper scrapbook on moving Ralph Lauren stripes.
-   Navy + oxford are fixed; the four accents rotate with the palette swap.
+   Navy + oxford are fixed; the four accents come from the booklet's first palette.
    ========================================================= */
 :root {
   --ground: #15120f;          /* warm near-black, like a film still */
@@ -54,12 +54,6 @@
   --space: clamp(3rem, 7vw, 8rem);
   --max: 110rem;
 }
-/* palette 2 · Teal & Orange */
-:root.pal-2 { --a1: #c2541f; --a2: #145467; --a3: #e0b04a; --a4: #6d1f3d; }
-/* palette 3 · Giallo */
-:root.pal-3 { --a1: #b3262e; --a2: #2f5d3a; --a3: #e2b33c; --a4: #3d2a6b; }
-/* palette 4 · Neo-noir */
-:root.pal-4 { --a1: #c23b6b; --a2: #1f4f8a; --a3: #d8b25a; --a4: #4b1d5c; }
 
 /* root size grows with the window: 16px on phones, ~18px laptops, ~23px on big monitors */
 html {
@@ -191,10 +185,6 @@ img { max-width: 100%; height: auto; display: block; }
 .nav nav { display: flex; gap: clamp(0.8rem, 2.5vw, 2.2rem); }
 .nav nav a { font: 700 max(13px, 0.78rem)/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding-block: 0.4rem; border-bottom: 2px solid transparent; color: var(--wood-text); letter-spacing: 0.12em; }
 .nav nav a:hover { color: var(--brass-light); border-color: var(--brass); }
-.swap-chip { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--navy-fixed); color: var(--wood-text); border: 1px solid var(--brass); box-shadow: none; padding: 0.5rem 0.7rem; cursor: pointer; font: 700 max(13px, 0.7rem)/1 var(--f-mono); }
-.swap-chip .dots { display: inline-flex; }
-.swap-chip .dots i { width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 1.5px solid var(--wood-text); margin-left: -0.25rem; }
-@media (max-width: 480px) { .swap-txt { display: none; } }
 
 /* ---------- hero (frame 1) ---------- */
 .hero { padding-block: clamp(2rem, 5vw, 6rem) var(--space); }
@@ -230,7 +220,6 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .hb-portrait img { width: 100%; height: auto; display: block; }
 .gogo { position: absolute; left: 24%; top: 4%; z-index: 4; font-size: 8.5cqw; pointer-events: none; }
-.hb-stamp { position: absolute; left: 0; bottom: 0; z-index: 4; }
 /* "now spinning": a torn label from Spotify, stuck under the headshot (components/NowPlaying.tsx) */
 .np-wrap { position: absolute; right: 3%; bottom: -9%; width: min(58%, 24rem); z-index: 5; transform: rotate(-2.5deg); filter: drop-shadow(0.25rem 0.3rem 0 var(--shade)); }
 .np-tape { right: 12%; top: -0.7rem; width: 4.5rem; height: 1.3rem; transform: rotate(8deg); }
@@ -259,13 +248,6 @@ img { max-width: 100%; height: auto; display: block; }
   @keyframes np-eq { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
 }
 @media (max-width: 800px) { .np-wrap { right: 0; bottom: -12%; width: min(82%, 22rem); } .hero-board:has(.np-wrap) { margin-bottom: 3.5rem; } }
-.stamp-btn {
-  width: clamp(5rem, 16cqw, 8rem); aspect-ratio: 1; border-radius: 50%; border: 0.25rem solid var(--a2);
-  background: var(--paper); color: var(--a2); cursor: pointer; transform: rotate(-14deg);
-  display: grid; place-content: center; font: 700 max(13px, 0.72rem)/1.2 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase;
-}
-.stamp-btn small { font-size: max(13px, 0.65rem); color: var(--ink-soft); }
-@media (hover: hover) and (pointer: fine) { .stamp-btn:hover { transform: rotate(-4deg) scale(1.05); } }
 @media (prefers-reduced-motion: no-preference) {
   .gogo { animation: wob 3.2s ease-in-out infinite; }
   @keyframes wob { 50% { translate: 0 -6px; } }

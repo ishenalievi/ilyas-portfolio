@@ -240,7 +240,7 @@
   "palettes": [
     {
       "name": "Technicolor",
-      "mood": "The default. Oxblood, deep teal, amber, aubergine.",
+      "mood": "The one the site uses. Oxblood, deep teal, amber, aubergine.",
       "a1": "#9b1d30",
       "a2": "#1b6b73",
       "a3": "#d9a441",
@@ -273,7 +273,7 @@
   ],
   "accentRoles": [
     "Accent 1: highlighter swipes, focus rings, stripe 2.",
-    "Accent 2: stripe 4, coloured paper shadows, the swap-colour stamp.",
+    "Accent 2: stripe 4 and coloured paper shadows.",
     "Accent 3: labels on the dark background and the ILYAS block. Keep it light enough for navy text.",
     "Accent 4: labels and roles on paper."
   ],

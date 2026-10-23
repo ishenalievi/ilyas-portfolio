@@ -1,5 +1,4 @@
 import { TLink } from "./transitions/TLink";
-import { PaletteSwap } from "./PaletteSwap";
 
 export function Nav() {
   return (
@@ -13,7 +12,6 @@ export function Nav() {
           <TLink href="/content">Content</TLink>
           <TLink href="/about">About</TLink>
         </nav>
-        <PaletteSwap />
       </div>
     </header>
   );
