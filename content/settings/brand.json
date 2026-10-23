@@ -335,7 +335,7 @@
     },
     {
       "name": "Die-cut stickers",
-      "how": "Stickers with a white cut edge float in the margins, four down each side. Eight slots (bear, cheese, rocket, crest, tea, sheep, patch, toast), each holding a drawn original or an uploaded picture."
+      "how": "Stickers with a white cut edge float in the margins, four down each side, evenly spaced and staggered so the two sides never line up. Eight slots (bear, cheese, rocket, crest, tea, sheep, patch, toast), each holding a drawn original or an uploaded picture."
     },
     {
       "name": "Menacing ゴゴゴ",
@@ -453,6 +453,7 @@
     "Fully fluid: everything scales from phone to ultra-wide.",
     "The side margin grows from 16px to 96px; content stops widening at 110rem.",
     "Sections alternate: open collage on the stripes, then a full-width sheet of torn paper.",
+    "On Home the work sits close under the intro sentence, a quarter of the usual gap between sections, so it's found without scrolling far.",
     "On phones some stickers hide so the margins stay clear."
   ]
 }
