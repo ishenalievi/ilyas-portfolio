@@ -101,6 +101,16 @@
       "stamp": "YouTube"
     },
     {
+      "title": "Greek Gods",
+      "note": "A quick piece with work paths and gradient maps",
+      "href": "https://www.instagram.com/p/Cr3a3T1voIo/",
+      "date": "2023-05-05",
+      "image": "/images/posts/greek-gods.jpg",
+      "platform": "ig",
+      "type": "design",
+      "stamp": "IG"
+    },
+    {
       "title": "Perspective",
       "note": "Graphic design piece",
       "href": "https://www.instagram.com/p/CrvBwCkvtgG/",
@@ -111,21 +121,21 @@
       "stamp": "IG"
     },
     {
+      "title": "I'm an Artist",
+      "note": "The intro reel: exploring all sorts of art",
+      "href": "https://www.instagram.com/p/Crr4MfxPqFY/",
+      "date": "2023-04-30",
+      "image": "/images/posts/artist.jpg",
+      "platform": "ig",
+      "type": "video",
+      "stamp": "IG reel"
+    },
+    {
       "title": "Neo-tribalism",
       "note": "Photoshop study",
       "href": "https://www.instagram.com/p/CrasHEPPJoK/",
       "date": "2023-04-24",
       "image": "/images/posts/tribal.jpg",
-      "platform": "ig",
-      "type": "design",
-      "stamp": "IG"
-    },
-    {
-      "title": "Red Moon in Venus",
-      "note": "Kali Uchis album poster",
-      "href": "https://www.instagram.com/p/Cq4RFnLPb1U/",
-      "date": "2023-04-11",
-      "image": "/images/posts/kali.jpg",
       "platform": "ig",
       "type": "design",
       "stamp": "IG"
@@ -141,11 +151,49 @@
       "stamp": "IG"
     },
     {
+      "title": "Red Moon in Venus",
+      "note": "Kali Uchis album poster",
+      "href": "https://www.instagram.com/p/Cq4RFnLPb1U/",
+      "date": "2023-04-08",
+      "image": "/images/posts/kali.jpg",
+      "platform": "ig",
+      "type": "design",
+      "stamp": "IG",
+      "more": [
+        "/images/posts/kali-2.jpg",
+        "/images/posts/kali-3.jpg"
+      ]
+    },
+    {
+      "title": "Gradient map exploration",
+      "note": "Using different gradient maps and overlays to texturize and learn skills",
+      "href": null,
+      "date": "2023-04-08",
+      "image": "/images/posts/gradient-1.jpg",
+      "more": [
+        "/images/posts/gradient-2.jpg",
+        "/images/posts/gradient-3.jpg"
+      ],
+      "platform": "site",
+      "type": "design",
+      "stamp": "Design"
+    },
+    {
       "title": "Fake It Flowers",
       "note": "beabadoobee poster, a new style",
       "href": "https://www.instagram.com/p/Cq1sR0Jhk7A/",
-      "date": "2023-04-10",
+      "date": "2023-04-07",
       "image": "/images/posts/beab1.jpg",
+      "platform": "ig",
+      "type": "design",
+      "stamp": "IG"
+    },
+    {
+      "title": "beabadoobee",
+      "note": "Poster in the old style, right before trying a new one",
+      "href": "https://www.instagram.com/p/CqzD_2wB2TD/",
+      "date": "2023-04-07",
+      "image": "/images/posts/beab2.jpg",
       "platform": "ig",
       "type": "design",
       "stamp": "IG"
