@@ -333,11 +333,10 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
   if (kind === "menace") {
     const bg = el("ov-menace");
     bg.style.clipPath = "circle(0% at 85% 15%)";
-    // same markup as the <Menacing> component, so it gets the real ゴゴゴ look
+    // same markup as the <Menacing> component (empty letters; CSS draws the ゴ), so it gets the real ゴゴゴ look
     const g = el("ov-gogo menacing", bg);
     const chars = [0, 1, 2, 3].map((i) => {
       const b = document.createElement("span");
-      b.textContent = "ゴ";
       b.style.setProperty("--i", String(i));
       b.style.opacity = "0";
       g.appendChild(b);

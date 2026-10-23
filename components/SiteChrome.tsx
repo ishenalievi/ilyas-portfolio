@@ -30,6 +30,6 @@ export async function SiteChrome({ children }: { children: ReactNode }) {
   );
 }
 
-/** The typed ゴ stays in place for screen size and screen readers; the picture is drawn over it. */
+/** Each ゴ becomes the picture alone: a 1em box with the picture as its background, and no typed letter at all. */
 const goGlyph = (src: string) =>
-  `.menacing > span{background:url("${encodeURI(src)}") center / contain no-repeat;-webkit-background-clip:border-box;background-clip:border-box;color:transparent;width:1em;height:1em;filter:none}`;
+  `.menacing > span{background:url("${encodeURI(src)}") center / contain no-repeat;-webkit-background-clip:border-box;background-clip:border-box;width:1em;height:1em;filter:none}.menacing > span::before{content:none}`;

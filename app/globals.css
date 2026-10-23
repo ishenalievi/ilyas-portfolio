@@ -354,7 +354,7 @@ img { max-width: 100%; height: auto; display: block; }
 .love-img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .love-img.fit-cover { object-fit: cover; object-position: 50% 8%; }
 .love-img.fit-contain { object-fit: contain; padding: 0.9rem 0 1.1rem; filter: drop-shadow(0.2rem 0.2rem 0 var(--shade)); }
-.love-ph span { font: 400 1.5rem/1 var(--f-display); color: var(--paper); -webkit-text-stroke: 1px var(--navy-fixed); }
+.love-ph > span:not(.menacing) { font: 400 1.5rem/1 var(--f-display); color: var(--paper); -webkit-text-stroke: 1px var(--navy-fixed); }
 .love-body { padding: 0.9rem 1.1rem 0; display: grid; gap: 0.35rem; }
 .fig { font: 700 max(13px, 0.66rem) var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
 .love-body h3 { font: 400 1.35rem/1.1 var(--f-serif); }
@@ -513,6 +513,8 @@ img { max-width: 100%; height: auto; display: block; }
           drop-shadow(0.06em 0.07em 0 #1a0a24) drop-shadow(0 0 0.12em rgba(196, 59, 214, 0.55));
   transform: translateY(calc(var(--i) * 0.32em)) rotate(calc(-10deg + var(--i) * 7deg)) skewX(-8deg);
 }
+/* the typed letter; an uploaded ゴ picture switches it off (SiteChrome) */
+.menacing > span::before { content: "ゴ"; }
 @media (prefers-reduced-motion: no-preference) {
   .menacing > span { animation: menace 0.42s steps(1) infinite; animation-delay: calc(var(--i) * -0.11s); }
   @keyframes menace {
