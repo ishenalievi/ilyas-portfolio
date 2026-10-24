@@ -32,7 +32,7 @@ Personal-brand portfolio. Live at https://ishenaliev.vercel.app (Vercel Hobby, f
 - Next.js 16 App Router with `cacheComponents`, React 19, TypeScript, mostly plain CSS in `app/globals.css`.
 - All text + images edited in Keystatic (`keystatic.config.ts`). Content in `content/settings/*.json` and `content/projects/*.json`, read via cached loaders in `lib/content.ts`. `npm run dev` uses local storage; production uses GitHub storage.
 - `app/(site)` holds site chrome; root layout bare so `/keystatic` stays plain.
-- Page transitions: `components/transitions/` (Web Animations API, cover/reveal split). Home = Tusk ACT 4, Work = Sticky Fingers zipper, project pages = Heaven's Door book, About = The World, external links = To Be Continued, first load = menacing "Welcome to Ilyas' portfolio" card. Keyboard navigation + reduced motion get fade.
+- Page transitions: `components/transitions/` (Web Animations API, cover/reveal split). Home = Tusk ACT 4, Work = Sticky Fingers zipper, project pages = Heaven's Door book, About = The World, Content = Hierophant Green Emerald Splash, external links = To Be Continued, first load = menacing "Welcome to Ilyas' portfolio" card. Keyboard navigation + reduced motion get fade.
 - Easing: OUT `cubic-bezier(0.23, 1, 0.32, 1)`, IN_OUT `cubic-bezier(0.77, 0, 0.175, 1)`, POP `cubic-bezier(.3,1.6,.5,1)`; transform/opacity only, no `scale(0)`.
 
 ## Secrets

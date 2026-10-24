@@ -690,6 +690,23 @@ img { max-width: 100%; height: auto; display: block; }
   text-shadow: 0.25rem 0.25rem 0 var(--navy-fixed);
 }
 
+/* Hierophant Green: emeralds shoot from the click over a spreading emerald flood, which shatters into facets */
+.eg-bg {
+  position: absolute; inset: 0;
+  background-color: #062a1c;
+  background-image: var(--noise), radial-gradient(circle at var(--ox, 50%) var(--oy, 50%), #2fbf78 0, #12704a 22%, #0a4430 48%, #062a1c 75%, #03170f 100%);
+}
+.eg-shard { inset: auto; visibility: hidden; background-size: 180px 180px, 100vw 100vh; background-repeat: repeat, no-repeat; }
+.eg-glow {
+  position: absolute; left: var(--ox); top: var(--oy); width: 34vmin; aspect-ratio: 1; border-radius: 50%; z-index: 1; opacity: 0;
+  background: radial-gradient(circle, #eafff2 0, #6ff0a8 22%, rgba(47, 191, 120, 0.45) 45%, rgba(47, 191, 120, 0) 70%);
+}
+.eg-gem-at { position: absolute; width: 0; height: 0; z-index: 1; }
+.eg-gem { position: absolute; width: clamp(40px, 5vw, 86px); opacity: 0; filter: drop-shadow(0 0 0.4rem rgba(111, 240, 168, 0.75)); }
+.eg-gem svg { display: block; width: 100%; height: auto; }
+/* the streak of light behind each emerald */
+.eg-gem::before { content: ""; position: absolute; right: 70%; top: 32%; width: 320%; height: 36%; border-radius: 99px; background: linear-gradient(90deg, rgba(111, 240, 168, 0), rgba(111, 240, 168, 0.75)); }
+
 /* Heaven's Door book */
 .bk-wrap { position: absolute; inset: 0; perspective: 2200px; }
 .bk-page {

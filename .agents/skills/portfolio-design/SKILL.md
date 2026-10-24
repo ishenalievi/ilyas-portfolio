@@ -29,7 +29,7 @@ When two sources disagree, the higher one wins. No exceptions.
   buttons, `mailto:` actions or "let's work together". No phone number or email anywhere. The only
   outward links are the owner's social profiles. Navigation buttons to other pages of the site are fine.
 - **Transitions come first.** Home = Tusk ACT 4, Work = Sticky Fingers zipper, project pages = Heaven's
-  Door book, About = The World, external links = To Be Continued, first load = the menacing welcome card.
+  Door book, About = The World, Content = Hierophant Green, external links = To Be Continued, first load = the menacing welcome card.
   Page motion starts only after `afterReveal()` fires, never animates the same elements or properties as
   a transition, and never delays or covers one. On conflict, cut the page motion.
 - **Copy is a placeholder.** Draft in the booklet's voice (sarcastic, cynical, self-aware); the owner

@@ -427,8 +427,15 @@
         "feel": "Time stops from the click: a grey freeze, a gold wall and a clock."
       },
       {
+        "kind": "emerald",
+        "where": "Content",
+        "stand": "Hierophant Green",
+        "sfx": "",
+        "feel": "A green glow at the click, then a barrage of emeralds with light streaks shoots into the screen while a deep emerald flood spreads behind them. A dozen gems stay stuck around the label. The flood then shatters into facets that burst away from the click, onto the new page."
+      },
+      {
         "kind": "strips",
-        "where": "Content and anything else",
+        "where": "Anything else",
         "stand": "Paper stack",
         "sfx": "",
         "feel": "Torn strips in the palette colours stack across the screen with the page name."

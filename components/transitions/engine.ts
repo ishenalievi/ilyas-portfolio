@@ -4,7 +4,7 @@
 
 import { rng, tornClip } from "@/lib/torn";
 
-export type Kind = "strips" | "zipper" | "book" | "timestop" | "tusk" | "menace" | "tbc" | "fade";
+export type Kind = "strips" | "zipper" | "book" | "timestop" | "tusk" | "emerald" | "menace" | "tbc" | "fade";
 
 export type Run = {
   cover: () => Promise<void>;
@@ -326,6 +326,120 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
         [...nails.map((x) => x.n), ...stars].forEach((d) => d.animate([{ opacity: 1 }, { opacity: 0, scale: "0.5" }], { duration: 240, easing: OUT, fill: "forwards" }));
         svg.animate([{ transform: "rotate(0deg) scale(1)" }, { transform: "rotate(540deg) scale(0.02)" }], o);
         await fin(bg.animate([{ clipPath: `circle(150% at ${eye})` }, { clipPath: `circle(0% at ${eye})` }], o));
+      },
+    };
+  }
+
+  if (kind === "emerald") {
+    // Hierophant Green's Emerald Splash: a barrage of emeralds shoots out of the click and an
+    // emerald flood spreads behind them. Some gems stick in the screen. Then the flood shatters
+    // into facets that burst away from the click, onto the new page.
+    const vw = innerWidth;
+    const vh = innerHeight;
+    const ox = origin?.x ?? vw / 2;
+    const oy = origin?.y ?? vh / 2;
+    ov.style.setProperty("--ox", `${Math.round(ox)}px`);
+    ov.style.setProperty("--oy", `${Math.round(oy)}px`);
+    const r = rng(1987);
+    const reach = Math.hypot(Math.max(ox, vw - ox), Math.max(oy, vh - oy)); // the click to the farthest corner
+
+    const flood = el("eg-bg");
+    flood.style.clipPath = `circle(0px at ${ox}px ${oy}px)`;
+
+    // the flood again, cut into gem-like facets for the shatter: a jittered grid, each cell split
+    // into two triangles, each triangle grown 1.5px so no seams show while they still fit together
+    const COLS = vw < 700 ? 4 : 6;
+    const ROWS = 4;
+    const grid = Array.from({ length: ROWS + 1 }, (_, j) =>
+      Array.from({ length: COLS + 1 }, (_, i) => {
+        const edgeX = i === 0 || i === COLS;
+        const edgeY = j === 0 || j === ROWS;
+        return [((i + (edgeX ? 0 : (r() - 0.5) * 0.6)) / COLS) * (vw + 8) - 4, ((j + (edgeY ? 0 : (r() - 0.5) * 0.6)) / ROWS) * (vh + 8) - 4];
+      }),
+    );
+    const shards: { d: HTMLElement; cx: number; cy: number }[] = [];
+    // built when the reveal starts: dozens of hidden pieces slow down the first frame of the cover
+    const cutFacets = () => {
+      for (let j = 0; j < ROWS; j++)
+        for (let i = 0; i < COLS; i++) {
+          const [A, B, C, D] = [grid[j][i], grid[j][i + 1], grid[j + 1][i + 1], grid[j + 1][i]];
+          for (const tri of (i + j) % 2 ? [[A, B, C], [A, C, D]] : [[A, B, D], [B, C, D]]) {
+            const cx = (tri[0][0] + tri[1][0] + tri[2][0]) / 3;
+            const cy = (tri[0][1] + tri[1][1] + tri[2][1]) / 3;
+            const pts = tri.map(([x, y]) => {
+              const l = Math.hypot(x - cx, y - cy) || 1;
+              return [x + ((x - cx) / l) * 1.5, y + ((y - cy) / l) * 1.5];
+            });
+            const x0 = Math.min(...pts.map((p) => p[0]));
+            const y0 = Math.min(...pts.map((p) => p[1]));
+            const d = el("eg-bg eg-shard");
+            Object.assign(d.style, {
+              left: `${x0}px`,
+              top: `${y0}px`,
+              width: `${Math.max(...pts.map((p) => p[0])) - x0}px`,
+              height: `${Math.max(...pts.map((p) => p[1])) - y0}px`,
+              // the same flood, lined up with the screen
+              backgroundPosition: `${-x0}px ${-y0}px`,
+              clipPath: `polygon(${pts.map(([x, y]) => `${(x - x0).toFixed(1)}px ${(y - y0).toFixed(1)}px`).join(", ")})`,
+              transformOrigin: `${cx - x0}px ${cy - y0}px`,
+            });
+            shards.push({ d, cx, cy });
+          }
+        }
+    };
+
+    const glow = el("eg-glow");
+    // the emeralds: each one points the way it flies, with a streak of light behind it
+    const GEM = `<svg viewBox="0 0 100 40" aria-hidden="true"><polygon points="0,20 22,2 78,2 100,20 78,38 22,38" fill="#0f7a4a"/><polygon points="0,20 22,2 78,2 100,20" fill="#3fe08f"/><polygon points="22,20 34,10 66,10 78,20 66,30 34,30" fill="#1fae66"/><line x1="34" y1="10" x2="66" y2="10" stroke="#d6ffe8" stroke-width="3"/><polygon points="0,20 22,2 78,2 100,20 78,38 22,38" fill="none" stroke="#062a1c" stroke-width="4" stroke-linejoin="round"/></svg>`;
+    // a click near the middle sprays all round; a click near an edge sprays into the screen
+    const toMiddle = Math.atan2(vh / 2 - oy, vw / 2 - ox);
+    const spread = Math.hypot(vw / 2 - ox, vh / 2 - oy) < Math.min(vw, vh) * 0.2 ? Math.PI : Math.PI * 0.42;
+    const gems = Array.from({ length: 30 }, (_, i) => {
+      const stick = i % 5 < 2; // 12 of them stay stuck in the screen
+      const ang = toMiddle + ((i / 29) * 2 - 1) * spread + (r() - 0.5) * 0.12;
+      const outer = el("eg-gem-at");
+      Object.assign(outer.style, { left: `${ox}px`, top: `${oy}px`, transform: `rotate(${ang}rad)` });
+      const gem = el("eg-gem", outer);
+      gem.innerHTML = GEM;
+      gem.style.scale = String(0.7 + r() * 0.6);
+      return { gem, stick, d: stick ? reach * (0.25 + r() * 0.45) : reach * 1.25 };
+    });
+    const lab = el("ov-label", ov, text);
+    lab.style.clipPath = tornClip("trbl", 6, 88);
+    const fly = (d: number) => `translate(-50%, -50%) translateX(${Math.round(d)}px)`;
+
+    return {
+      cover: async () => {
+        glow.animate([{ opacity: 0, transform: "translate(-50%, -50%) scale(0.6)" }, { opacity: 1, transform: "translate(-50%, -50%) scale(1)", offset: 0.3 }, { opacity: 0, transform: "translate(-50%, -50%) scale(1.3)" }], { duration: 520, easing: OUT, fill: "both" });
+        const shots = gems.map(({ gem, stick, d }, i) =>
+          gem.animate([{ opacity: 0, transform: fly(0) }, { opacity: 1, transform: fly(d * 0.08), offset: 0.05 }, { opacity: stick ? 1 : 0.9, transform: fly(d) }], { duration: stick ? 560 : 480, delay: 40 + i * 12, easing: OUT, fill: "both" }),
+        );
+        const splash = flood.animate([{ clipPath: `circle(0px at ${ox}px ${oy}px)` }, { clipPath: `circle(${Math.ceil(reach) + 20}px at ${ox}px ${oy}px)` }], { duration: 520, delay: 120, easing: OUT, fill: "both" });
+        const label = lab.animate([{ opacity: 0, transform: "translate(-50%,-50%) scale(.6) rotate(-12deg)" }, { opacity: 1, transform: "translate(-50%,-50%) scale(1) rotate(-4deg)" }], { duration: 280, delay: 560, easing: POP, fill: "both" });
+        await all([...shots, splash, label]);
+        await wait(140);
+      },
+      reveal: async () => {
+        lab.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: OUT, fill: "forwards" });
+        // the stuck gems carry on out of the screen
+        gems.forEach(({ gem, stick, d }) => stick && gem.animate([{ transform: fly(d) }, { transform: fly(d + reach) }], { duration: 300, easing: OUT, fill: "forwards" }));
+        // swap the flood for its facets (they look the same), then burst them away from the click
+        cutFacets();
+        shards.forEach(({ d }) => (d.style.visibility = "visible"));
+        flood.style.visibility = "hidden";
+        const far = Math.max(...shards.map(({ cx, cy }) => Math.hypot(cx - ox, cy - oy)));
+        await all(
+          shards.map(({ d, cx, cy }) => {
+            const dist = Math.hypot(cx - ox, cy - oy) || 1;
+            const push = 140 + r() * 220;
+            const [dx, dy] = [((cx - ox) / dist) * push, ((cy - oy) / dist) * push + 60];
+            const spin = (r() - 0.5) * 90;
+            return d.animate(
+              [{ opacity: 1, transform: "none" }, { opacity: 1, transform: `translate(${dx * 0.5}px, ${dy * 0.5}px) rotate(${spin * 0.5}deg)`, offset: 0.5 }, { opacity: 0, transform: `translate(${dx}px, ${dy}px) rotate(${spin}deg)` }],
+              { duration: 520, delay: (dist / far) * 180, easing: OUT, fill: "both" },
+            );
+          }),
+        );
       },
     };
   }

@@ -411,6 +411,7 @@ export default config({
                     { label: "Sticky Fingers", value: "zipper" },
                     { label: "Heaven's Door", value: "book" },
                     { label: "The World", value: "timestop" },
+                    { label: "Hierophant Green", value: "emerald" },
                     { label: "Paper stack", value: "strips" },
                     { label: "To Be Continued", value: "tbc" },
                   ],
