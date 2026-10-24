@@ -263,25 +263,28 @@ img { max-width: 100%; height: auto; display: block; }
 @media (min-width: 801px) { .hero-board { margin-left: -12%; } }
 .hb { position: absolute; }
 .hb-img img, .hb-img video { width: 100%; }
-.hb-1 { left: 0; top: 4%; width: 31%; transform: rotate(-6deg); z-index: 1; }
-.hb-2 { right: 0; top: 0; width: 33%; transform: rotate(6deg); z-index: 1; }
-.hb-3 { left: 2%; bottom: 10%; width: 46%; transform: rotate(-4deg); z-index: 2; }
-.hb-4 { left: -5%; bottom: -10%; width: 24%; transform: rotate(-9deg); z-index: 3; } /* pinned over hb-3's bottom-left corner, clear of the stickers on the screen edge */
-@media (max-width: 800px) { .hb-4 { width: 26%; } }
+/* the clippings frame the headshot: a wide still across the top, a poster behind the head and another
+   down its right side, then two wide stills stepping down the left, the lower one pinned over the one above.
+   Everything on the right stays inside the board, so nothing reaches the stickers on the screen edge. */
+.hb-1 { left: -3%; top: 5%; width: 56%; transform: rotate(-4deg); z-index: 2; }
+.hb-2 { right: 1%; top: 0; width: 29%; transform: rotate(6deg); z-index: 1; }
+.hb-5 { right: 2%; top: 40%; width: 25%; transform: rotate(-5deg); z-index: 1; }
+.hb-3 { left: -5%; top: 42%; width: 36%; transform: rotate(5deg); z-index: 1; }
+.hb-4 { left: 3%; top: 64%; width: 46%; transform: rotate(-3deg); z-index: 2; }
 /* cursor drift (components/motion): --px/--py run -1..1 on the board, --d is each layer's depth */
 .hb-img, .hb-portrait img, .hero-board .tape { translate: calc(var(--px, 0) * var(--d, 0) * 1cqw) calc(var(--py, 0) * var(--d, 0) * 1cqw); }
-.hb-1 { --d: -1.2; } .hb-2 { --d: 1; } .hb-3 { --d: -0.7; } .hb-4 { --d: 0.5; } .hb-portrait { --d: 1.8; }
+.hb-1 { --d: -1.2; } .hb-2 { --d: 1; } .hb-3 { --d: -0.7; } .hb-4 { --d: 0.5; } .hb-5 { --d: 0.8; } .hb-portrait { --d: 1.8; }
 /* each tape sits inside its clipping and shares its depth; angles add to the clipping's own tilt */
 .hb-tape1 { left: 18%; top: -0.7rem; transform: rotate(-24deg); }
 .hb-tape2 { right: 22%; top: -0.8rem; transform: rotate(8deg); }
 .hb-portrait {
-  position: absolute; right: -6%; bottom: -2%; width: 86%; z-index: 3;
+  position: absolute; right: 4%; bottom: -2%; width: 82%; z-index: 3;
   /* white die-cut edge that follows the cut-out, then a hard shadow */
   filter: drop-shadow(0.45cqw 0 0 #fff) drop-shadow(-0.45cqw 0 0 #fff) drop-shadow(0 0.45cqw 0 #fff) drop-shadow(0 -0.45cqw 0 #fff)
           drop-shadow(0.9cqw 1.1cqw 0 var(--shade));
 }
 .hb-portrait img { width: 100%; height: auto; display: block; }
-.gogo { position: absolute; left: 24%; top: 4%; z-index: 4; font-size: 8.5cqw; pointer-events: none; }
+.gogo { position: absolute; left: 45%; top: -3%; z-index: 4; font-size: 8.5cqw; pointer-events: none; }
 /* "now spinning": a torn label from Spotify, stuck under the headshot (components/NowPlaying.tsx) */
 .np-wrap { position: absolute; right: 3%; bottom: -9%; width: min(58%, 24rem); z-index: 5; transform: rotate(-2.5deg); filter: drop-shadow(0.25rem 0.3rem 0 var(--shade)); }
 .np-tape { right: 12%; top: -0.7rem; width: 4.5rem; height: 1.3rem; transform: rotate(8deg); }
@@ -310,7 +313,7 @@ img { max-width: 100%; height: auto; display: block; }
   @keyframes np-eq { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
 }
 /* phones: hangs just under the board, below Danza's corner */
-@media (max-width: 800px) { .np-wrap { right: -8%; bottom: auto; top: calc(100% + 0.5rem); width: min(92%, 22rem); } .hero-board:has(.np-wrap) { margin-bottom: 6.5rem; } }
+@media (max-width: 800px) { .np-wrap { right: -5%; bottom: auto; top: calc(100% + 0.5rem); width: min(92%, 22rem); } .hero-board:has(.np-wrap) { margin-bottom: 6.5rem; } }
 @media (prefers-reduced-motion: no-preference) {
   .gogo { animation: wob 3.2s ease-in-out infinite; }
   @keyframes wob { 50% { translate: 0 -6px; } }

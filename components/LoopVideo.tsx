@@ -8,6 +8,9 @@ import { useEffect, useRef } from "react";
 import type { Img } from "@/lib/content";
 import { afterReveal } from "./motion/bus";
 
+/** Folder names come from titles ("After Hours, Pt. 2"), and the static file server only finds them with every character escaped. */
+const url = (path: string) => path.split("/").map(encodeURIComponent).join("/");
+
 export function LoopVideo({ src, poster, className }: { src: string; poster: Img; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -38,8 +41,8 @@ export function LoopVideo({ src, poster, className }: { src: string; poster: Img
     <video
       ref={ref}
       className={className}
-      src={src}
-      poster={poster.src}
+      src={url(src)}
+      poster={url(poster.src)}
       width={poster.w}
       height={poster.h}
       aria-label={poster.alt || undefined}

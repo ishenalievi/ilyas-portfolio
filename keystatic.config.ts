@@ -119,7 +119,7 @@ export default config({
             alt: text("Description for screen readers"),
             video: clip(),
           }),
-          { label: "Hero clippings (first four are used)", itemLabel: (p) => p.fields.title.value || "Clipping", slugField: "title" },
+          { label: "Hero clippings (first five are used)", itemLabel: (p) => p.fields.title.value || "Clipping", slugField: "title" },
         ),
         intro: fields.object(
           {

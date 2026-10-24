@@ -43,7 +43,7 @@ export default async function Home() {
 
           <div className="hero-board">
             <Menacing className="gogo" />
-            {home.clippings.slice(0, 4).map((c, i) => (
+            {home.clippings.slice(0, 5).map((c, i) => (
               <div key={c.src} className={`hb hb-${i + 1}`}>
                 <Lift>
                   <Torn className="hb-img" seed={`hb-${i + 1}`} amp={i === 2 ? 6 : 7}>

@@ -6,7 +6,8 @@
     {
       "title": "After Hours, Pt. 2",
       "image": "/images/hero/clippings/After Hours, Pt. 2/image.jpg",
-      "alt": "After Hours, Pt. 2 poster"
+      "alt": "After Hours, Pt. 2: a woman looks up under purple neon",
+      "video": "/videos/clippings/After Hours, Pt. 2/video.mp4"
     },
     {
       "title": "Red Moon in Venus",
@@ -22,7 +23,13 @@
     {
       "title": "Danza de los Amantes",
       "image": "/images/hero/clippings/Danza de los Amantes/image.jpg",
-      "alt": "Danza de los Amantes film poster"
+      "alt": "Danza de los Amantes: a couple dancing in a lit doorway",
+      "video": "/videos/clippings/Danza de los Amantes/video.mp4"
+    },
+    {
+      "title": "Perspective",
+      "image": "/images/hero/clippings/Perspective/image.jpg",
+      "alt": "Perspective poster: warped orange type beside a hand and a field of eyes"
     }
   ],
   "intro": {
