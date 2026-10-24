@@ -5,7 +5,7 @@
       "note": "IMPRINT Reels, ep. 3, on @ubcimprint",
       "href": "https://www.instagram.com/p/DerygqZSF2k/",
       "date": "2026-10-19",
-      "image": "/images/posts/imprint-3.jpg",
+      "image": "/images/posts/imprint-ep3.jpg",
       "platform": "ig",
       "type": "video",
       "stamp": "IG reel"
@@ -15,7 +15,7 @@
       "note": "IMPRINT Reels, ep. 2, on @ubcimprint",
       "href": "https://www.instagram.com/p/DedA2LcSkZt/",
       "date": "2026-10-13",
-      "image": "/images/posts/imprint-2.jpg",
+      "image": "/images/posts/imprint-ep2.jpg",
       "platform": "ig",
       "type": "video",
       "stamp": "IG reel"
@@ -25,7 +25,7 @@
       "note": "IMPRINT Reels, ep. 1, on @ubcimprint",
       "href": "https://www.instagram.com/p/DeK9--tBvPo/",
       "date": "2026-10-06",
-      "image": "/images/posts/imprint.jpg",
+      "image": "/images/posts/imprint-ep1.jpg",
       "platform": "ig",
       "type": "video",
       "stamp": "IG reel"
@@ -105,7 +105,7 @@
       "note": "A quick piece with work paths and gradient maps",
       "href": "https://www.instagram.com/p/Cr3a3T1voIo/",
       "date": "2023-05-05",
-      "image": "/images/posts/greek-gods.jpg",
+      "image": "/images/posts/greek-gods-poster.jpg",
       "platform": "ig",
       "type": "design",
       "stamp": "IG"
@@ -115,7 +115,7 @@
       "note": "Graphic design piece",
       "href": "https://www.instagram.com/p/CrvBwCkvtgG/",
       "date": "2023-05-02",
-      "image": "/images/posts/persp.jpg",
+      "image": "/images/posts/perspective.jpg",
       "platform": "ig",
       "type": "design",
       "stamp": "IG"
@@ -145,7 +145,7 @@
       "note": "Poster for @mateojjimz",
       "href": "https://www.instagram.com/p/Cq6hSCivL5I/",
       "date": "2023-04-11",
-      "image": "/images/posts/mateo.jpg",
+      "image": "/images/posts/mateo-poster.jpg",
       "platform": "ig",
       "type": "design",
       "stamp": "IG"
@@ -155,13 +155,13 @@
       "note": "Kali Uchis album poster",
       "href": "https://www.instagram.com/p/Cq4RFnLPb1U/",
       "date": "2023-04-08",
-      "image": "/images/posts/kali.jpg",
+      "image": "/images/posts/red-moon-1.jpg",
       "platform": "ig",
       "type": "design",
       "stamp": "IG",
       "more": [
-        "/images/posts/kali-2.jpg",
-        "/images/posts/kali-3.jpg"
+        "/images/posts/red-moon-2.jpg",
+        "/images/posts/red-moon-3.jpg"
       ]
     },
     {
@@ -193,7 +193,7 @@
       "note": "Poster in the old style, right before trying a new one",
       "href": "https://www.instagram.com/p/CqzD_2wB2TD/",
       "date": "2023-04-07",
-      "image": "/images/posts/beab2.jpg",
+      "image": "/images/posts/beabadoobee-2.jpg",
       "platform": "ig",
       "type": "design",
       "stamp": "IG"

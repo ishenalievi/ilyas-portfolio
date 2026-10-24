@@ -44,7 +44,7 @@ const role = fields.object({
   linkHref: text("Link (optional)", "e.g. /work/imprint-reels or a full https:// address"),
 });
 
-const sticker = (label: string) => fields.image({ label, directory: "public/stickers", publicPath: "/stickers/" });
+const sticker = (label: string, description?: string) => fields.image({ label, description, directory: "public/stickers", publicPath: "/stickers/" });
 const clip = () =>
   fields.file({
     label: "Looping clip (optional MP4, 5–15 seconds)",
@@ -119,7 +119,7 @@ export default config({
             alt: text("Description for screen readers"),
             video: clip(),
           }),
-          { label: "Hero clippings (first three are used)", itemLabel: (p) => p.fields.title.value || "Clipping", slugField: "title" },
+          { label: "Hero clippings (first four are used)", itemLabel: (p) => p.fields.title.value || "Clipping", slugField: "title" },
         ),
         intro: fields.object(
           {
@@ -141,7 +141,7 @@ export default config({
         lovesCount: fields.integer({ label: "How many loves to show on Home", defaultValue: 5 }),
         lovesButton: text("Loves button"),
         record: heading("Experience section"),
-        recordCount: fields.integer({ label: "How many roles to show on Home", defaultValue: 4 }),
+        recordCount: fields.integer({ label: "How many places to show on Home", description: "Back-to-back roles at one place (promotions) count once", defaultValue: 4 }),
         recordButton: text("Experience button"),
       },
     }),
@@ -294,16 +294,23 @@ export default config({
     stickers: singleton({
       label: "Background stickers",
       path: "content/settings/stickers",
+      // Each slot does its own trick when pressed (components/sticker-moves.ts); press them all for the hidden reward.
       format: { data: "json" },
       schema: {
-        bear: sticker("Bear (leave empty for the drawn one)"),
-        cheese: sticker("Cheese"),
-        rocket: sticker("Rocket"),
-        crest: sticker("Crest"),
-        tea: sticker("Tea"),
-        sheep: sticker("Sheep"),
-        patch: sticker("Patch"),
-        toast: sticker("Toast"),
+        bear: sticker("Football · left, top", "Pressed: bounces twice, then flies into a goal."),
+        cheese: sticker("Climbing hold · right, top", "Pressed: a chalk hand print slaps on, it drops off the wall, then sticks back on."),
+        rocket: sticker("Curious George · left", "Pressed: the top scoop falls off, splats and leaves a drip. The scoop is cut out by position, so a new picture needs re-measuring."),
+        crest: sticker("Agüero jersey · right", "Pressed: spins, with AGÜEROOOO!"),
+        tea: sticker("Camera · left, bottom", "Pressed: its flash goes off, a burst of light over the camera. The flash is placed by position, so a new picture needs re-measuring."),
+        sheep: sticker("Gromit · right", "Pressed: a head tilt and a heart in a speech bubble."),
+        plant: sticker("Plant · left (the pot and lower jaw)", "Pressed: chomps, using the top jaw below."),
+        plantJaw: fields.image({
+          label: "Plant top jaw (transparent PNG)",
+          description: "Same canvas size as the plant, lined up on top of it. Press the plant on the site and this jaw swings open on its hinge and snaps shut.",
+          directory: "public/stickers",
+          publicPath: "/stickers/",
+        }),
+        toast: sticker("Guitar · right, bottom", "Pressed: the strings wobble and the guitar rocks. The strings are placed by position, so a new picture needs re-measuring."),
         go: fields.image({
           label: "ゴ letter for the menacing ゴゴゴ (transparent PNG)",
           description: "One ゴ, drawn the way you want it. It replaces the typed letter everywhere ゴゴゴ appears, including the intro.",

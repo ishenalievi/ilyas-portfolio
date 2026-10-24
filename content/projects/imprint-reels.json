@@ -35,7 +35,7 @@
       "text": "More episodes are on the way. They get added here as they're posted."
     }
   ],
-  "cover": "/images/projects/imprint.jpg",
+  "cover": "/images/projects/imprint-ep1.jpg",
   "coverAlt": "After Hours reel cover: two figures in a dark room under red title type",
   "links": [
     {
@@ -55,17 +55,17 @@
     {
       "title": "After Hours",
       "href": "https://www.instagram.com/p/DeK9--tBvPo/",
-      "image": "/images/projects/imprint.jpg"
+      "image": "/images/projects/imprint-ep1.jpg"
     },
     {
       "title": "After Hours, Pt. 2",
       "href": "https://www.instagram.com/p/DedA2LcSkZt/",
-      "image": "/images/projects/imprint-2.jpg"
+      "image": "/images/projects/imprint-ep2.jpg"
     },
     {
       "title": "After Hours, Pt. 3",
       "href": "https://www.instagram.com/p/DerygqZSF2k/",
-      "image": "/images/projects/imprint-3.jpg"
+      "image": "/images/projects/imprint-ep3.jpg"
     }
   ],
   "videos": [],

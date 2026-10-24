@@ -4,19 +4,24 @@
   "portrait": "/images/portrait.png",
   "clippings": [
     {
-      "title": "After Hours",
-      "image": "/images/hero/clippings/After Hours/image.jpg",
-      "alt": "After Hours reel cover"
+      "title": "After Hours, Pt. 2",
+      "image": "/images/hero/clippings/after-hours-2/image.jpg",
+      "alt": "After Hours, Pt. 2 poster"
     },
     {
       "title": "Red Moon in Venus",
-      "image": "/images/hero/clippings/Red Moon in Venus/image.jpg",
+      "image": "/images/hero/clippings/red-moon/image.jpg",
       "alt": "Red Moon in Venus poster"
     },
     {
       "title": "Baseball Sendoff",
       "image": "/images/hero/clippings/Baseball Sendoff/image.jpg",
       "alt": "ISM Baseball Sendoff thumbnail"
+    },
+    {
+      "title": "Danza de los Amantes",
+      "image": "/images/hero/clippings/Danza de los Amantes/image.jpg",
+      "alt": "Danza de los Amantes film poster"
     }
   ],
   "intro": {

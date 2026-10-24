@@ -1,10 +1,12 @@
 {
+  "bear": "/stickers/bear.png",
   "cheese": "/stickers/cheese.png",
   "rocket": "/stickers/rocket.png",
   "crest": "/stickers/crest.png",
   "tea": "/stickers/tea.png",
   "sheep": "/stickers/sheep.png",
-  "patch": "/stickers/patch.png",
+  "plant": "/stickers/plant.png",
+  "plantJaw": "/stickers/plantJaw.png",
   "toast": "/stickers/toast.png",
   "go": "/stickers/go.png"
 }

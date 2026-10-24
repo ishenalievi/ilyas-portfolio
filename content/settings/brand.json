@@ -59,7 +59,7 @@
         "where": "Footer"
       }
     ],
-    "sfx": "Sound effects are English comic lettering: ZZZIP!, FLIP!, THE WORLD!, ACT 4!. The only Japanese on the site is the menacing ゴゴゴ, drawn in purple with a dark outline."
+    "sfx": "Sound effects are English comic lettering: ZZZIP!, FLIP!, THE WORLD!, ACT 4!, and AGÜEROOOO! on the jersey sticker, the only sticker with lettering. The only Japanese on the site is the menacing ゴゴゴ, drawn in purple with a dark outline."
   },
   "colourGroups": [
     {
@@ -282,14 +282,14 @@
       "role": "Display",
       "font": "Bowlby One",
       "token": "--f-display",
-      "use": "Shouty headlines, ILYAS, sound effects.",
+      "use": "Shouty headlines, ILYAS, the transition sound effects.",
       "sample": "ILYAS"
     },
     {
       "role": "Serif",
       "font": "DM Serif Display",
       "token": "--f-serif",
-      "use": "Italic accents: Ishenaliev, the II. monogram, big statements.",
+      "use": "Italic accents: Ishenaliev, the II. monogram, big statements, and the AGÜEROOOO! on the jersey sticker.",
       "sample": "Ishenaliev"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "name": "Die-cut stickers",
-      "how": "Stickers with a white cut edge float in the margins, four down each side, evenly spaced and staggered so the two sides never line up. Eight slots (bear, cheese, rocket, crest, tea, sheep, patch, toast), each holding a drawn original or an uploaded picture."
+      "how": "Stickers with a white cut edge float in the margins, four down each side, evenly spaced and staggered so the two sides never line up. Eight slots, each holding one of the owner's pictures and doing its own trick when pressed: football, climbing hold, Curious George, Agüero jersey, camera, Gromit, plant, guitar. The plant is two pictures, the pot and a top jaw on the same canvas. Press every sticker on screen and the hidden reward appears: a torn card."
     },
     {
       "name": "Menacing ゴゴゴ",
@@ -358,10 +358,11 @@
     "Real photos only: events, posters, video thumbnails, the headshot. No stock.",
     "Video work is shown moving: a short silent loop of the real clip, with its still as the first frame.",
     "Photos are clippings: torn edges, a slight tilt, taped down.",
+    "Home's board holds four clippings around the headshot. Pictures fill their torn frames edge to edge, and posters go up clean: no play buttons or white frames left over from social media posts. The board sits in from the screen edges at every size, phones included, so no clipping or the headshot covers the stickers along the edge.",
     "The headshot is cut out like a sticker and sits in front of the collage.",
     "Project pages can carry a process gallery: storyboards and screenshots taped up as evidence.",
     "A content wall post can hold a series of pieces: paper arrow buttons under the picture flip through them with a quick crossfade, next to a mono 1 / 3 counter. Posts that only live on this site carry a plain paper stamp.",
-    "The drawn stickers are originals. Any of them can be swapped for an uploaded PNG with a transparent background. Uploads are scaled to cover about the same area as the others, so a tall guitar comes out narrower, not bigger.",
+    "Stickers are the owner's own picks, uploaded as PNGs with a transparent background. Uploads are scaled to cover about the same area as the others, so a tall guitar comes out narrower, not bigger. Their tricks add only drawn originals: a chalk hand print, a melting drip, guitar strings, a goal, a heart in a speech bubble.",
     "Artwork, characters and products owned by others are covered by a general disclaimer at the foot of every page (Keystatic → Site details → Footer disclaimer)."
   ],
   "motion": {
@@ -443,6 +444,9 @@
     "ambient": [
       "Background stripes pan across every 30 seconds.",
       "Stickers bob gently.",
+      "Every sticker does a trick when pressed. Football: two bounces, then it flies into a goal that pops up beside it. Climbing hold: a chalk hand print slaps on, it drops off the wall and sticks back on. Curious George: the top scoop falls off and splats, leaves a drip, and a fresh one lands. Agüero jersey: two spins with AGÜEROOOO!. Camera: its flash goes off, a burst of light over the camera alone, never the whole screen. Gromit: a head tilt and a heart in a speech bubble. Plant: chomps. Guitar: the strings wobble and it rocks.",
+      "With the mouse over a sticker it lifts a little and the cursor turns to a hand; the plant also parts its jaw. A press only counts where no paper, picture or link covers the sticker. Reduced motion turns the lettering, the bubble, the goal and the camera flash into fades, keeps the plant's bite and the drip, and drops anything that flies or spins.",
+      "Hidden reward: press every sticker on screen (all eight on a computer, the four that show on a phone) and a torn card drops in: You found them all. Any press, Esc or seven seconds closes it.",
       "On Home the hero collage drifts slightly with the mouse, each layer at its own depth. Mouse only; it settles back when the cursor leaves.",
       "The Now spinning label checks Spotify every 30 seconds while the page is open, and swaps the song without a reload.",
       "Smooth scrolling, paused while a transition is on screen.",
@@ -455,6 +459,7 @@
     "The side margin grows from 16px to 96px; content stops widening at 110rem.",
     "Sections alternate: open collage on the stripes, then a full-width sheet of torn paper.",
     "On Home the work sits close under the intro sentence, a quarter of the usual gap between sections, so it's found without scrolling far.",
+    "Experience is a ruled ledger: dates, place, role. Back-to-back roles at one place are one entry, roles stacked newest first, each title in the same role column as every other entry, their dates joined by a thin line with oxblood square markers, like a LinkedIn promotion.",
     "On phones some stickers hide so the margins stay clear."
   ]
 }

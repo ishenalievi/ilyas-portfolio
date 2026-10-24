@@ -1,171 +1,132 @@
-// Die-cut stickers stuck on the background, behind the paper.
-// The drawn ones are originals: nods to Ralph Lauren and Wallace & Gromit,
-// not their actual characters or logos.
+// Die-cut stickers stuck on the background, behind the paper. Every slot holds one of the
+// owner's pictures (admin panel /keystatic → Background stickers), and each one does its own
+// trick when pressed (StickerPlay.tsx, sticker-moves.ts).
 //
-// TO USE YOUR OWN PNG: open the admin panel (/keystatic) → Background stickers,
-// and upload an image for the sticker you want to replace. Leave it empty to keep
-// the drawn one. A transparent background looks best: the white die-cut edge follows its shape.
+// The extras drawn here (the chalk hand, George's top scoop and drip, the guitar strings) are
+// lined up with today's pictures. Upload a different picture to one of those slots and its
+// trick stops lining up: tell Claude, and it will re-measure.
 
 import Image from "next/image";
-import { getStickers } from "@/lib/content";
 import type { CSSProperties, ReactNode } from "react";
+import { getStickers } from "@/lib/content";
 
-const INK = "#14213d";
-const RED = "#a3122a";
-const CREAM = "#f1ecdf";
+type Pic = { src: string; w: number; h: number };
 
-function Bear() {
-  // a preppy teddy in a rugby sweater and bow tie
-  return (
-    <svg viewBox="0 0 100 124">
-      <circle cx="30" cy="22" r="10" fill="#7a4a22" />
-      <circle cx="70" cy="22" r="10" fill="#7a4a22" />
-      <circle cx="30" cy="22" r="4.5" fill="#c68e5a" />
-      <circle cx="70" cy="22" r="4.5" fill="#c68e5a" />
-      <ellipse cx="22" cy="80" rx="9" ry="16" fill={INK} transform="rotate(18 22 80)" />
-      <ellipse cx="78" cy="80" rx="9" ry="16" fill={INK} transform="rotate(-18 78 80)" />
-      <circle cx="17" cy="94" r="7" fill="#a8713d" />
-      <circle cx="83" cy="94" r="7" fill="#a8713d" />
-      <ellipse cx="38" cy="112" rx="11" ry="8" fill="#a8713d" />
-      <ellipse cx="62" cy="112" rx="11" ry="8" fill="#a8713d" />
-      <rect x="24" y="58" width="52" height="50" rx="16" fill={INK} />
-      <rect x="24" y="74" width="52" height="7" fill={RED} />
-      <rect x="24" y="85" width="52" height="3" fill={CREAM} />
-      <rect x="40" y="58" width="20" height="9" rx="2" fill={CREAM} />
-      <circle cx="50" cy="38" r="23" fill="#a8713d" />
-      <ellipse cx="50" cy="47" rx="11" ry="8" fill="#e2c29a" />
-      <ellipse cx="50" cy="43" rx="4.5" ry="3.2" fill="#2a1a10" />
-      <path d="M50 46 v4 M46 51 q4 3 8 0" stroke="#2a1a10" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-      <circle cx="41" cy="33" r="2.6" fill="#2a1a10" />
-      <circle cx="59" cy="33" r="2.6" fill="#2a1a10" />
-      <path d="M50 62 L40 56 L40 68 Z M50 62 L60 56 L60 68 Z" fill={RED} />
-      <circle cx="50" cy="62" r="2.6" fill={RED} />
-    </svg>
-  );
-}
-
-function Cheese() {
-  return (
-    <svg viewBox="0 0 120 92">
-      <path d="M8 70 L112 70 L112 42 L30 26 Z" fill="#f2c14e" />
-      <path d="M30 26 L112 42 L112 30 Z" fill="#f8d878" />
-      <path d="M8 70 L30 26 L30 30 L12 70 Z" fill="#e0a93a" />
-      <circle cx="44" cy="52" r="6" fill="#d9a033" />
-      <circle cx="72" cy="58" r="4" fill="#d9a033" />
-      <circle cx="92" cy="50" r="7" fill="#d9a033" />
-      <circle cx="60" cy="44" r="3" fill="#d9a033" />
-      <text x="60" y="88" textAnchor="middle" fontSize="15" fill={INK} style={{ fontFamily: "var(--f-display)" }}>
-        MORE CHEESE?
-      </text>
-    </svg>
-  );
-}
-
-function Rocket() {
-  return (
-    <svg viewBox="0 0 80 120">
-      <path d="M40 4 C60 22 62 60 56 86 L24 86 C18 60 20 22 40 4 Z" fill="#d7263d" />
-      <path d="M24 66 L8 92 L26 86 Z M56 66 L72 92 L54 86 Z" fill="#a3122a" />
-      <circle cx="40" cy="44" r="10" fill={CREAM} stroke={INK} strokeWidth="4" />
-      <path d="M28 86 L52 86 L46 98 L34 98 Z" fill="#6b7280" />
-      <path d="M33 98 Q40 122 47 98 Z" fill="#f2b705" />
-      <path d="M37 98 Q40 112 43 98 Z" fill="#ff7a1a" />
-    </svg>
-  );
-}
-
-function Tea() {
-  return (
-    <svg viewBox="0 0 110 90">
-      <path d="M38 20 q-6 -8 0 -16 M52 20 q-6 -8 0 -16" stroke="#94a3b8" strokeWidth="3" fill="none" strokeLinecap="round" />
-      <ellipse cx="50" cy="78" rx="44" ry="9" fill={CREAM} stroke={INK} strokeWidth="3" />
-      <path d="M18 28 L82 28 L76 66 Q50 80 24 66 Z" fill="#ffffff" stroke={INK} strokeWidth="3" />
-      <path d="M82 36 q20 2 12 18 q-6 8 -16 6" stroke={INK} strokeWidth="5" fill="none" />
-      <rect x="20" y="38" width="60" height="7" fill={RED} />
-      <rect x="21" y="48" width="58" height="3" fill={INK} />
-    </svg>
-  );
-}
-
-function Sheep() {
-  return (
-    <svg viewBox="0 0 110 90">
-      <rect x="30" y="62" width="7" height="20" rx="3" fill="#2a2a2a" />
-      <rect x="66" y="62" width="7" height="20" rx="3" fill="#2a2a2a" />
-      <g fill="#ffffff" stroke="#c9d1de" strokeWidth="2">
-        <circle cx="34" cy="44" r="16" />
-        <circle cx="54" cy="36" r="18" />
-        <circle cx="74" cy="44" r="16" />
-        <circle cx="44" cy="58" r="14" />
-        <circle cx="66" cy="58" r="14" />
-      </g>
-      <ellipse cx="90" cy="46" rx="12" ry="15" fill="#2a2a2a" />
-      <circle cx="94" cy="42" r="3" fill="#ffffff" />
-      <circle cx="95" cy="42" r="1.5" fill="#2a2a2a" />
-    </svg>
-  );
-}
-
-function Crest() {
-  return (
-    <svg viewBox="0 0 90 104">
-      <path d="M8 8 L82 8 L82 50 Q82 84 45 98 Q8 84 8 50 Z" fill={INK} />
-      <path d="M14 14 L76 14 L76 50 Q76 78 45 91 Q14 78 14 50 Z" fill="none" stroke="#d4ae3a" strokeWidth="2.5" />
-      <text x="45" y="62" textAnchor="middle" fontSize="34" fill="#d4ae3a" style={{ fontFamily: "var(--f-serif)", fontStyle: "italic" }}>
-        II
-      </text>
-    </svg>
-  );
-}
-
-function Patch() {
-  // a rugby-stripe patch
-  return (
-    <svg viewBox="0 0 120 70">
-      <rect x="4" y="4" width="112" height="62" rx="10" fill={INK} />
-      <rect x="4" y="22" width="112" height="10" fill={RED} />
-      <rect x="4" y="36" width="112" height="10" fill="#1f4d3a" />
-      <rect x="4" y="4" width="112" height="62" rx="10" fill="none" stroke={CREAM} strokeWidth="3" strokeDasharray="5 4" />
-      <text x="60" y="62" textAnchor="middle" fontSize="11" fill={CREAM} style={{ fontFamily: "var(--f-mono)", fontWeight: 700, letterSpacing: "1.5px" }}>
-        EST. 2026
-      </text>
-    </svg>
-  );
-}
-
-function Toast() {
-  return (
-    <svg viewBox="0 0 90 90">
-      <path d="M12 34 Q8 8 45 8 Q82 8 78 34 L74 84 L16 84 Z" fill="#d8a25e" />
-      <path d="M20 36 Q18 18 45 18 Q72 18 70 36 L67 76 L23 76 Z" fill="#f6e2b8" />
-      <path d="M26 40 Q45 30 64 42 Q60 58 46 54 Q30 60 26 40 Z" fill="#c2185b" />
-    </svg>
-  );
-}
-
-const STICKERS: { id: string; node: ReactNode; cls: string }[] = [
-  { id: "bear", node: <Bear />, cls: "st-1" },
-  { id: "cheese", node: <Cheese />, cls: "st-2" },
-  { id: "rocket", node: <Rocket />, cls: "st-3" },
-  { id: "crest", node: <Crest />, cls: "st-4" },
-  { id: "tea", node: <Tea />, cls: "st-5" },
-  { id: "sheep", node: <Sheep />, cls: "st-6" },
-  { id: "patch", node: <Patch />, cls: "st-7" },
-  { id: "toast", node: <Toast />, cls: "st-8" },
+const SLOTS = [
+  { id: "bear", play: "ball", cls: "st-1" },
+  { id: "cheese", play: "hold", cls: "st-2" },
+  { id: "rocket", play: "george", cls: "st-3" },
+  { id: "crest", play: "jersey", cls: "st-4" },
+  { id: "tea", play: "camera", cls: "st-5" },
+  { id: "sheep", play: "gromit", cls: "st-6" },
+  { id: "plant", play: "plant", cls: "st-7" },
+  { id: "toast", play: "guitar", cls: "st-8" },
 ];
 
 /** Width factor that gives an uploaded picture about the area of a square sticker, within limits. */
 const fit = (w: number, h: number) => Math.min(1.15, Math.max(0.75, Math.sqrt(w / h))).toFixed(3);
 
+const img = (p: Pic, className?: string, style?: CSSProperties) => (
+  <Image className={className} style={style} src={p.src} alt="" width={p.w} height={p.h} sizes="10rem" />
+);
+
+// George's top scoop, measured on the 880 × 1414 picture: the round top, then back along the
+// wavy edge of the scoop under it. As % of the picture, for clip-path.
+const SCOOP = [
+  ...Array.from({ length: 19 }, (_, i) => {
+    const t = ((-28 + (i * 236) / 18) * Math.PI) / 180;
+    return [606 + 91 * Math.cos(t), 135 - 92 * Math.sin(t)];
+  }),
+  [517, 180], [547, 177], [577, 183], [600, 170], [620, 175], [640, 174], [660, 177], [680, 177], [697, 182],
+]
+  .map(([x, y]) => `${((x / 880) * 100).toFixed(2)}% ${((y / 1414) * 100).toFixed(2)}%`)
+  .join(", ");
+
+function George({ p }: { p: Pic }) {
+  return (
+    <>
+      {img(p, "george-base", { clipPath: `polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, ${SCOOP}, ${SCOOP.split(", ")[0]}, 0 0)` })}
+      {/* bare sticker backing, showing where the scoop was */}
+      <span className="george-gap" style={{ clipPath: `polygon(${SCOOP})` }} />
+      {img(p, "george-scoop", { clipPath: `polygon(${SCOOP})` })}
+      {/* what the scoop leaves behind: a melted puddle running down the next one */}
+      <svg className="george-drip" viewBox="0 0 880 1414" preserveAspectRatio="none">
+        <g fill="#fbf0a2" stroke="#3b2a14" strokeWidth="5" strokeLinejoin="round">
+          <path className="drop" d="M534 190 C532 210 533 226 539 238 C545 248 553 240 551 224 C549 210 550 198 552 192 Z" />
+          <path className="drop" d="M594 192 C592 216 594 244 601 262 C607 274 617 264 614 244 C611 224 612 204 614 194 Z" />
+          <path className="drop" d="M656 190 C654 204 656 216 661 224 C667 232 674 224 672 212 C670 202 671 194 672 190 Z" />
+          <path d="M512 186 C520 164 548 160 566 168 C584 158 610 156 628 166 C648 158 676 160 700 184 C690 196 672 190 660 192 C640 200 620 190 600 196 C580 204 560 192 540 196 C526 200 516 196 512 186 Z" />
+        </g>
+      </svg>
+    </>
+  );
+}
+
+function Chalk() {
+  // a chalky hand print: a palm and five fingers, roughed up and speckled by the filter
+  return (
+    <svg className="hold-chalk" viewBox="0 0 100 100">
+      <defs>
+        <filter id="chalky" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" result="rough" />
+          <feColorMatrix in="noise" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 5 -1.6" result="speck" />
+          <feComposite in="rough" in2="speck" operator="in" />
+        </filter>
+      </defs>
+      <g fill="#fbfaf5" filter="url(#chalky)" transform="rotate(-14 50 55)">
+        <ellipse cx="50" cy="66" rx="20" ry="18" />
+        <rect x="31" y="24" width="9" height="34" rx="4.5" transform="rotate(-10 35 41)" />
+        <rect x="42" y="16" width="9" height="38" rx="4.5" />
+        <rect x="53" y="19" width="9" height="36" rx="4.5" transform="rotate(7 57 37)" />
+        <rect x="63" y="31" width="8" height="28" rx="4" transform="rotate(16 67 45)" />
+        <rect x="19" y="54" width="9" height="26" rx="4.5" transform="rotate(-52 23 67)" />
+      </g>
+    </svg>
+  );
+}
+
+// Guitar strings, measured on the 621 × 1406 picture: x at the nut (y 250) and at the saddle (y 1074).
+const STRINGS = [
+  [282, 273], [292, 287], [302, 302], [311, 316], [321, 330], [331, 344],
+];
+
+function Strings() {
+  return (
+    <svg className="guitar-strings" viewBox="0 0 621 1406">
+      {STRINGS.map(([nut, saddle]) => {
+        const x = (nut + saddle) / 2;
+        return (
+          // each string in its own little viewport, so it can bow either way around x
+          <svg key={x} x={x} y="0" overflow="visible">
+            <path d={`M${nut - x} 250 Q${(nut + saddle) / 2 - x + 110} 662 ${saddle - x} 1074`} />
+          </svg>
+        );
+      })}
+    </svg>
+  );
+}
+
+function Body({ play, pic, jaw }: { play: string; pic: Pic; jaw?: Pic }): ReactNode {
+  if (play === "george") return <George p={pic} />;
+  if (play === "hold") return <>{img(pic)}<Chalk /></>;
+  if (play === "guitar") return <>{img(pic)}<Strings /></>;
+  if (play === "plant") return <>{img(pic)}{jaw && img(jaw, "plant-jaw")}</>;
+  return img(pic);
+}
+
 export async function Stickers() {
   const own = await getStickers();
   return (
     <div className="stickers" aria-hidden="true">
-      {STICKERS.map((s) => {
+      {SLOTS.map((s) => {
         const pic = own[s.id];
+        if (!pic) return null;
         return (
-          <div key={s.id} className={`sticker ${s.cls}`} style={pic ? ({ "--fit": fit(pic.w, pic.h) } as CSSProperties) : undefined}>
-            {pic ? <Image src={pic.src} alt="" width={pic.w} height={pic.h} sizes="10rem" /> : s.node}
+          <div key={s.id} className={`sticker ${s.cls}`} data-play={s.play} style={{ "--fit": fit(pic.w, pic.h) } as CSSProperties}>
+            <div className="play">
+              <Body play={s.play} pic={pic} jaw={s.play === "plant" ? own.plantJaw : undefined} />
+            </div>
           </div>
         );
       })}

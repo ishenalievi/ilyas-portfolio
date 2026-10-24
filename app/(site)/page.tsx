@@ -43,7 +43,7 @@ export default async function Home() {
 
           <div className="hero-board">
             <Menacing className="gogo" />
-            {home.clippings.slice(0, 3).map((c, i) => (
+            {home.clippings.slice(0, 4).map((c, i) => (
               <div key={c.src} className={`hb hb-${i + 1}`}>
                 <Lift>
                   <Torn className="hb-img" seed={`hb-${i + 1}`} amp={i === 2 ? 6 : 7}>
@@ -138,7 +138,7 @@ export default async function Home() {
         <SectionHead eyebrow={home.record.eyebrow} title={home.record.title}>
           {home.record.sub}
         </SectionHead>
-        <Ledger rows={resume.work.slice(0, home.recordCount ?? 4)} linkedinUrl={site.linkedinUrl} />
+        <Ledger rows={resume.work} limit={home.recordCount ?? 4} linkedinUrl={site.linkedinUrl} />
         <p className="more">
           <TLink href="/about" className="btn btn-ghost">
             {home.recordButton || "The full record →"}

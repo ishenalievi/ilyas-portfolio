@@ -6,6 +6,7 @@ import { getSite, getStickers } from "@/lib/content";
 import { Footer } from "./Footer";
 import { Motion } from "./motion/Motion";
 import { Nav } from "./Nav";
+import { StickerPlay } from "./StickerPlay";
 import { Stickers } from "./Stickers";
 import { TransitionProvider } from "./transitions/TransitionProvider";
 
@@ -16,6 +17,8 @@ export async function SiteChrome({ children }: { children: ReactNode }) {
       {/* your drawn ゴ (Keystatic → Background stickers) replaces the typed letter in every ゴゴゴ */}
       {stickers.go && <style>{goGlyph(stickers.go.src)}</style>}
       <Stickers />
+      {/* pressing the stickers: their tricks, the lettering above the page, the hidden reward */}
+      <StickerPlay />
       <TransitionProvider introLabel={site.introLabel}>
         <a href="#main" className="skip">
           Skip to content
