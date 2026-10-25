@@ -25,11 +25,18 @@ export function rng(seed: string | number) {
 export function tornClip(sides: string, amp: number, seed: string | number): string {
   const r = rng(seed);
   const step = () => 1.5 + r() * 3;
-  const d = (side: string) => (sides.includes(side) ? (r() * amp).toFixed(1) : "0");
   const p: string[] = [];
-  for (let x = 0; x < 100; x += step()) p.push(`${x.toFixed(2)}% ${d("t")}px`);
-  for (let y = 0; y < 100; y += step()) p.push(`calc(100% - ${d("r")}px) ${y.toFixed(2)}%`);
-  for (let x = 100; x > 0; x -= step()) p.push(`${x.toFixed(2)}% calc(100% - ${d("b")}px)`);
-  for (let y = 100; y > 0; y -= step()) p.push(`${d("l")}px ${y.toFixed(2)}%`);
+  // a straight side needs only its first point; the random steps still run, so every tear stays the same
+  const side = (s: string, n: number, at: (v: number, d: string) => string) => {
+    const torn = sides.includes(s);
+    for (let i = 0, v = n ? 100 : 0; n ? v > 0 : v < 100; v += (n ? -1 : 1) * step(), i++) {
+      const d = torn ? `${(r() * amp).toFixed(1)}px` : "0px";
+      if (torn || i === 0) p.push(at(v, d));
+    }
+  };
+  side("t", 0, (x, d) => `${x.toFixed(2)}% ${d}`);
+  side("r", 0, (y, d) => `calc(100% - ${d}) ${y.toFixed(2)}%`);
+  side("b", 1, (x, d) => `${x.toFixed(2)}% calc(100% - ${d})`);
+  side("l", 1, (y, d) => `${d} ${y.toFixed(2)}%`);
   return `polygon(${p.join(",")})`;
 }

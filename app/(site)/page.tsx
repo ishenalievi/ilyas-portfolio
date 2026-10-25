@@ -48,7 +48,7 @@ export default async function Home() {
               <div key={c.src} className={`hb hb-${i + 1}`}>
                 <Lift>
                   <Torn className="hb-img" seed={`hb-${i + 1}`} amp={i === 2 ? 6 : 7}>
-                    {c.video ? <LoopVideo src={c.video} poster={c} /> : <Image src={c.src} alt={c.alt} width={c.w} height={c.h} loading={i < 2 ? "eager" : undefined} fetchPriority={i < 2 ? "high" : undefined} sizes="(max-width: 800px) 45vw, 24vw" />}
+                    {c.video ? <LoopVideo src={c.video} poster={c} /> : <Image src={c.src} alt={c.alt} width={c.w} height={c.h} loading={i < 2 ? "eager" : undefined} sizes="(max-width: 800px) 45vw, 24vw" />}
                   </Torn>
                 </Lift>
                 {/* the tape rides on its clipping, so it drifts and drops in with it */}

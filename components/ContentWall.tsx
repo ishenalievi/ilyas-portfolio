@@ -20,7 +20,8 @@ type F = (typeof FILTERS)[number]["id"];
 
 const SIZES = "(max-width: 600px) 50vw, (max-width: 1200px) 25vw, 18vw";
 
-export function ContentWall({ posts, filters = true }: { posts: Post[]; filters?: boolean }) {
+/** eager: how many posts sit in the first screen, so their pictures load straight away. */
+export function ContentWall({ posts, filters = true, eager = 0 }: { posts: Post[]; filters?: boolean; eager?: number }) {
   const [f, setF] = useState<F>("all");
   const shown = posts.filter((p) => f === "all" || p.type === f || p.platform === f);
 
@@ -36,17 +37,17 @@ export function ContentWall({ posts, filters = true }: { posts: Post[]; filters?
         </div>
       )}
       <div className="wall" style={filters ? undefined : ({ "--cols": fitCols(shown.length) } as React.CSSProperties)}>
-        {shown.map((p) => (p.slides.length > 1 ? <SlidePost key={p.href || p.title} p={p} /> : <LinkPost key={p.href || p.title} p={p} />))}
+        {shown.map((p, i) => (p.slides.length > 1 ? <SlidePost key={p.href || p.title} p={p} eager={i < eager} /> : <LinkPost key={p.href || p.title} p={p} eager={i < eager} />))}
       </div>
     </div>
   );
 }
 
-function LinkPost({ p }: { p: Post }) {
+function LinkPost({ p, eager }: { p: Post; eager: boolean }) {
   return (
     <TLink href={p.href} className="post">
       <div className="pic" style={{ clipPath: tornClip("trbl", 4, p.href) }}>
-        <Image src={p.img} alt={p.title} width={p.w} height={p.h} sizes={SIZES} />
+        <Image src={p.img} alt={p.title} width={p.w} height={p.h} sizes={SIZES} loading={eager ? "eager" : undefined} />
       </div>
       <span className={`post-stamp ${p.platform}`}>{p.stamp}</span>
       <b>{p.title}</b>
@@ -56,7 +57,7 @@ function LinkPost({ p }: { p: Post }) {
 }
 
 /** A post with several pieces: arrows under the picture flip through them (buttons can't sit inside a link, so only the title links out). */
-function SlidePost({ p }: { p: Post }) {
+function SlidePost({ p, eager }: { p: Post; eager: boolean }) {
   const [at, setAt] = useState(0);
   const n = p.slides.length;
   const go = (d: number) => setAt((at + d + n) % n);
@@ -65,7 +66,7 @@ function SlidePost({ p }: { p: Post }) {
     <div className="post">
       <div className="pic slides" style={{ clipPath: tornClip("trbl", 4, p.href || p.title) }}>
         {p.slides.map((s, i) => (
-          <Image key={s.src} src={s.src} alt={`${p.title}, ${i + 1} of ${n}`} width={s.w} height={s.h} sizes={SIZES} className={i === at ? "on" : undefined} aria-hidden={i !== at} />
+          <Image key={s.src} src={s.src} alt={`${p.title}, ${i + 1} of ${n}`} width={s.w} height={s.h} sizes={SIZES} loading={eager && i === 0 ? "eager" : undefined} className={i === at ? "on" : undefined} aria-hidden={i !== at} />
         ))}
       </div>
       <div className="slide-nav" role="group" aria-label={`${p.title} pictures`}>

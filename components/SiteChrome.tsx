@@ -33,6 +33,7 @@ export async function SiteChrome({ children }: { children: ReactNode }) {
   );
 }
 
-/** Each ゴ becomes the picture alone: a 1em box with the picture as its background, and no typed letter at all. */
+/** Each ゴ becomes the picture alone: a 1em box with the picture as its background, and no typed letter at all.
+    The picture goes through the image optimizer, sized for the biggest ゴ (the intro card's). */
 const goGlyph = (src: string) =>
-  `.menacing > span{background:url("${encodeURI(src)}") center / contain no-repeat;-webkit-background-clip:border-box;background-clip:border-box;width:1em;height:1em;filter:none}.menacing > span::before{content:none}`;
+  `.menacing > span{background:url("/_next/image?url=${encodeURIComponent(src.split("/").map(encodeURIComponent).join("/"))}&w=384&q=75") center / contain no-repeat;-webkit-background-clip:border-box;background-clip:border-box;width:1em;height:1em;filter:none}.menacing > span::before{content:none}`;

@@ -14,7 +14,7 @@ export default async function ContentPage() {
         <SectionHead level={1} eyebrow={page.header.eyebrow} title={page.header.title}>
           {page.header.sub}
         </SectionHead>
-        <ContentWall posts={posts} />
+        <ContentWall posts={posts} eager={4} />
         <p className="more">
           <TLink href={site.instagramUrl} className="btn">
             Follow {site.instagramHandle} ↗

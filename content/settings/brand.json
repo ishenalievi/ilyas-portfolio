@@ -303,7 +303,7 @@
       "role": "Mono",
       "font": "Space Mono",
       "token": "--f-mono",
-      "use": "Small labels, stamps and dates, in tracked-out capitals.",
+      "use": "Small labels, stamps and dates, in bold, tracked-out capitals. Bold is the only weight loaded.",
       "sample": "Portfolio · Vol. 1 · 2026"
     }
   ],

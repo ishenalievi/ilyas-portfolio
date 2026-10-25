@@ -27,7 +27,7 @@ const SLOTS = [
 const fit = (w: number, h: number) => Math.min(1.15, Math.max(0.75, Math.sqrt(w / h))).toFixed(3);
 
 const img = (p: Pic, className?: string, style?: CSSProperties) => (
-  <Image className={className} style={style} src={p.src} alt="" width={p.w} height={p.h} sizes="10rem" />
+  <Image className={className} style={style} src={p.src} alt="" width={p.w} height={p.h} sizes="(max-width: 800px) 4rem, 8vw" fetchPriority="low" />
 );
 
 // George's top scoop, measured on the 880 × 1414 picture: the round top, then back along the

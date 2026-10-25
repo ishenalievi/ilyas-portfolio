@@ -8,7 +8,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Torn } from "./collage";
 import { isCovering } from "./motion/bus";
-import { MOVES } from "./sticker-moves";
+
+// the tricks load on the first hover or press, so they cost nothing on page load
+const moves = () => import("./sticker-moves").then((m) => m.MOVES);
 
 const SOLID = "a, button, input, select, textarea, label, summary, img, video, svg, canvas, iframe, [role], [tabindex]";
 const FOUND = "stickers-found";
@@ -48,9 +50,12 @@ export function StickerPlay() {
       const sticker = stickerAt(e.clientX, e.clientY);
       const id = sticker?.dataset.play;
       const play = sticker?.querySelector<HTMLElement>(".play");
-      if (!sticker || !id || !play || !MOVES[id] || busy.has(id)) return;
+      const out = layer.current;
+      if (!sticker || !id || !play || busy.has(id)) return;
       busy.add(id);
-      MOVES[id]({ sticker, play, layer: layer.current, still: still.matches }).finally(() => busy.delete(id));
+      moves()
+        .then((m) => m[id]?.({ sticker, play, layer: out, still: still.matches }))
+        .finally(() => busy.delete(id));
       found.add(id);
       save(found);
       const onScreen = [...document.querySelectorAll<HTMLElement>(".sticker[data-play]")].filter((s) => s.checkVisibility());
@@ -72,6 +77,7 @@ export function StickerPlay() {
         if (now === near) return;
         near?.classList.remove("is-near");
         now?.classList.add("is-near");
+        if (now) moves();
         near = now;
         document.body.style.cursor = now ? "pointer" : "";
       });

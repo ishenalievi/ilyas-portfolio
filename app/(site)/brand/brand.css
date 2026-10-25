@@ -36,7 +36,7 @@
 .bb-x li::before { content: "✗"; color: var(--a1); }
 .bb-wide { max-width: 70ch; }
 .bb-tape { left: 50%; top: -0.7rem; transform: translateX(-50%) rotate(-3deg); }
-.bb-anchor code { font: 400 max(13px, 0.78rem)/1.3 var(--f-mono); }
+.bb-anchor code { font: 700 max(13px, 0.78rem)/1.3 var(--f-mono); }
 
 /* ---------- identity ---------- */
 .bb-id { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }

@@ -2,7 +2,8 @@
 
 // A silent clip on repeat, standing in for a still (hero clippings, episode posters).
 // The still is its poster, so it looks finished before the clip loads, and it is all anyone
-// with reduced motion sees. It only plays while on screen and after the page transition.
+// with reduced motion sees. It only plays while on screen and after the page transition, and
+// nothing of the clip downloads before then.
 
 import { useEffect, useRef } from "react";
 import type { Img } from "@/lib/content";
@@ -10,6 +11,8 @@ import { afterReveal } from "./motion/bus";
 
 /** Folder names come from titles ("After Hours, Pt. 2"), and the static file server only finds them with every character escaped. */
 const url = (path: string) => path.split("/").map(encodeURIComponent).join("/");
+/** The still, compressed by the image optimizer like every other picture (it is the first thing anyone sees). */
+const still = (path: string) => `/_next/image?url=${encodeURIComponent(url(path))}&w=640&q=75`;
 
 export function LoopVideo({ src, poster, className }: { src: string; poster: Img; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -42,14 +45,14 @@ export function LoopVideo({ src, poster, className }: { src: string; poster: Img
       ref={ref}
       className={className}
       src={url(src)}
-      poster={url(poster.src)}
+      poster={still(poster.src)}
       width={poster.w}
       height={poster.h}
       aria-label={poster.alt || undefined}
       muted
       loop
       playsInline
-      preload="metadata"
+      preload="none"
       disablePictureInPicture
     />
   );

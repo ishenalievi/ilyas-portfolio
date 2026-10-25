@@ -13,14 +13,6 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   // album covers for the "now spinning" label on Home
   images: { remotePatterns: [{ protocol: "https", hostname: "i.scdn.co" }] },
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
-  },
 };
 
 export default nextConfig;
