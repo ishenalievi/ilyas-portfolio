@@ -45,7 +45,7 @@
   background: var(--wood-base) var(--wood) 0 0 / var(--wood-size); color: var(--wood-text);
   border: 0.3rem solid var(--brass); box-shadow: inset 0 0 0 0.15rem var(--wood-seam), 0.35rem 0.4rem 0 var(--shade);
 }
-.bb-mono span { font: italic 400 clamp(3.4rem, 7vw, 6rem)/1 var(--f-serif); }
+.bb-mono .logo-paper { font-size: clamp(2.6rem, 5vw, 4.2rem); }
 .bb-mono small { font: 700 max(13px, 0.65rem)/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass-light); }
 .bb-wordmark { display: grid; gap: 0.8rem; max-width: 46rem; }
 .bb-mini .r1 { font-size: clamp(1.8rem, 4vw, 3.4rem); }

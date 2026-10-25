@@ -173,11 +173,13 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
   }
 
   if (kind === "timestop") {
-    // The World: an inverted sphere freezes the page, then a gold sphere covers it
-    // with a stopped clock. Time resumes on the new page.
+    // The World: an inverted sphere freezes the page grey, the clock appears and ticks once,
+    // and the frozen world goes still. Then time rewinds: the hands spin backwards and the
+    // stillness is swept away anticlockwise from twelve, like a hand winding back, onto the new page.
     const inv = el("tw-inv");
     const gray = el("tw-gray");
-    const wall = el("tw-wall");
+    const still = el("tw-still");
+    const dial = el("tw-dial");
     const NS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(NS, "svg");
     svg.setAttribute("viewBox", "0 0 100 100");
@@ -204,37 +206,52 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
     const minute = hand(31, "tw-min", 54);
     const second = hand(36, "tw-sec", 0);
     make("circle", { cx: 50, cy: 50, r: 3, class: "tw-pin" });
-    wall.appendChild(svg);
-    const lab = el("tw-label", wall, text);
+    dial.appendChild(svg);
+    const lab = el("tw-label", dial, text);
     lab.style.clipPath = tornClip("trbl", 6, 77);
-    el("tw-stamp", wall, "Time: stopped");
-    const sfx = el("tw-sfx", ov, "THE WORLD!");
 
     const from = origin ? `${Math.round(origin.x)}px ${Math.round(origin.y)}px` : "50% 50%";
     const C = (r: number, at = from) => `circle(${r}% at ${at})`;
+    // what is still frozen while time rewinds: a sector from twelve o'clock, clockwise, that
+    // shrinks anticlockwise as p goes 0 → 1 (p = how far time has rewound)
+    const vw = innerWidth;
+    const vh = innerHeight;
+    const R = Math.hypot(vw, vh);
+    const sector = (p: number) => {
+      const sweep = (1 - p) * 2 * Math.PI;
+      const arc = Array.from({ length: 40 }, (_, k) => {
+        const t = (sweep * k) / 39;
+        return `${(vw / 2 + R * Math.sin(t)).toFixed(1)}px ${(vh / 2 - R * Math.cos(t)).toFixed(1)}px`;
+      });
+      return `polygon(${vw / 2}px ${vh / 2}px, ${arc.join(", ")})`;
+    };
+    const rewind = Array.from({ length: 17 }, (_, i) => ({ clipPath: sector(i / 16) }));
     return {
       cover: async () => {
-        // 1. the inverted sphere bursts out from the middle of the page
+        // 1. the inverted sphere bursts out from the click
         await fin(inv.animate([{ clipPath: C(0) }, { clipPath: C(150) }], { duration: 420, easing: OUT, fill: "forwards" }));
-        // 2. it collapses, leaving the world frozen and grey
+        // 2. it collapses, leaving the world frozen and grey, and the clock appears and ticks once
         gray.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: OUT, fill: "forwards" });
-        sfx.animate([{ opacity: 0, transform: "translateX(-50%) scale(1.8) rotate(-6deg)" }, { opacity: 1, transform: "translateX(-50%) scale(1) rotate(-4deg)", offset: 0.4 }, { opacity: 1, transform: "translateX(-50%) scale(1.04) rotate(-4deg)" }], { duration: 500, easing: OUT, fill: "forwards" });
         await fin(inv.animate([{ clipPath: C(150) }, { clipPath: C(0) }], { duration: 340, easing: IN_OUT, fill: "forwards" }));
-        // 3. a quick gold sphere with the stopped clock: one tick, and the label lands with it
-        second.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(6deg)" }], { duration: 300, easing: "steps(1, start)", fill: "forwards" });
-        lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-4deg)" }], { duration: 280, delay: 100, easing: POP, fill: "forwards" });
-        await fin(wall.animate([{ clipPath: C(0) }, { clipPath: C(150) }], { duration: 380, easing: OUT, fill: "forwards" }));
-        await wait(120);
+        svg.animate([{ opacity: 0, transform: "scale(.6)" }, { opacity: 1, transform: "scale(1)" }], { duration: 300, easing: POP, fill: "both" });
+        second.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(6deg)" }], { duration: 300, delay: 260, easing: "steps(1, start)", fill: "both" });
+        const label = lab.animate([{ opacity: 0, transform: "scale(.6) rotate(-10deg)" }, { opacity: 1, transform: "scale(1) rotate(-4deg)" }], { duration: 280, delay: 120, easing: POP, fill: "both" });
+        // 3. the frozen world goes still behind the clock
+        await all([label, still.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: 300, easing: OUT, fill: "both" })]);
+        await wait(140);
       },
       reveal: async () => {
-        // time resumes: the hands spin while the sphere shrinks away and colour comes back
-        const o: KeyframeAnimationOptions = { duration: 380, easing: OUT, fill: "forwards" };
-        sfx.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140, easing: OUT, fill: "forwards" });
-        hour.animate([{ transform: "rotate(300deg)" }, { transform: "rotate(480deg)" }], o);
-        minute.animate([{ transform: "rotate(54deg)" }, { transform: "rotate(774deg)" }], o);
+        // time rewinds: the hands spin backwards while the stillness is swept away anticlockwise
+        const MS = 700;
+        const o: KeyframeAnimationOptions = { duration: MS, easing: IN_OUT, fill: "forwards" };
+        lab.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140, easing: OUT, fill: "forwards" });
+        hour.animate([{ transform: "rotate(300deg)" }, { transform: "rotate(-60deg)" }], o);
+        minute.animate([{ transform: "rotate(54deg)" }, { transform: "rotate(-1026deg)" }], o);
+        second.animate([{ transform: "rotate(6deg)" }, { transform: "rotate(-2154deg)" }], o);
         await all([
-          wall.animate([{ clipPath: C(150) }, { clipPath: C(0) }], o),
-          gray.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 280, delay: 160, easing: OUT, fill: "forwards" }),
+          still.animate(rewind, o),
+          gray.animate(rewind, o),
+          svg.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 1, transform: "scale(1)", offset: 0.75 }, { opacity: 0, transform: "scale(.8)" }], o),
         ]);
       },
     };

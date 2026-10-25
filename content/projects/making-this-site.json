@@ -1,7 +1,7 @@
 {
-  "title": "This website",
+  "title": "My Portfolio",
   "no": "03",
-  "subtitle": "the making-of",
+  "subtitle": "how I made it",
   "short": "MAKING OF",
   "year": "2026",
   "role": "Design + direction",
@@ -12,7 +12,7 @@
     "Oct 2026 →",
     "Design + direction"
   ],
-  "summary": "How this site went from an empty folder to live: the references, the storyboards, the palettes and the build.",
+  "summary": "How this site went from an empty folder to what it is now: the references, the storyboards, the palettes, and the build.",
   "body": [
     {
       "heading": "The brief",
@@ -35,44 +35,42 @@
       "text": "Next.js, hosted free on Vercel. Every tear on this page is generated from a seed, so it looks hand-made but stays the same every visit."
     }
   ],
-  "cover": null,
-  "coverAlt": "",
   "links": [],
   "episodes": [],
   "videos": [],
-  "accent": "a4",
   "gallery": [
     {
-      "caption": "Storyboard v1, the cover: still too clean",
-      "image": "/images/gallery/storyboard-cover.jpg"
+      "caption": "Storyboard v1, the cover: too clean",
+      "image": "/images/gallery/making-this-site/storyboard-cover.jpg"
     },
     {
-      "caption": "Storyboard v1, frame 2: the margin note that became “← accurate, sadly”",
-      "image": "/images/gallery/storyboard-intro.jpg"
+      "caption": "Storyboard v1, frame 2: the margin note & other adjustments",
+      "image": "/images/gallery/making-this-site/storyboard-intro.jpg"
     },
     {
       "caption": "Storyboard v1, frame 3: three clippings on the table",
-      "image": "/images/gallery/storyboard-work.jpg"
+      "image": "/images/gallery/making-this-site/storyboard-work.jpg"
     },
     {
       "caption": "Storyboard v1, frame 7: the To Be Continued sign-off",
-      "image": "/images/gallery/storyboard-footer.jpg"
+      "image": "/images/gallery/making-this-site/storyboard-footer.jpg"
     },
     {
       "caption": "Home: Tusk ACT 4, mid-spiral",
-      "image": "/images/gallery/transition-tusk.jpg"
+      "image": "/images/gallery/making-this-site/transition-tusk.jpg"
     },
     {
       "caption": "Work: Sticky Fingers, zipped shut",
-      "image": "/images/gallery/transition-sticky-fingers.jpg"
+      "image": "/images/gallery/making-this-site/transition-sticky-fingers.jpg"
     },
     {
-      "caption": "About: The World, time stopped",
-      "image": "/images/gallery/transition-the-world.jpg"
+      "caption": "About: The World, time stopped (1st draft)",
+      "image": "/images/gallery/making-this-site/transition-the-world.jpg"
     },
     {
       "caption": "Project pages: Heaven's Door, mid-flip",
-      "image": "/images/gallery/transition-heavens-door.jpg"
+      "image": "/images/gallery/making-this-site/transition-heavens-door.jpg"
     }
-  ]
+  ],
+  "accent": "a4"
 }

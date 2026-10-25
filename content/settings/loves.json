@@ -2,93 +2,87 @@
   "items": [
     {
       "title": "JoJo's Bizarre Adventure",
-      "fig": "Manga, 1987–",
-      "line": "The reason I can no longer stand normally in photos.",
+      "fig": "Anime/Manga, 1987–",
+      "line": "The art style is so beautiful, and I can't stop admiring it.",
       "tag": "ゴゴゴ",
       "color": "a4",
-      "linkLabel": "",
-      "linkHref": ""
+      "imageFit": "cover"
     },
     {
       "title": "Manchester City",
-      "fig": "Football",
-      "line": "Yes, I liked them before the trophies. No, I will not be providing evidence.",
+      "fig": "Football club",
+      "line": "My brother supported Man U, I chose Man City, and have been a fan ever since.",
       "tag": "MCFC",
       "color": "city",
-      "image": "/images/loves/manchester-city.webp",
+      "image": "/images/loves/items/1/image.webp",
       "imageAlt": "Manchester City crest",
-      "imageFit": "contain",
-      "linkLabel": "",
-      "linkHref": ""
+      "imageFit": "contain"
     },
     {
       "title": "Bouldering",
       "fig": "V4–6 · Scarpa Instinct VSR LV",
-      "line": "I pay money to fall off walls in shoes a size too small.",
+      "line": "Climbing in and around Vancouver whenever I have time.",
       "tag": "V4–6",
       "color": "a2",
+      "image": "/images/loves/items/2/climbs.jpg",
+      "imageAlt": "A pile of bouldering photos from @ishenslabs: a heel hook, a big reach, a lunge and two more problems on different walls",
+      "imageFit": "center",
       "linkLabel": "Proof: @ishenslabs",
       "linkHref": "https://www.instagram.com/ishenslabs"
     },
     {
       "title": "Books",
       "fig": "Now reading",
-      "line": "Currently on The Place of the Skull by Chingiz Aitmatov. Exactly as cheerful as it sounds.",
+      "line": "Currently on The Place of the Skull by Chingiz Aitmatov. Planning to start Red Rising...",
       "tag": "p. 1 of many",
       "color": "a3",
-      "linkLabel": "",
-      "linkHref": ""
+      "imageFit": "cover"
     },
     {
       "title": "Video editing",
       "fig": "Premiere Pro, After Effects",
-      "line": "Four hours on a fifteen-second clip that people will watch once, at 2× speed.",
+      "line": "Four hours on a fifteen-second clip that people will watch once, at 2× speed and scroll past.",
       "tag": "00:00:15",
       "color": "a1",
-      "image": "/images/loves/premiere-pro.webp",
+      "image": "/images/loves/items/4/image.webp",
       "imageAlt": "Adobe Premiere Pro icon",
-      "imageFit": "contain",
-      "linkLabel": "",
-      "linkHref": ""
+      "imageFit": "contain"
     },
     {
       "title": "Guitar",
       "fig": "Since summer 2026",
       "line": "I know four chords. My neighbours know them too.",
-      "tag": "G · C · D",
+      "tag": "G · C · D · E",
       "color": "navy",
-      "linkLabel": "",
-      "linkHref": ""
+      "imageFit": "cover"
     },
     {
       "title": "Wallace & Gromit",
       "fig": "Claymation",
-      "line": "Gromit is the most competent character in British film and he never says a word.",
+      "line": "The dynamic duo will always have a special place in my heart. Bless Aardman Productions.",
       "tag": "CHEESE",
       "color": "a3",
-      "linkLabel": "",
-      "linkHref": ""
+      "image": "/images/loves/items/6/image.jpg",
+      "imageAlt": "Wallace and Gromit raising their W and G mugs",
+      "imageFit": "cover"
     },
     {
       "title": "The Nightmare Before Christmas",
       "fig": "Stop-motion, 1993",
-      "line": "Settled the Halloween-or-Christmas argument by refusing to pick one.",
-      "tag": "Oct → Dec",
+      "line": "Something about this specific Tim Burton will always be unmatched, even though I didn't experience a White Christmas until I was 18...",
       "color": "a4",
-      "image": "/images/loves/nightmare-before-christmas.jpg",
+      "image": "/images/loves/items/7/image.jpg",
       "imageAlt": "Jack Skellington on the spiral hill in front of the full moon",
-      "imageFit": "cover",
-      "linkLabel": "",
-      "linkHref": ""
+      "imageFit": "cover"
     },
     {
       "title": "Theatre & musicals",
       "fig": "Trained in acting · fave: Little Shop of Horrors",
-      "line": "My favourite musical is a feel-good story about a florist and his carnivorous plant.",
+      "line": "My favourite musical is a horror-comedy rock musical about a florist and his carnivorous plant.",
       "tag": "ENCORE?",
       "color": "a2",
-      "linkLabel": "",
-      "linkHref": ""
+      "image": "/images/loves/items/8/image.jpg",
+      "imageFit": "cover"
     }
   ]
 }

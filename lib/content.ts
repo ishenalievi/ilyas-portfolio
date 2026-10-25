@@ -113,7 +113,7 @@ export type Love = {
   tag: string;
   color: string;
   img?: Img;
-  fit: "cover" | "contain";
+  fit: "cover" | "center" | "contain";
   link?: { label: string; href: string };
 };
 

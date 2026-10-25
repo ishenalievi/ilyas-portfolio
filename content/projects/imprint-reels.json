@@ -12,31 +12,31 @@
     "Oct 2026",
     "Film + edit"
   ],
-  "summary": "A run of reels for UBC Imprint Conference & Competition, where I'm VP Content Marketing. The first three tease After Hours on 20 October 2026. More land over the next few weeks.",
+  "summary": "A Reel campaign for UBC Imprint Conference & Competition. Teasing After Hours on 20 October 2026.",
   "body": [
     {
       "heading": "The brief",
-      "text": "Make people want to show up to After Hours on 20 October without telling them much about it. Three reels, zero spoilers. The first rule of After Hours, as the caption says, you already know."
+      "text": "Make people want to show up to After Hours on 20 October without telling them much about it. Three reels to pull interest. The first rule of After Hours, as the caption says, you already know."
     },
     {
       "heading": "Ep. 01 · After Hours",
-      "text": "Shot and cut as a short film teaser, opening on a title card that reads “a film by Ilyas Ishenaliev”. If you're going to make a reel, you might as well credit yourself like it's Cannes. Red type, dark rooms, two people who clearly know something you don't."
+      "text": "Shot and cut as a parody of Fight Club, opening on a title card. Red type, dark rooms, two people who clearly know something you don't."
     },
     {
       "heading": "Ep. 02 · After Hours, Pt. 2",
-      "text": "Same mood, new set. Someone walks toward a wall of gothic arched doors under red neon script, and nobody explains anything. That's the point."
+      "text": "Going to the event. Someone walks toward a wall of Gothic arched doors under red neon script, and nobody explains anything. That's the point."
     },
     {
       "heading": "Ep. 03 · After Hours, Pt. 3",
-      "text": "Made with ACE UBC. The colour drains to black and white, the cast gets bigger, and someone grins through a phone call in front of a laptop while a wall of tuxedo portraits watches on. Still no explanation."
+      "text": "Made with ACE UBC. A parody of a scene from Wolf of Wall Street. This one was our last push before the event with an emphasis on sales and selling the event to people viewing the video."
     },
     {
       "heading": "What's next",
-      "text": "More episodes are on the way. They get added here as they're posted."
+      "text": "VP Introduction videos, case sponsor videos, and promotion videos for upcoming events."
     }
   ],
-  "cover": "/images/projects/imprint-ep1.jpg",
-  "coverAlt": "After Hours reel cover: two figures in a dark room under red title type",
+  "cover": "/images/projects/imprint-reels/cover.jpg",
+  "coverAlt": "After Hours, Pt. 2 reel cover: someone walks toward a wall of Gothic arched doors under red neon script",
   "links": [
     {
       "label": "Watch episode 3",
@@ -55,20 +55,20 @@
     {
       "title": "After Hours",
       "href": "https://www.instagram.com/p/DeK9--tBvPo/",
-      "image": "/images/projects/imprint-ep1.jpg"
+      "image": "/images/projects/imprint-reels/episodes/after-hours/image.jpg"
     },
     {
       "title": "After Hours, Pt. 2",
       "href": "https://www.instagram.com/p/DedA2LcSkZt/",
-      "image": "/images/projects/imprint-ep2.jpg"
+      "image": "/images/projects/imprint-reels/episodes/after-hours-pt-2/image.jpg"
     },
     {
       "title": "After Hours, Pt. 3",
       "href": "https://www.instagram.com/p/DerygqZSF2k/",
-      "image": "/images/projects/imprint-ep3.jpg"
+      "image": "/images/projects/imprint-reels/episodes/after-hours-pt-3/image.jpg"
     }
   ],
   "videos": [],
-  "accent": "a1",
-  "gallery": []
+  "gallery": [],
+  "accent": "a1"
 }

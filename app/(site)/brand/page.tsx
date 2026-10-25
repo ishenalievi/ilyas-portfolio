@@ -94,7 +94,9 @@ export default async function BrandPage() {
         <SectionHead eyebrow="01 · Identity" title="Who this is" />
         <div className="bb-id">
           <div className="bb-mono">
-            <span>{b.identity.monogram}</span>
+            <Torn as="span" className="logo-paper paper-2" seed="logo" amp={3}>
+              {b.identity.monogram}
+            </Torn>
             <small>Monogram</small>
           </div>
           <div className="bb-wordmark">

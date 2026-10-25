@@ -7,6 +7,7 @@ import { Menacing } from "@/components/Menacing";
 import { TLink } from "@/components/transitions/TLink";
 import { LoopVideo } from "@/components/LoopVideo";
 import { NowPlaying } from "@/components/NowPlaying";
+import { MarginNote } from "@/components/MarginNote";
 
 // a space between sentence parts, unless the next part starts with punctuation
 const glue = (next: string) => (/^[.,!?;:)]/.test(next) ? "" : " ");
@@ -86,7 +87,7 @@ export default async function Home() {
             )}
             {intro.after && glue(intro.after) + intro.after}
           </p>
-          {intro.note && <span className="margin-note">{intro.note}</span>}
+          {intro.note && <MarginNote text={intro.note} />}
         </div>
       </section>
 

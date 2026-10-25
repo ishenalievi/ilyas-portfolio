@@ -128,7 +128,7 @@ export default config({
             middle: text("Middle"),
             circled: text("Circled word"),
             after: text("End of the sentence"),
-            note: text("Margin note"),
+            note: text("Margin note", "Sits under the circled word with a drawn arrow pointing at it, so no need to type an arrow."),
           },
           { label: "Intro sentence" },
         ),
@@ -237,6 +237,7 @@ export default config({
               label: "How the picture sits",
               options: [
                 { label: "Fill the strip (photos, posters)", value: "cover" },
+                { label: "Fill the strip, kept centred (collages, wide pictures)", value: "center" },
                 { label: "Fit inside the strip (logos, badges)", value: "contain" },
               ],
               defaultValue: "cover",
@@ -331,7 +332,7 @@ export default config({
 
         identity: fields.object(
           {
-            monogram: text("Monogram", "The small logo in the nav"),
+            monogram: text("Monogram", "The nav logo, on the same off-white paper as Ishenaliev"),
             wordmark: longText("How the name is set"),
             words: fields.array(text("Word"), { label: "Brand words", itemLabel: (p) => p.value || "Word" }),
             is: list("The site is…", "Point"),
