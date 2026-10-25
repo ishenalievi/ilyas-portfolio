@@ -78,7 +78,7 @@ No P0 findings. Commits: see the last section.
 | 8 | Source maps | — | ✅ `productionBrowserSourceMaps` unset; 0 `.map` files in `.next/static` |
 | 9 | Console / debug leftovers | — | ✅ No `console.*` or `debugger` in `app/`, `components/`, `lib/` |
 | 10 | Mixed content | — | ✅ The only `http://` URLs are `127.0.0.1` addresses in the dev-only Spotify setup |
-| 11 | Third-party | — | ✅ No external scripts, iframes, analytics or widgets. Fonts are self-hosted through `next/font/google` |
+| 11 | Third-party | — | ✅ No external scripts, iframes or widgets. Fonts are self-hosted through `next/font/google`. Added later: Vercel Web Analytics (`@vercel/analytics`), which is cookie-free, needs no consent banner and loads from the site's own `/_vercel/insights/`, so the CSP needs no change |
 | 12 | External links | — | ✅ No `target="_blank"` anywhere: external links open in the same tab after the To Be Continued transition, so tab-nabbing can't happen. `rel="noopener"` is already set |
 | 13 | Back end | — | ✅ No CORS headers set (same-origin only). `/api/now-playing` is read-only and cached at Vercel's edge for 20 s and in memory for 15 s, so floods don't reach Spotify. Its errors return only `{state:"off"}`. `/brand` is checked on the server against GitHub, not just hidden in the UI. Editor writes are authorized by GitHub itself (they need write access to the repo) |
 
