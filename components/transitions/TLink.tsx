@@ -21,6 +21,10 @@ const pageLabels: Record<string, string> = { "/": "HOME", "/work": "WORK", "/con
 
 const isExternal = (href: string) => /^https?:\/\//.test(href);
 
+// Links come from the editor and from Spotify. Only web addresses, pages on this site and
+// "#" jumps get through, so a "javascript:" or "data:" link can never run anything.
+const safeHref = (href: string) => (/^(?:https?:\/\/|\/(?!\/)|#)/i.test(href.trim()) ? href.trim() : "#");
+
 function autoKind(href: string): Kind {
   if (isExternal(href)) return "tbc";
   if (/^\/work\/[^/]+/.test(href)) return "book"; // Heaven's Door for projects
@@ -44,7 +48,8 @@ function autoLabel(href: string): string {
 
 const modified = (e: React.MouseEvent) => e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
 
-export function TLink({ href, kind, label, onClick, children, ...rest }: Props) {
+export function TLink({ href: raw, kind, label, onClick, children, ...rest }: Props) {
+  const href = safeHref(raw);
   const go = useGo();
   const k = kind ?? autoKind(href);
   const l = label ?? autoLabel(href);

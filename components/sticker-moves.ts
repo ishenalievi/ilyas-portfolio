@@ -279,7 +279,7 @@ async function ball(ctx: Ctx) {
   const gy = Math.min(Math.max(8, r.bottom - gh + r.height * 0.6), innerHeight - gh - 8);
   const goal = document.createElement("div");
   goal.className = "goal";
-  goal.innerHTML = GOAL;
+  goal.innerHTML = GOAL; // fixed drawing written above, no outside text
   Object.assign(goal.style, { left: `${gx}px`, top: `${gy}px`, width: `${gw}px` });
   layer.append(goal);
   const tilt = left ? -3 : 3;

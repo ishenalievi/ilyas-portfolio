@@ -417,7 +417,7 @@ export function createRun(ov: HTMLElement, kind: Kind, text: string, skipped: ()
       const outer = el("eg-gem-at");
       Object.assign(outer.style, { left: `${ox}px`, top: `${oy}px`, transform: `rotate(${ang}rad)` });
       const gem = el("eg-gem", outer);
-      gem.innerHTML = GEM;
+      gem.innerHTML = GEM; // fixed drawing written above, no outside text
       gem.style.scale = String(0.7 + r() * 0.6);
       return { gem, stick, d: stick ? reach * (0.25 + r() * 0.45) : reach * 1.25 };
     });
