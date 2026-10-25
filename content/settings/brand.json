@@ -352,6 +352,10 @@
     {
       "name": "Now spinning",
       "how": "A torn label taped under the headshot on Home shows what's playing on Spotify right now (with three little equaliser bars), or the last thing played. It links to the song and hides when Spotify isn't connected."
+    },
+    {
+      "name": "Tab icon",
+      "how": "The II. monogram on its torn off-white paper, tilted, with a strip of amber tape across the top and the hard black shadow. Navy letters stay readable at 16px."
     }
   ],
   "imagery": [
